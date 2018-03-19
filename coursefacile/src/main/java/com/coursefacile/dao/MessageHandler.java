@@ -5,7 +5,6 @@ import org.hibernate.Session;
 
 public class MessageHandler implements IMessageHandler {
 
-    @Override
     public boolean add(Message message) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -25,7 +24,6 @@ public class MessageHandler implements IMessageHandler {
 
     }
 
-    @Override
     public boolean update(Message message) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -45,7 +43,6 @@ public class MessageHandler implements IMessageHandler {
 
     }
 
-    @Override
     public boolean delete(Message message) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -65,7 +62,6 @@ public class MessageHandler implements IMessageHandler {
 
     }
 
-    @Override
     public Message get(Message message) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         try {

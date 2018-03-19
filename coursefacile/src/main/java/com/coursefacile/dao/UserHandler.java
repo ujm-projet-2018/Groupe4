@@ -6,7 +6,6 @@ import org.hibernate.Session;
 
 
 public class UserHandler implements IUserHandler {
-    @Override
     public boolean add(User user) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -25,7 +24,6 @@ public class UserHandler implements IUserHandler {
 
     }
 
-    @Override
     public boolean update(User user) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -44,7 +42,6 @@ public class UserHandler implements IUserHandler {
         return check;
     }
 
-    @Override
     public boolean delete(User user) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -63,7 +60,6 @@ public class UserHandler implements IUserHandler {
         return check;
     }
 
-    @Override
     public User get(String email, String pwd) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         User u = null;

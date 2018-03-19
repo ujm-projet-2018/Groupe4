@@ -4,7 +4,6 @@ import com.coursefacile.model.Mission;
 import org.hibernate.Session;
 
 public class MissionHandler implements IMissionHandler {
-    @Override
     public boolean add(Mission mission) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -23,7 +22,6 @@ public class MissionHandler implements IMissionHandler {
         return check;
     }
 
-    @Override
     public boolean update(Mission mission) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -42,7 +40,6 @@ public class MissionHandler implements IMissionHandler {
         return check;
     }
 
-    @Override
     public boolean delete(Mission mission) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
@@ -61,7 +58,6 @@ public class MissionHandler implements IMissionHandler {
         return check;
     }
 
-    @Override
     public Mission get(Mission mission) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         try {
