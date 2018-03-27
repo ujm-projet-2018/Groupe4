@@ -1,5 +1,6 @@
 package com.coursefacile.dao;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -21,6 +22,11 @@ public class SessionFactoryHelper {
         if (sessionFactory == null)
             new SessionFactoryHelper();
         return sessionFactory;
+    }
+
+    public static void init(){
+       Session s = getSessionFactory().openSession();
+       s.close();
     }
 
 }

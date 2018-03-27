@@ -22,6 +22,7 @@ public class User {
     private boolean telChecked;
     private Date registerDate;
     private String description;
+    private String image;
     @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
     private Set<Mission> publishedMissions;
     @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
@@ -164,5 +165,13 @@ public class User {
 
     public void setMessagesReceived(Set<Message> messagesReceived) {
         this.messagesReceived = messagesReceived;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
