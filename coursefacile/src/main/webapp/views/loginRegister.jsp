@@ -36,16 +36,16 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <form role="form" action="/coursefacile/login" method="post" class="login-form">
+                            <form role="form" action="/coursefacile/login" method="post" novalidate="novalidate" class="login-form">
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-username">Adresse E-mail</label>
-                                    <input type="text" name="email" placeholder="E-mail..."
-                                           class="form-username form-control" id="form-username">
+                                    <label class="sr-only" for="login_email">Adresse E-mail</label>
+                                    <input type="text" name="login_email" placeholder="E-mail..."
+                                           class="form-username form-control" id="login_email">
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-password">Mot de passe</label>
-                                    <input type="password" name="pwd" placeholder="Mot de passe..."
-                                           class="form-password form-control" id="form-password">
+                                    <label class="sr-only" for="login_pwd">Mot de passe</label>
+                                    <input type="password"  name="login_pwd" placeholder="Mot de passe..."
+                                           class="form-password form-control" id="login_pwd">
                                 </div>
                                 <input type="hidden" name="type" value="login">
                                 <a href="">Mot de passe oublié?</a>
@@ -71,38 +71,38 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <form role="form" action="/coursefacile/register" method="post" class="registration-form">
+                            <form role="form" action="/coursefacile/register" method="post"  novalidate="novalidate" class="registration-form form-validation">
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-first-name">First name</label>
-                                    <input type="text" name="first-name" placeholder="Nom..."
-                                           class="form-first-name form-control" id="form-first-name">
+                                    <label class="sr-only" for="first_name">First name</label>
+                                    <input type="text" name="first_name" placeholder="*Nom..."
+                                           class="form-control" id="first_name"  >
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-last-name">Last name</label>
-                                    <input type="text" name="last-name" placeholder="Prénom..."
-                                           class="form-last-name form-control" id="form-last-name">
+                                    <label class="sr-only" for="last_name">Last name</label>
+                                    <input type="text" name="last_name" placeholder="*Prénom..."
+                                           class="form-control" id="last_name"  >
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-email">Email</label>
-                                    <input type="text" name="email" placeholder="Email..." class="form-control"
-                                           id="form-email">
+                                    <label class="sr-only" for="email">Email</label>
+                                    <input type="email" name="email" placeholder="*Email..."  class="form-control"
+                                           id="email" >
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-pwd">Mot de passe</label>
+                                    <label class="sr-only" for="pwd">Mot de passe</label>
                                     <input type="password" name="pwd"
-                                           placeholder="Mot de passe (8 caractères min.)..." class="form-control"
-                                           id="form-pwd">
+                                           placeholder="*Mot de passe (8 caractères min.)..." class="form-control"
+                                           id="pwd"   >
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-confirm-pwd">Confirmer le mot de passe</label>
-                                    <input type="password" name="confirm-pwd"
-                                           placeholder="Confirmer le mot de passe..." class=" form-control"
-                                           id="form-confirm-pwd">
+                                    <label class="sr-only" for="confirm_pwd">Confirmer le mot de passe</label>
+                                    <input type="password" name="confirm_pwd"
+                                           placeholder="*Confirmer le mot de passe..." class=" form-control"
+                                           id="confirm_pwd"   >
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-description">Apropos de moi</label>
+                                    <label class="sr-only" for="description">Apropos de moi</label>
                                     <textarea name="description" placeholder="Apropos de moi..."
-                                              class=" form-control" id="form-description"></textarea>
+                                              class=" form-control" id="description"></textarea>
                                 </div>
                                 <input type="hidden" name="type" value="register">
                                 <button type="submit" class="btn">S'enregistrer</button>
@@ -120,7 +120,7 @@
 
 
 <%@ include file="parts/footer.jsp" %>
-<script src="/js/loginRegister.js"></script>
+
 
 <!--[if lt IE 10]>
 <script src="assets/js/placeholder.js"></script>

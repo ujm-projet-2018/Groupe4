@@ -93,4 +93,5 @@
 <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="js/functions.js"></script>
+<script src="js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>

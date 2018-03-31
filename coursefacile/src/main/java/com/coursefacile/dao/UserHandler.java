@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -68,9 +69,9 @@ public class UserHandler implements IUserHandler {
     public boolean authentificate(HttpServletRequest request) {
         boolean check = false;
         Map<String, String[]> params = request.getParameterMap();
-        if(params.containsKey("email") && params.containsKey("pwd")) {
-            String email = request.getParameter("email");
-            String pwd = request.getParameter("pwd");
+        if(params.containsKey("login_email") && params.containsKey("login_pwd")) {
+            String email = request.getParameter("login_email");
+            String pwd = request.getParameter("login_pwd");
             if (email.length() != 0 && pwd.length() != 0) {
                 Session session = SessionFactoryHelper.getSessionFactory().openSession();
                 try {
@@ -93,12 +94,12 @@ public class UserHandler implements IUserHandler {
 
     public boolean register(HttpServletRequest request) {
         Map<String, String[]> params = request.getParameterMap();
-        if (params.containsKey("first-name") && params.containsKey("first-name") && params.containsKey("last-name") && params.containsKey("email") && params.containsKey("pwd") && params.containsKey("confirm-pwd") && params.containsKey("description")) {
-            String fName = request.getParameter("first-name"),
-                    lName = request.getParameter("last-name"),
+        if (params.containsKey("first_name") && params.containsKey("last_name") && params.containsKey("email") && params.containsKey("pwd") && params.containsKey("confirm_pwd") && params.containsKey("description")) {
+            String fName = request.getParameter("first_name"),
+                    lName = request.getParameter("last_name"),
                     email = request.getParameter("email"),
                     pwd = request.getParameter("pwd"),
-                    confirmPwd = request.getParameter("confirm-pwd"),
+                    confirmPwd = request.getParameter("confirm_pwd"),
                     description = request.getParameter("description");
             if (fName.trim().length() > 0 && lName.trim().length() > 0 && email.trim().length() > 0 && pwd.trim().length() > 0 && confirmPwd.trim().length() > 0) {
                 if (pwd.equals(confirmPwd)) {
@@ -106,7 +107,8 @@ public class UserHandler implements IUserHandler {
                     newUser.setFname(fName);
                     newUser.setLname(lName);
                     newUser.setEmail(email);
-
+                    newUser.setEmailChecked(false);
+                    newUser.setRegisterDate(new Date());
                     newUser.setPassword(hashPwd(pwd));
                     if (description.trim().length() > 0) newUser.setDescription(description);
                     add(newUser);

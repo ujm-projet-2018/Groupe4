@@ -1,7 +1,6 @@
 package com.coursefacile.dao;
 
 import com.coursefacile.model.City;
-import com.coursefacile.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -20,7 +19,6 @@ public class CityHandler implements ICityHandler {
                 try {
                     session.beginTransaction();
                     Query query = session.createQuery("FROM City  WHERE name LIKE :city OR postalCode LIKE :city");
-//                    Query query = session.createSQLQuery("SELECT GROUP_CONCAT(ville_nom,' ',ville_code_postal) FROM villes_france");
                     query.setString("city", "%" + cityOrPostalCode + "%");
                     query.setMaxResults(10);
                     List resultList = query.list();
@@ -30,9 +28,6 @@ public class CityHandler implements ICityHandler {
                         if(i<resultList.size()-1)
                             result+=",";
                     }
-                    System.out.println(result);
-
-//                    result = (String) query.list().get(0);
                     session.getTransaction().commit();
                 } catch (Exception e) {
                     session.getTransaction().rollback();
