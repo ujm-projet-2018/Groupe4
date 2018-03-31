@@ -19,5 +19,6 @@
         <mapping class="com.coursefacile.model.Mission"/>
         <mapping class="com.coursefacile.model.User"/>
         <mapping class="com.coursefacile.model.Message"/>
+        <mapping class="com.coursefacile.model.City"/>
     </session-factory>
 </hibernate-configuration>

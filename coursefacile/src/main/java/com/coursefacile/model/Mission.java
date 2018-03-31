@@ -14,7 +14,9 @@ public class Mission {
     private String description;
     private Date publishDate;
     private Date missionDate;
-    private String city;
+    @ManyToOne
+    @JoinColumn(name = "city")
+    private City city;
     @ManyToOne
     @JoinColumn(name = "owner")
     private User owner;
@@ -68,11 +70,11 @@ public class Mission {
         this.missionDate = missionDate;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 

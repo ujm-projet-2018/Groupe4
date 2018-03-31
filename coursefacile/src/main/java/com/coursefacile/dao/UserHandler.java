@@ -109,9 +109,7 @@ public class UserHandler implements IUserHandler {
 
                     newUser.setPassword(hashPwd(pwd));
                     if (description.trim().length() > 0) newUser.setDescription(description);
-                    System.out.println("before" +newUser.getId());
                     add(newUser);
-                    System.out.println("after"+newUser.getId());
                     request.getSession().setAttribute("user", newUser);
                     return true;
                 }
