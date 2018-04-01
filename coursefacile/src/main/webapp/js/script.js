@@ -63,6 +63,7 @@ $(function () {
         $cityIdInput.val(field.id);
     });
     $.validator.methods.email = function( value, element ) {
+        //^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$
         return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
     }
     var $loginForm = $('.login-form');
@@ -116,7 +117,7 @@ $(function () {
                 confirm_pwd: {
                     required: true,
                     minlength: 8,
-                    equalTo: "#password"
+                    equalTo: "#pwd"
                 },
                 email: {
                     required: true,

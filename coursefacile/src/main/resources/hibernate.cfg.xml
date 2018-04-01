@@ -20,5 +20,6 @@
         <mapping class="com.coursefacile.model.User"/>
         <mapping class="com.coursefacile.model.Message"/>
         <mapping class="com.coursefacile.model.City"/>
+        <mapping class="com.coursefacile.model.VerificationToken"/>
     </session-factory>
 </hibernate-configuration>

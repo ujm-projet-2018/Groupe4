@@ -101,3 +101,7 @@ nav.navbar-static-top {
     background-image: -o-linear-gradient(top,#ed9c2e,#ed502e);
     background-image: linear-gradient(to bottom,#ed9c2e,#ed502e);
 }
+
+.nav .user a.dropdown-toggle{
+    border: none;
+}

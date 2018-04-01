@@ -17,4 +17,12 @@
         <url-pattern>/register</url-pattern>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>VerifyMail</servlet-name>
+        <servlet-class>com.coursefacile.controller.VerifyMail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VerifyMail</servlet-name>
+        <url-pattern>/verifymail</url-pattern>
+    </servlet-mapping>
 </web-app>

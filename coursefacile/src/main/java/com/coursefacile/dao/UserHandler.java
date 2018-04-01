@@ -5,8 +5,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Map;
 
@@ -35,8 +33,7 @@ public class UserHandler implements IUserHandler {
         boolean check = false;
         try {
             session.beginTransaction();
-            User newUser = session.get(user.getClass(), user.getId());
-            session.update(newUser);
+            session.update(user);
             session.getTransaction().commit();
             check = true;
         } catch (Exception e) {
@@ -69,14 +66,14 @@ public class UserHandler implements IUserHandler {
     public boolean authentificate(HttpServletRequest request) {
         boolean check = false;
         Map<String, String[]> params = request.getParameterMap();
-        if(params.containsKey("login_email") && params.containsKey("login_pwd")) {
+        if (params.containsKey("login_email") && params.containsKey("login_pwd")) {
             String email = request.getParameter("login_email");
             String pwd = request.getParameter("login_pwd");
             if (email.length() != 0 && pwd.length() != 0) {
                 Session session = SessionFactoryHelper.getSessionFactory().openSession();
                 try {
                     session.beginTransaction();
-                    Query query = session.createQuery("from User where email='" + email + "' AND password='" + hashPwd(pwd) + "'");
+                    Query query = session.createQuery("from User where email='" + email + "' AND password='" + Util.hashString(pwd) + "'");
                     User user = (User) query.uniqueResult();
                     session.getTransaction().commit();
                     request.getSession().setAttribute("user", user);
@@ -109,10 +106,12 @@ public class UserHandler implements IUserHandler {
                     newUser.setEmail(email);
                     newUser.setEmailChecked(false);
                     newUser.setRegisterDate(new Date());
-                    newUser.setPassword(hashPwd(pwd));
+                    newUser.setPassword(Util.hashString(pwd));
                     if (description.trim().length() > 0) newUser.setDescription(description);
                     add(newUser);
                     request.getSession().setAttribute("user", newUser);
+                    IVerificationTokenHandler verificationTokenHandler = new VerificationTokenHandler();
+                    verificationTokenHandler.sendVerificationMail(newUser);
                     return true;
                 }
             }
@@ -121,8 +120,19 @@ public class UserHandler implements IUserHandler {
     }
 
     public User get(int id) {
+        User user = null;
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
-        return null;
+        try {
+            session.beginTransaction();
+            user = session.get(User.class, id);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
     }
 
     public boolean isLoggedIn(HttpServletRequest request) {
@@ -130,34 +140,10 @@ public class UserHandler implements IUserHandler {
     }
 
     public User getLoggedInUser(HttpServletRequest request) {
-        if(isLoggedIn(request))
-            return (User)request.getSession().getAttribute("user");
+        if (isLoggedIn(request))
+            return (User) request.getSession().getAttribute("user");
         return null;
     }
 
-    private String hashPwd(String passwordToHash){
-        String generatedPassword = null;
-        try {
-            // Create MessageDigest instance for MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            //Add password bytes to digest
-            md.update(passwordToHash.getBytes());
-            //Get the hash's bytes
-            byte[] bytes = md.digest();
-            //This bytes[] has bytes in decimal format;
-            //Convert it to hexadecimal format
-            StringBuilder sb = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            //Get complete hashed password in hex format
-            generatedPassword = sb.toString();
-        }
-        catch (NoSuchAlgorithmException e)
-        {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
+
 }
