@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class UserHandler implements IUserHandler {
@@ -63,7 +65,7 @@ public class UserHandler implements IUserHandler {
         return check;
     }
 
-    public boolean authentificate(HttpServletRequest request) {
+    public boolean authenticate(HttpServletRequest request) {
         boolean check = false;
         Map<String, String[]> params = request.getParameterMap();
         if (params.containsKey("login_email") && params.containsKey("login_pwd")) {
@@ -74,18 +76,26 @@ public class UserHandler implements IUserHandler {
                 try {
                     session.beginTransaction();
                     Query query = session.createQuery("from User where email='" + email + "' AND password='" + Util.hashString(pwd) + "'");
-                    User user = (User) query.uniqueResult();
+                    Object object = query.uniqueResult();
+
                     session.getTransaction().commit();
-                    request.getSession().setAttribute("user", user);
-                    check = true;
+                    if (object != null) {
+                        User user = (User) object;
+                        request.getSession().setAttribute("user", user);
+                        check = true;
+                    } else
+                        Util.addGlobalAlert(Util.DANGER, "Email ou mot de passe incorrecte");
+
                 } catch (Exception e) {
                     session.getTransaction().rollback();
                     e.printStackTrace();
                 } finally {
                     session.close();
                 }
-            }
-        }
+            } else
+                Util.addGlobalAlert(Util.WARNING, "Veuillez fournire votre mail et mot de passe");
+        } else
+            Util.addGlobalAlert(Util.WARNING, "Veuillez fournire votre mail et mot de passe");
         return check;
     }
 
@@ -100,21 +110,30 @@ public class UserHandler implements IUserHandler {
                     description = request.getParameter("description");
             if (fName.trim().length() > 0 && lName.trim().length() > 0 && email.trim().length() > 0 && pwd.trim().length() > 0 && confirmPwd.trim().length() > 0) {
                 if (pwd.equals(confirmPwd)) {
-                    User newUser = new User();
-                    newUser.setFname(fName);
-                    newUser.setLname(lName);
-                    newUser.setEmail(email);
-                    newUser.setEmailChecked(false);
-                    newUser.setRegisterDate(new Date());
-                    newUser.setPassword(Util.hashString(pwd));
-                    if (description.trim().length() > 0) newUser.setDescription(description);
-                    add(newUser);
-                    request.getSession().setAttribute("user", newUser);
-                    IVerificationTokenHandler verificationTokenHandler = new VerificationTokenHandler();
-                    verificationTokenHandler.sendVerificationMail(newUser);
-                    return true;
-                }
-            }
+                    if(Util.isValidEmail(email)){
+                        User newUser = new User();
+                        newUser.setEmail(email);
+                        newUser.setFname(fName);
+                        newUser.setLname(lName);
+                        newUser.setEmailChecked(false);
+                        newUser.setRegisterDate(new Date());
+                        newUser.setPassword(Util.hashString(pwd));
+                        if (description.trim().length() > 0) newUser.setDescription(description);
+                        add(newUser);
+                        request.getSession().setAttribute("user", newUser);
+                        IVerificationTokenHandler verificationTokenHandler = new VerificationTokenHandler();
+                        verificationTokenHandler.sendVerificationMail(newUser);
+                        return true;
+                    }
+                    else{
+                        Util.addGlobalAlert(Util.DANGER,"Veuillez entrer un email valide");
+                    }
+
+                }else
+                    Util.addGlobalAlert(Util.DANGER,"Les mots de passe entrée ne sont pas identiques!");
+            }else
+                Util.addGlobalAlert(Util.DANGER,"Tous les champs avec * sont obligatoires");
+
         }
         return false;
     }
@@ -133,16 +152,6 @@ public class UserHandler implements IUserHandler {
             session.close();
         }
         return user;
-    }
-
-    public boolean isLoggedIn(HttpServletRequest request) {
-        return request.getSession().getAttribute("user") != null;
-    }
-
-    public User getLoggedInUser(HttpServletRequest request) {
-        if (isLoggedIn(request))
-            return (User) request.getSession().getAttribute("user");
-        return null;
     }
 
 

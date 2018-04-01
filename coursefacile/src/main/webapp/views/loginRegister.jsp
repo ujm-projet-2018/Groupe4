@@ -48,7 +48,9 @@
                                            class="form-password form-control" id="login_pwd">
                                 </div>
                                 <input type="hidden" name="type" value="login">
-                                <a href="">Mot de passe oublié?</a>
+                                <div class="form-group">
+                                <a class="anchor" href="">Mot de passe oublié?</a>
+                                </div>
                                 <button type="submit" class="btn">Se connecter</button>
                             </form>
                         </div>
@@ -64,7 +66,7 @@
                     <div class="form-box">
                         <div class="form-top">
                             <div class="form-top-left">
-                                <h3>Pas encore membre? M'enregister</h3>
+                                <h3>Pas encore membre?</h3>
                             </div>
                             <div class="form-top-right">
                                 <i class="fa fa-pencil"></i>

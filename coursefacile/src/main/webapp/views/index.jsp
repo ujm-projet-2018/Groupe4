@@ -1,5 +1,4 @@
-<%@ page import="com.coursefacile.dao.SessionFactoryHelper" %>
-<%@ page import="com.coursefacile.dao.CityHandler" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: abdelmoghitmadih
   Date: 3/16/18
@@ -11,7 +10,6 @@
 <html lang="fr">
 <head>
 
-    <% SessionFactoryHelper.init(); %>
     <%@ include file="parts/meta.jsp" %>
     <title>Courses Faciles</title>
     <%@ include file="parts/styles.jsp" %>

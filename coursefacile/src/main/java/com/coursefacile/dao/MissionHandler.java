@@ -27,8 +27,7 @@ public class MissionHandler implements IMissionHandler {
         boolean check = false;
         try {
             session.beginTransaction();
-            Mission newMission = session.get(mission.getClass(), mission.getId());
-            session.update(newMission);
+            session.update(mission);
             session.getTransaction().commit();
             check = true;
         } catch (Exception e) {

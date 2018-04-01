@@ -105,3 +105,15 @@ nav.navbar-static-top {
 .nav .user a.dropdown-toggle{
     border: none;
 }
+
+.validation-mail .jumbotron{
+    background-color: inherit;
+}
+
+.global-alert .alert{
+    margin-bottom: 0;
+}
+
+.anchor:hover{
+    color: #ed502e;
+}

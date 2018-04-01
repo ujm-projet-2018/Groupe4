@@ -1,6 +1,5 @@
-<%@ page import="com.coursefacile.dao.IUserHandler" %>
-<%@ page import="com.coursefacile.dao.UserHandler" %>
-<%@ page import="com.coursefacile.model.User" %><%--
+<%@ page import="com.coursefacile.model.User" %>
+<%@ page import="com.coursefacile.dao.Util" %><%--
   Created by IntelliJ IDEA.
   User: abdelmoghitmadih
   Date: 3/26/18
@@ -31,10 +30,10 @@
                             <li role="presentation"><a href="/coursefacile/" class="active">Accueil</a></li>
                             <li role="presentation"><a href="/coursefacile/services">Services</a></li>
                             <li role="presentation"><a href="/coursefacile/contact">Contact</a></li>
-                            <% IUserHandler userHandler = new UserHandler();
-                                if (userHandler.isLoggedIn(request)) {
-                                    User user = userHandler.getLoggedInUser(request);
-                                String imgUrl = user.getImage()==null ? "images/people.png": user.getImage();
+                            <%
+                                if (Util.isLoggedIn(request)) {
+                                    User user = Util.getLoggedInUser(request);
+                                    String imgUrl = user.getImage() == null ? "images/people.png" : user.getImage();
                             %>
                             <li class="user">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">
@@ -74,4 +73,7 @@
         </div>
     </nav>
 </header>
+<div class="global-alert">
+    <%= Util.showGlobalAlerts() %>
+</div>
 

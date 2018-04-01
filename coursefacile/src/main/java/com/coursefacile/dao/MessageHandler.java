@@ -29,8 +29,7 @@ public class MessageHandler implements IMessageHandler {
         boolean check = false;
         try {
             session.beginTransaction();
-            Message newMessage = session.get(message.getClass(), message.getId());
-            session.update(newMessage);
+            session.update(message);
             session.getTransaction().commit();
             check = true;
         } catch (Exception e) {
