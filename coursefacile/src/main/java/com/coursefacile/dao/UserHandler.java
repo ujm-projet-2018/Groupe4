@@ -1,6 +1,7 @@
 package com.coursefacile.dao;
 
 import com.coursefacile.model.User;
+import com.coursefacile.model.VerificationToken;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -122,7 +123,7 @@ public class UserHandler implements IUserHandler {
                         add(newUser);
                         request.getSession().setAttribute("user", newUser);
                         IVerificationTokenHandler verificationTokenHandler = new VerificationTokenHandler();
-                        verificationTokenHandler.sendVerificationMail(newUser);
+                        verificationTokenHandler.sendVerificationMail(newUser, VerificationToken.VALIDATION_MAIL_TOKEN);
                         return true;
                     }
                     else{
@@ -144,6 +145,23 @@ public class UserHandler implements IUserHandler {
         try {
             session.beginTransaction();
             user = session.get(User.class, id);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return user;
+    }
+
+    public User get(String mail) {
+        User user = null;
+        Session session = SessionFactoryHelper.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from User where email='" + mail + "'");
+            user = (User) query.uniqueResult();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();

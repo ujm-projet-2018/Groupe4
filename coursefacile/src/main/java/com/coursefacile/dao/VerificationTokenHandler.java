@@ -6,11 +6,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
+import java.util.UUID;
 
 public class VerificationTokenHandler implements IVerificationTokenHandler {
 
-    public boolean add(VerificationToken verifToken) {
+    boolean add(VerificationToken verifToken) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
         try {
@@ -27,7 +30,7 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
         return check;
     }
 
-    public boolean delete(VerificationToken verificationToken) {
+    boolean delete(VerificationToken verificationToken) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         boolean check = false;
         try {
@@ -45,11 +48,31 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
         return check;
     }
 
-    public VerificationToken generateUniqueVerificationToken(User user) {
+    public VerificationToken get(String token) {
+        VerificationToken verificationToken = null;
+        Session session = SessionFactoryHelper.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from VerificationToken where token= :token");
+            query.setString("token", token);
+            verificationToken = (VerificationToken) query.uniqueResult();
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return verificationToken;
+    }
+
+    public VerificationToken generateUniqueVerificationToken(User user, int verificationType) {
         UUID uuid = UUID.randomUUID();
         String hashedUUID = Util.hashString(uuid.toString());
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(hashedUUID);
+        verificationToken.setType(verificationType);
         Date currentDate = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(currentDate);
@@ -60,16 +83,29 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
         return verificationToken;
     }
 
-    public boolean sendVerificationMail(User user) {
+    public boolean sendVerificationMail(User user, int verificationType) {
         boolean check = false;
-        VerificationToken verificationToken = generateUniqueVerificationToken(user);
+        VerificationToken verificationToken = generateUniqueVerificationToken(user, verificationType);
         if (verificationToken != null) {
             boolean checkAdd = add(verificationToken);
             if (checkAdd) {
+                String subject = "", messageHeader = "", verificationUrl = "", highlitedText = "", normalText = "", linkText = "";
                 String toEmail = user.getEmail();
-                String subject = "Validation mail";
-//                String body = "<p>Pour finaliser votre inscription veuillez cliquer sur le lien ci dessous<p>" +
-//                        "<a href='http://localhost:8080/coursefacile/verifymail?token=" + verificationToken.getToken() + "'>Valider mon mail</a>";
+                if (verificationType == VerificationToken.VALIDATION_MAIL_TOKEN) {
+                    messageHeader = "Merci pour votre inscription!";
+                    verificationUrl = "http://localhost:8080/coursefacile/verifymail?token=" + verificationToken.getToken();
+                    highlitedText = "On est heureux de vous avoir comme membre de Courses Faciles!";
+                    normalText = "Merci de bien vouloir confirmer votre email";
+                    linkText = "Confirmer";
+                    subject = "Validation mail";
+                } else if (verificationType == VerificationToken.RECOVERY_PWD_TOKEN) {
+                    messageHeader = "Recuperation de mot de passe";
+                    verificationUrl = "http://localhost:8080/coursefacile/recoverpassword?token=" + verificationToken.getToken();
+                    highlitedText = "Si vous n'avez pas demander une recuperation de mot de passe ignorer ce message.";
+                    normalText = "Pour recuperer votre mot de passe veuillez cliquer sur le bouton ci-dessous.";
+                    linkText = "Recuperer mon mot de passe";
+                    subject = "Recuperation de mot de passe";
+                }
                 String body = "<!doctype html>\n" +
                         " <html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                         " <head>\n" +
@@ -171,11 +207,11 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
                         "\n" +
                         "<table class=\"table-row\" width=\"450\" bgcolor=\"#FFFFFF\" style=\"table-layout: fixed; background-color: #ffffff;\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody><tr><td class=\"table-row-td\" style=\"font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; padding-left: 36px; padding-right: 36px;\" valign=\"top\" align=\"left\">\n" +
                         "  <table class=\"table-col\" align=\"left\" width=\"378\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"table-layout: fixed;\"><tbody><tr><td class=\"table-col-td\" width=\"378\" style=\"font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; width: 378px;\" valign=\"top\" align=\"left\">\n" +
-                        "    <table class=\"header-row\" width=\"378\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"table-layout: fixed;\"><tbody><tr><td class=\"header-row-td\" width=\"378\" style=\"font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #478fca; margin: 0px; font-size: 18px; padding-bottom: 10px; padding-top: 15px;\" valign=\"top\" align=\"left\">Merci pour votre inscription!</td></tr></tbody></table>\n" +
+                        "    <table class=\"header-row\" width=\"378\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"table-layout: fixed;\"><tbody><tr><td class=\"header-row-td\" width=\"378\" style=\"font-family: Arial, sans-serif; font-weight: normal; line-height: 19px; color: #478fca; margin: 0px; font-size: 18px; padding-bottom: 10px; padding-top: 15px;\" valign=\"top\" align=\"left\">" + messageHeader + "</td></tr></tbody></table>\n" +
                         "    <div style=\"font-family: Arial, sans-serif; line-height: 20px; color: #444444; font-size: 13px;\">\n" +
-                        "      <b style=\"color: #777777;\">On est heureux de vous avoir comme membre de Courses Faciles</b>\n" +
+                        "      <b style=\"color: #777777;\">" + highlitedText + "</b>\n" +
                         "      <br>\n" +
-                        "      Merci de bien vouloir confirmer votre email\n" +
+                        "      " + normalText + "\n" +
                         "    </div>\n" +
                         "  </td></tr></tbody></table>\n" +
                         "</td></tr></tbody></table>\n" +
@@ -187,7 +223,7 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
                         "<table class=\"table-row\" width=\"450\" bgcolor=\"#FFFFFF\" style=\"table-layout: fixed; background-color: #ffffff;\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody><tr><td class=\"table-row-td\" style=\"font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; padding-left: 36px; padding-right: 36px;\" valign=\"top\" align=\"left\">\n" +
                         "  <table class=\"table-col\" align=\"left\" width=\"378\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"table-layout: fixed;\"><tbody><tr><td class=\"table-col-td\" width=\"378\" style=\"font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; font-weight: normal; width: 378px;\" valign=\"top\" align=\"left\">\n" +
                         "    <div style=\"font-family: Arial, sans-serif; line-height: 19px; color: #444444; font-size: 13px; text-align: center;\">\n" +
-                        "      <a href='http://localhost:8080/coursefacile/verifymail?token=" + verificationToken.getToken() + "' style=\"color: #ffffff; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border: 4px solid #6fb3e0; padding: 4px 9px; font-size: 15px; line-height: 21px; background-color: #6fb3e0;\">&nbsp; Confirmer &nbsp;</a>\n" +
+                        "      <a href='" + verificationUrl + "' style=\"color: #ffffff; text-decoration: none; margin: 0px; text-align: center; vertical-align: baseline; border: 4px solid #6fb3e0; padding: 4px 9px; font-size: 15px; line-height: 21px; background-color: #6fb3e0;\">&nbsp; " + linkText + " &nbsp;</a>\n" +
                         "    </div>\n" +
                         "    <table class=\"table-space\" height=\"16\" style=\"height: 16px; font-size: 0px; line-height: 0; width: 378px; background-color: #ffffff;\" width=\"378\" bgcolor=\"#FFFFFF\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\"><tbody><tr><td class=\"table-space-td\" valign=\"middle\" height=\"16\" style=\"height: 16px; width: 378px; background-color: #ffffff;\" width=\"378\" bgcolor=\"#FFFFFF\" align=\"left\">&nbsp;</td></tr></tbody></table>\n" +
                         "  </td></tr></tbody></table>\n" +
@@ -209,8 +245,14 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
                         " </body>\n" +
                         " </html>";
                 check = Util.sendEmail(toEmail, subject, body);
-                if(check)
-                    Util.addGlobalAlert(Util.INFO,"Un email de validation vient d'être envoyé");
+                if (check) {
+                    if (verificationType == VerificationToken.VALIDATION_MAIL_TOKEN)
+                        Util.addGlobalAlert(Util.INFO, "Un email de validation vient d'être envoyé");
+                    else if (verificationType == VerificationToken.RECOVERY_PWD_TOKEN)
+                        Util.addGlobalAlert(Util.INFO, "Un email de recuperation de mot de passe vient d'être envoyé");
+
+
+                }
 
             }
         }
@@ -224,20 +266,7 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
         if (params.containsKey("token")) {
             String token = request.getParameter("token");
             if (token.length() != 0) {
-                Session session = SessionFactoryHelper.getSessionFactory().openSession();
-                try {
-                    session.beginTransaction();
-                    Query query = session.createQuery("from VerificationToken where token= :token");
-                    query.setString("token", token);
-                    verificationToken = (VerificationToken) query.uniqueResult();
-                    session.getTransaction().commit();
-
-                } catch (Exception e) {
-                    session.getTransaction().rollback();
-                    e.printStackTrace();
-                } finally {
-                    session.close();
-                }
+                verificationToken = get(token);
                 if (verificationToken != null) {
                     Date currentDate = new Date();
                     if (currentDate.compareTo(verificationToken.getExpirationDate()) < 0) {
@@ -252,5 +281,18 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
             }
         }
         return check;
+    }
+
+    public boolean recoverPassword(String token) {
+        if (token.length() == 0) return false;
+        VerificationToken verificationToken = get(token);
+        if (verificationToken != null) {
+            Date currentDate = new Date();
+            if (currentDate.compareTo(verificationToken.getExpirationDate()) < 0) {
+                delete(verificationToken);
+                return true;
+            }
+        }
+        return false;
     }
 }

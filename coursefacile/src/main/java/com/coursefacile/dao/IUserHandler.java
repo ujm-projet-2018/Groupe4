@@ -45,7 +45,21 @@ public interface IUserHandler {
      */
     boolean register(HttpServletRequest request);
 
+    /**
+     * get user by id
+     *
+     * @param id user id
+     * @return if the id match user return the user if not retur null
+     */
     User get(int id);
+
+    /**
+     * get user by mail
+     *
+     * @param mail user mail
+     * @return if the mail match user return the user if not retur null
+     */
+    User get(String mail);
 
 
 }

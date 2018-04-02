@@ -1,6 +1,7 @@
 package com.coursefacile.dao;
 
 import com.coursefacile.model.City;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -18,9 +19,10 @@ public class CityHandler implements ICityHandler {
                 Session session = SessionFactoryHelper.getSessionFactory().openSession();
                 try {
                     session.beginTransaction();
-                    Query query = session.createQuery("FROM City  WHERE name LIKE :city OR postalCode LIKE :city");
-                    query.setString("city", "%" + cityOrPostalCode + "%");
-                    query.setMaxResults(10);
+                    Query query = session.createQuery("FROM City  WHERE name LIKE :city OR postalCode LIKE :city order by name asc");
+                    query.setString("city", cityOrPostalCode + "%");
+                    query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+                    query.setMaxResults(20);
                     List resultList = query.list();
                     for(int i=0;i<resultList.size();i++){
                         City city = (City)resultList.get(i);

@@ -49,7 +49,7 @@
                                 </div>
                                 <input type="hidden" name="type" value="login">
                                 <div class="form-group">
-                                <a class="anchor" href="">Mot de passe oublié?</a>
+                                    <a class="anchor" href="/coursefacile/recoverpassword">Mot de passe oublié?</a>
                                 </div>
                                 <button type="submit" class="btn">Se connecter</button>
                             </form>

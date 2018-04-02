@@ -29,4 +29,12 @@
         <servlet-name>VerifyMail</servlet-name>
         <url-pattern>/verifymail</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>RecoverPassword</servlet-name>
+        <servlet-class>com.coursefacile.controller.RecoverPassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RecoverPassword</servlet-name>
+        <url-pattern>/recoverpassword</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -1,6 +1,7 @@
 package com.coursefacile.controller;
 
 import com.coursefacile.dao.*;
+import com.coursefacile.model.VerificationToken;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ public class VerifyMail extends HttpServlet {
         IVerificationTokenHandler verificationTokenHandler = new VerificationTokenHandler();
         if (Util.isLoggedIn(request)) {
             if (params.containsKey("sendNewValidatoinMail")) {
-                verificationTokenHandler.sendVerificationMail(Util.getLoggedInUser(request));
+                verificationTokenHandler.sendVerificationMail(Util.getLoggedInUser(request), VerificationToken.VALIDATION_MAIL_TOKEN);
                 response.sendRedirect("/coursefacile");
             } else {
                 String validationStatus =  Boolean.toString(verificationTokenHandler.validateMail(request));
