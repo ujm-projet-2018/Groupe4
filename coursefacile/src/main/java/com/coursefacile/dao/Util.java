@@ -6,12 +6,12 @@ import javax.mail.Message;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -158,6 +158,14 @@ public class Util {
         Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(mail);
         return matcher.matches();
+    }
+
+    public static boolean elementExistInEnum(Enumeration<String> enumeration, String element) {
+        while (enumeration.hasMoreElements()) {
+            if (enumeration.nextElement().equals(element))
+                return true;
+        }
+        return false;
     }
 
 }

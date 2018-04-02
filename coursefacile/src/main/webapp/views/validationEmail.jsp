@@ -1,10 +1,12 @@
-  Created by IntelliJ IDEA.
-  User: abdelmoghitmadih
-  Date: 4/1/18
-  Time: 3:20 PM
-  To change this template use File | Settings | File Templates.
+Created by IntelliJ IDEA.
+User: abdelmoghitmadih
+Date: 4/1/18
+Time: 3:20 PM
+To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% boolean validationStatus = Boolean.parseBoolean(((String) request.getAttribute("validationStatus"))); %>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,21 +18,21 @@
 </head>
 <body>
 <%@include file="parts/header.jsp" %>
-<% boolean validationStatus = Boolean.parseBoolean(((String)request.getAttribute("validationStatus"))); %>
 <div class="container validation-mail">
-    <% if (validationStatus){ %>
+    <% if (validationStatus) { %>
     <div class="jumbotron">
         <p class="lead text-success">Votre mail est maintenant validé!</p>
         <p class="text-success">vous pouvez à présent creer/effectuer des missions</p>
-        <p><a class="btn btn-primary btn-lg" href="/coursefacile" role="button">Page d'accueil </a></p>
+        <p><a class="btn btn-primary btn-lg" href="<%= prefixPath %>" role="button">Page d'accueil </a></p>
     </div>
     <% } else {
-    String urlValidationMail = (String)request.getAttribute("urlValidationMail");
+        String urlValidationMail = (String) request.getAttribute("urlValidationMail");
     %>
     <div class="jumbotron">
         <p class="lead text-danger">Votre mail n'est pas validé.</p>
         <p class="text-danger">Le lien de validation a expiré!</p>
-        <p> <a class="btn btn-primary btn-lg" href="<%= urlValidationMail %>" role="button">Recevoir un nouvel mail de validation</a></p>
+        <p><a class="btn btn-primary btn-lg" href="<%= urlValidationMail %>" role="button">Recevoir un nouvel mail de
+            validation</a></p>
     </div>
     <% } %>
 </div>

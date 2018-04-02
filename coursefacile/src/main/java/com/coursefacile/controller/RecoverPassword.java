@@ -17,6 +17,7 @@ public class RecoverPassword extends HttpServlet {
         Map<String, String[]> params = request.getParameterMap();
         ServletContext servletContext = this.getServletContext();
         IUserHandler userHandler = new UserHandler();
+        String prefixPath = servletContext.getInitParameter("prefixPath");
         if (params.containsKey("email")) {
             String email = request.getParameter("email");
             if (Util.isValidEmail(email)) {
@@ -26,7 +27,7 @@ public class RecoverPassword extends HttpServlet {
                 servletContext.setAttribute("recoverPwdUser", user);
                 if (user != null) {
                     verificationTokenHandler.sendVerificationMail(user, VerificationToken.RECOVERY_PWD_TOKEN);
-                    response.sendRedirect("/coursefacile");
+                    response.sendRedirect(prefixPath);
                 } else {
                     Util.addGlobalAlert(Util.DANGER, "Aucun compte n'est associé a cette adresse email!");
                     request.setAttribute("showRecoverPwdForm", "false");
@@ -44,7 +45,7 @@ public class RecoverPassword extends HttpServlet {
                 servletContext.removeAttribute("recoverPwdUser");
                 request.getSession().setAttribute("user", user);
                 Util.addGlobalAlert(Util.SUCCESS, "Votre mot de passe est modifié avec succès");
-                response.sendRedirect("/coursefacile");
+                response.sendRedirect(prefixPath);
 
             } else {
                 request.setAttribute("showRecoverPwdForm", "true");

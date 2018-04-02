@@ -76,13 +76,18 @@ public class UserHandler implements IUserHandler {
                 Session session = SessionFactoryHelper.getSessionFactory().openSession();
                 try {
                     session.beginTransaction();
-                    Query query = session.createQuery("from User where email='" + email + "' AND password='" + Util.hashString(pwd) + "'");
+                    Query query = session.createQuery("from User where email=:email AND password=:pwd");
+                    query.setString("email", email);
+                    query.setString("pwd", Util.hashString(pwd));
                     Object object = query.uniqueResult();
 
                     session.getTransaction().commit();
+
                     if (object != null) {
+                        System.out.println("Im user and im not null");
                         User user = (User) object;
                         request.getSession().setAttribute("user", user);
+                        System.out.println(((User) request.getSession().getAttribute("user")).getFname());
                         check = true;
                     } else
                         Util.addGlobalAlert(Util.DANGER, "Email ou mot de passe incorrecte");

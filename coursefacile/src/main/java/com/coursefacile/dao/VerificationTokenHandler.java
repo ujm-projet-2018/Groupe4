@@ -6,10 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.*;
 
 public class VerificationTokenHandler implements IVerificationTokenHandler {
 
@@ -91,16 +90,31 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
             if (checkAdd) {
                 String subject = "", messageHeader = "", verificationUrl = "", highlitedText = "", normalText = "", linkText = "";
                 String toEmail = user.getEmail();
+                String prefixPath = "", host = "";
+                try {
+                    Properties prop = new Properties();
+                    String propFileName = "params.properties";
+                    InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+                    if (inputStream != null) {
+                        prop.load(inputStream);
+                    }
+                    // get the property value and print it out
+                    prefixPath = prop.getProperty("prefixPath");
+                    host = prop.getProperty("host");
+                    inputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (verificationType == VerificationToken.VALIDATION_MAIL_TOKEN) {
                     messageHeader = "Merci pour votre inscription!";
-                    verificationUrl = "http://localhost:8080/coursefacile/verifymail?token=" + verificationToken.getToken();
+                    verificationUrl = host + prefixPath + "/verifymail?token=" + verificationToken.getToken();
                     highlitedText = "On est heureux de vous avoir comme membre de Courses Faciles!";
                     normalText = "Merci de bien vouloir confirmer votre email";
                     linkText = "Confirmer";
                     subject = "Validation mail";
                 } else if (verificationType == VerificationToken.RECOVERY_PWD_TOKEN) {
                     messageHeader = "Recuperation de mot de passe";
-                    verificationUrl = "http://localhost:8080/coursefacile/recoverpassword?token=" + verificationToken.getToken();
+                    verificationUrl = host + prefixPath + "/recoverpassword?token=" + verificationToken.getToken();
                     highlitedText = "Si vous n'avez pas demander une recuperation de mot de passe ignorer ce message.";
                     normalText = "Pour recuperer votre mot de passe veuillez cliquer sur le bouton ci-dessous.";
                     linkText = "Recuperer mon mot de passe";

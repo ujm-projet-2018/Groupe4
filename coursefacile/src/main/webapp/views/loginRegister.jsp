@@ -6,11 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <%@ include file="parts/meta.jsp" %>
-    <title>Multi-purpose theme</title>
+    <title>Course faciles | connéxion ou inscription</title>
     <link rel="stylesheet" href="css/form-elements.css">
     <link rel="stylesheet" href="css/loginRegister.css">
     <%@ include file="parts/styles.jsp" %>
@@ -36,7 +37,8 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <form role="form" action="/coursefacile/login" method="post" novalidate="novalidate" class="login-form">
+                            <form role="form" action="<%= prefixPath %>/login" method="post" novalidate="novalidate"
+                                  class="login-form">
                                 <div class="form-group">
                                     <label class="sr-only" for="login_email">Adresse E-mail</label>
                                     <input type="text" name="login_email" placeholder="E-mail..."
@@ -49,7 +51,7 @@
                                 </div>
                                 <input type="hidden" name="type" value="login">
                                 <div class="form-group">
-                                    <a class="anchor" href="/coursefacile/recoverpassword">Mot de passe oublié?</a>
+                                    <a class="anchor" href="<%= prefixPath %>/recoverpassword">Mot de passe oublié?</a>
                                 </div>
                                 <button type="submit" class="btn">Se connecter</button>
                             </form>
@@ -73,7 +75,8 @@
                             </div>
                         </div>
                         <div class="form-bottom">
-                            <form role="form" action="/coursefacile/register" method="post"  novalidate="novalidate" class="registration-form form-validation">
+                            <form role="form" action="<%= prefixPath %>/register" method="post" novalidate="novalidate"
+                                  class="registration-form form-validation">
                                 <div class="form-group">
                                     <label class="sr-only" for="first_name">First name</label>
                                     <input type="text" name="first_name" placeholder="*Nom..."

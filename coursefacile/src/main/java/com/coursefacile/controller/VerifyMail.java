@@ -21,10 +21,11 @@ public class VerifyMail extends HttpServlet {
         ServletContext servletContext = this.getServletContext();
         Map<String, String[]> params = request.getParameterMap();
         IVerificationTokenHandler verificationTokenHandler = new VerificationTokenHandler();
+        String prefixPath = servletContext.getInitParameter("prefixPath");
         if (Util.isLoggedIn(request)) {
             if (params.containsKey("sendNewValidatoinMail")) {
                 verificationTokenHandler.sendVerificationMail(Util.getLoggedInUser(request), VerificationToken.VALIDATION_MAIL_TOKEN);
-                response.sendRedirect("/coursefacile");
+                response.sendRedirect(prefixPath);
             } else {
                 String validationStatus =  Boolean.toString(verificationTokenHandler.validateMail(request));
                 request.setAttribute("validationStatus", validationStatus);

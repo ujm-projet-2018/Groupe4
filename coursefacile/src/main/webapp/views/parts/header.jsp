@@ -1,11 +1,5 @@
 <%@ page import="com.coursefacile.model.User" %>
-<%@ page import="com.coursefacile.dao.Util" %><%--
-  Created by IntelliJ IDEA.
-  User: abdelmoghitmadih
-  Date: 3/26/18
-  Time: 10:20 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.coursefacile.dao.Util" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -20,16 +14,17 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand">
-                        <a href="/coursefacile"><h1><img src="images/logo.png" title="Courses Faciles"></h1></a>
+                        <a href="<%= prefixPath %>"><h1><img src="<%= prefixPath %>/images/logo.png"
+                                                             title="Courses Faciles"></h1></a>
                     </div>
                 </div>
 
                 <div class="navbar-collapse collapse">
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation"><a href="/coursefacile/" class="active">Accueil</a></li>
-                            <li role="presentation"><a href="/coursefacile/services">Services</a></li>
-                            <li role="presentation"><a href="/coursefacile/contact">Contact</a></li>
+                            <li role="presentation"><a href="<%= prefixPath %>/" class="active">Accueil</a></li>
+                            <li role="presentation"><a href="<%= prefixPath %>/services">Services</a></li>
+                            <li role="presentation"><a href="<%= prefixPath %>/contact">Contact</a></li>
                             <%
                                 if (Util.isLoggedIn(request)) {
                                     User user = Util.getLoggedInUser(request);
@@ -46,7 +41,7 @@
                                 </a>
                                 <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                                     <li>
-                                        <a href="/coursefacile/profile">
+                                        <a href="<%= prefixPath %>/profile">
                                             <i class="ace-icon fa fa-user"></i>
                                             Profile
                                         </a>
@@ -55,7 +50,7 @@
                                     <li class="divider"></li>
 
                                     <li>
-                                        <a href="/coursefacile/logout">
+                                        <a href="<%= prefixPath %>/logout">
                                             <i class="ace-icon fa fa-power-off"></i>
                                             déconnéxion
                                         </a>
@@ -63,7 +58,7 @@
                                 </ul>
                             </li>
                             <% } else {%>
-                            <li role="presentation"><a href="/coursefacile/login">Connéxion/Inscription</a></li>
+                            <li role="presentation"><a href="<%= prefixPath %>/login">Connéxion/Inscription</a></li>
                             <%}%>
 
                         </ul>

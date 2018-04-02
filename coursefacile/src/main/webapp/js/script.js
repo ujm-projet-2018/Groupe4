@@ -44,7 +44,7 @@ $(function () {
                     $cityIdInput.val("");
                 $.ajax({
                     type: 'GET',
-                    url: '/coursefacile/filterCities',
+                    url: prefixPath + '/filterCities',
                     data: {city: q},
                     dataType: 'json',
                     cache: false,

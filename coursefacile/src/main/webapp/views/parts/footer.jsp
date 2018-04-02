@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <footer>
     <div class="footer">
         <div class="container">
@@ -81,17 +82,20 @@
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery-2.1.1.min.js"></script>
+<script src="<%= prefixPath %>/js/jquery-2.1.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script type="text/javascript"  src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/wow.min.js"></script>
-<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
-<script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
-<script type="text/javascript" src="js/jquery.isotope.min.js"></script>
-<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="js/functions.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
+<script>
+    prefixPath = "<%= prefixPath %>";
+</script>
+<script type="text/javascript" src="<%= prefixPath %>/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/wow.min.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/functions.js"></script>
+<script src="<%= prefixPath %>/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<%= prefixPath %>/js/script.js"></script>
