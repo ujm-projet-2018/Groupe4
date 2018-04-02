@@ -3,18 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+
+    </welcome-file-list>
+    <servlet>
+        <servlet-name>Init</servlet-name>
+        <servlet-class>com.coursefacile.controller.Init</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Init</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
     <context-param>
         <param-name>prefixPath</param-name>
         <param-value>/coursefacile</param-value>
     </context-param>
-   <servlet>
-       <servlet-name>Init</servlet-name>
-       <servlet-class>com.coursefacile.controller.Init</servlet-class>
-   </servlet>
-    <servlet-mapping>
-        <servlet-name>Init</servlet-name>
-        <url-pattern></url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>LoginRegister</servlet-name>
         <servlet-class>com.coursefacile.controller.LoginRegister</servlet-class>
