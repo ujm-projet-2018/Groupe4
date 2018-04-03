@@ -84,10 +84,8 @@ public class UserHandler implements IUserHandler {
                     session.getTransaction().commit();
 
                     if (object != null) {
-                        System.out.println("Im user and im not null");
                         User user = (User) object;
                         request.getSession().setAttribute("user", user);
-                        System.out.println(((User) request.getSession().getAttribute("user")).getFname());
                         check = true;
                     } else
                         Util.addGlobalAlert(Util.DANGER, "Email ou mot de passe incorrecte");
