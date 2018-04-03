@@ -1,6 +1,5 @@
 <%@ page import="com.coursefacile.model.User" %>
 <%@ page import="com.coursefacile.dao.Util" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="navigation">
@@ -28,7 +27,7 @@
                             <%
                                 if (Util.isLoggedIn(request)) {
                                     User user = Util.getLoggedInUser(request);
-                                    String imgUrl = user.getImage() == null ? "images/people.png" : user.getImage();
+                                    String imgUrl = user.getImage() == null ? "/images/people.png" : user.getImage();
                             %>
                             <li class="user">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">
@@ -48,17 +47,26 @@
                                     </li>
 
                                     <li class="divider"></li>
+                                    
+                                    <li>
+                                        <a href="<%= prefixPath %>/dashboard">
+                                            <i class="glyphicon glyphicon-tasks"></i>
+                                            Tableau de bord
+                                        </a>
+                                    </li>
+
+                                    <li class="divider"></li>
 
                                     <li>
                                         <a href="<%= prefixPath %>/logout">
                                             <i class="ace-icon fa fa-power-off"></i>
-                                            dÃ©connÃ©xion
+                                            déconnéxion
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <% } else {%>
-                            <li role="presentation"><a href="<%= prefixPath %>/login">ConnÃ©xion/Inscription</a></li>
+                            <li role="presentation"><a href="<%= prefixPath %>/login">Connéxion/Inscription</a></li>
                             <%}%>
 
                         </ul>

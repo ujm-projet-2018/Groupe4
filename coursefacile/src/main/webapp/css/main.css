@@ -117,3 +117,7 @@ nav.navbar-static-top {
 .anchor:hover{
     color: #ed502e;
 }
+
+.notify {
+    margin-top: 10px;
+}
