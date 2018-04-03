@@ -15,10 +15,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="alaouiib">
     <!-- Bootstrap Core CSS -->
-    <link href="ElaAdmin-master/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="ElaAdmin-master/css/helper.css" rel="stylesheet">
-    <link href="ElaAdmin-master/css/style.css" rel="stylesheet">
+    <%--<link href="ElaAdmin-master/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">--%>
+    <%--<!-- Custom CSS -->--%>
+    <%--<link href="ElaAdmin-master/css/helper.css" rel="stylesheet">--%>
+    <%--<link href="ElaAdmin-master/css/style.css" rel="stylesheet">--%>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
 

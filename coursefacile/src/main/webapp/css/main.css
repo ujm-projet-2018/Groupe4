@@ -69,6 +69,7 @@
 .hero-text h2 {
     color: white;
 }
+
 @media screen and (max-width: 767px){
     .hero-text{
         top: 50%;

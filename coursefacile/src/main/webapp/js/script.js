@@ -2,7 +2,7 @@ $(function () {
     /**
      * validation functions
      */
-    function errorPlacement(error, element) {
+    function errorPlacement (error, element) {
         // Add the `help-block` class to the error element
         error.addClass("help-block");
 
@@ -12,12 +12,10 @@ $(function () {
             error.insertAfter(element);
         }
     }
-
-    function highlight(element, errorClass, validClass) {
+    function highlight (element, errorClass, validClass) {
         $(element).parents(".form-group").addClass("has-error").removeClass("has-success");
     }
-
-    function unhighlight(element, errorClass, validClass) {
+    function unhighlight (element, errorClass, validClass) {
         $(element).parents(".form-group").addClass("has-success").removeClass("has-error");
     }
 
@@ -39,12 +37,13 @@ $(function () {
         valueKey: 'title',
         source: [
             function (q, add) {
+                console.log(q);
                 var $cityIdInput = $("#city_id");
                 if ($cityIdInput.length)
                     $cityIdInput.val("");
                 $.ajax({
                     type: 'GET',
-                    url: prefixPath + '/filterCities',
+                    url: '/coursefacile/filterCities',
                     data: {city: q},
                     dataType: 'json',
                     cache: false,
@@ -63,14 +62,14 @@ $(function () {
         }
         $cityIdInput.val(field.id);
     });
-    $.validator.methods.email = function (value, element) {
+    $.validator.methods.email = function( value, element ) {
         //^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$
-        return this.optional(element) || /^[\w-\+]+(\.[\w]+)*@[\w-]+(\.[\w]+)*(\.[a-z]{2,})$/i.test(value);
+        return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
     }
     var $loginForm = $('.login-form');
     var $formToValidate = $('.form-validation');
     //login form
-    if ($loginForm.length) {
+    if($loginForm.length){
         $loginForm.validate({
             rules: {
                 login_email: {
