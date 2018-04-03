@@ -7,14 +7,10 @@
         <param-name>prefixPath</param-name>
         <param-value>/coursefacile</param-value>
     </context-param>
-   <servlet>
-       <servlet-name>Init</servlet-name>
-       <servlet-class>com.coursefacile.controller.Init</servlet-class>
-   </servlet>
-    <servlet-mapping>
-        <servlet-name>Init</servlet-name>
-        <url-pattern></url-pattern>
-    </servlet-mapping>
+  <welcome-file-list>
+  <welcome-file>views/index.jsp</welcome-file>
+  </welcome-file-list>
+   
     <servlet>
         <servlet-name>LoginRegister</servlet-name>
         <servlet-class>com.coursefacile.controller.LoginRegister</servlet-class>
@@ -32,6 +28,14 @@
     <servlet-mapping>
         <servlet-name>VerifyMail</servlet-name>
         <url-pattern>/verifymail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>com.coursefacile.controller.ProfileController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>RecoverPassword</servlet-name>

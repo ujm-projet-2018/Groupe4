@@ -22,15 +22,18 @@ public class User {
     private boolean emailChecked;
     private boolean telChecked;
     private Date registerDate;
+    private String birthDate;
+
+
     private String description;
     private String image;
-    @OneToMany(mappedBy = "owner",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Mission> publishedMissions;
-    @OneToMany(mappedBy = "customer",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<Mission> chosedMissions;
-    @OneToMany(mappedBy = "sender",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "sender", fetch = FetchType.EAGER)
     private Set<Message> messagesSent;
-    @OneToMany(mappedBy = "receiver",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.EAGER)
     private Set<Message> messagesReceived;
 
     public User() {
@@ -174,5 +177,13 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 }
