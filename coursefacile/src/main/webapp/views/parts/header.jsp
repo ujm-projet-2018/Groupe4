@@ -27,11 +27,11 @@
                             <%
                                 if (Util.isLoggedIn(request)) {
                                     User user = Util.getLoggedInUser(request);
-                                    String imgUrl = user.getImage() == null ? "/images/people.png" : user.getImage();
+                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
                             %>
                             <li class="user">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">
-                                    <img class="nav-user-photo" src="<%= imgUrl%>" alt="Jason's Photo">
+                                    <img class="nav-user-photo" src="<%= imgUrl%>" alt="<%= user.getFullName() %>">
                                     <span class="user-info">
 									<%= user.getFname()%>
 								</span>
@@ -60,13 +60,13 @@
                                     <li>
                                         <a href="<%= prefixPath %>/logout">
                                             <i class="ace-icon fa fa-power-off"></i>
-                                            déconnéxion
+                                            Deconnexion
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <% } else {%>
-                            <li role="presentation"><a href="<%= prefixPath %>/login">Connéxion/Inscription</a></li>
+                            <li role="presentation"><a href="<%= prefixPath %>/login">Connexion/Inscription</a></li>
                             <%}%>
 
                         </ul>

@@ -28,11 +28,13 @@ $(function () {
         {})
         .init();
 
-    $('#date').datepicker({
-        weekStart: 1,
-        format: 'dd/mm/yyyy'
-    });
-
+    var homeDatePicker = $('#date');
+    if (homeDatePicker.length) {
+        homeDatePicker.datepicker({
+            weekStart: 1,
+            format: 'dd/mm/yyyy'
+        });
+    }
     $cityInput.autocomplete({
         valueKey: 'title',
         source: [

@@ -90,21 +90,8 @@ public class VerificationTokenHandler implements IVerificationTokenHandler {
             if (checkAdd) {
                 String subject = "", messageHeader = "", verificationUrl = "", highlitedText = "", normalText = "", linkText = "";
                 String toEmail = user.getEmail();
-                String prefixPath = "", host = "";
-                try {
-                    Properties prop = new Properties();
-                    String propFileName = "params.properties";
-                    InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-                    if (inputStream != null) {
-                        prop.load(inputStream);
-                    }
-                    // get the property value and print it out
-                    prefixPath = prop.getProperty("prefixPath");
-                    host = prop.getProperty("host");
-                    inputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                String prefixPath = Util.getProperty("prefixPath");
+                String host = Util.getProperty("host");
                 if (verificationType == VerificationToken.VALIDATION_MAIL_TOKEN) {
                     messageHeader = "Merci pour votre inscription!";
                     verificationUrl = host + prefixPath + "/verifymail?token=" + verificationToken.getToken();

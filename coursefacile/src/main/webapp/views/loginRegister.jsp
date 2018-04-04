@@ -12,8 +12,6 @@
 <head>
     <%@ include file="parts/meta.jsp" %>
     <title>Course faciles | connéxion ou inscription</title>
-    <link rel="stylesheet" href="css/form-elements.css">
-    <link rel="stylesheet" href="css/loginRegister.css">
     <%@ include file="parts/styles.jsp" %>
 
 </head>
