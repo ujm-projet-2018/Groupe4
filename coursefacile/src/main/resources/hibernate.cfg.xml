@@ -8,6 +8,7 @@
         <property name="hibernate.connection.class_driver">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">abdel0000</property>
+
         <property name="hibernate.connection.pool_size">20</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/CourseFacile</property>
         <property name="hibernate.connection.username">root</property>

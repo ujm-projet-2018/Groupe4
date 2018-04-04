@@ -54,4 +54,12 @@
         <servlet-name>RecoverPassword</servlet-name>
         <url-pattern>/recoverpassword</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Dashboard</servlet-name>
+        <servlet-class>com.coursefacile.controller.Dashboard</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Dashboard</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -28,7 +28,6 @@
 </head>
 
 <body class="fix-header fix-sidebar">
-<%@ include file="parts/header.jsp" %>
 
 <div class="page-wrapper">
 
@@ -83,13 +82,35 @@
                                     <% Util.showGlobalAlerts();%>
 
                                     <form action="profile" method="post" class="form-horizontal form-material">
-                                        <div class="form-group">
-                                            <label class="col-md-12"> Nom </label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Nom..." name="lname"
-                                                       class="form-control form-control-line">
-                                            </div>
-                                        </div>
+
+
+                                        <c:choose>
+                                            <c:when test="${not empty user.lname }">
+                                                <div class="form-group">
+                                                    <label class="col-md-12"> Nom </label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Nom..." name="lname"
+                                                               class="form-control form-control-line" value="${user.lname}">
+                                                    </div>
+                                                </div>
+                                            </c:when>
+                                            <c:when test="${empty user.lname }">
+                                                <div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-12"> Nom </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" placeholder="Nom..." name="lname"
+                                                                   class="form-control form-control-line" value="${user.lname}">
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                            class="glyphicon glyphicon-remove  form-control-feedback"></span>
+                                                    <em id="login_email-error" class="error help-block">veuillez saisir votreenom</em>
+                                                </div>
+                                            </c:when>
+
+
+                                        </c:choose>
 
 
                                         <c:choose>
@@ -98,7 +119,7 @@
                                                     <label class="col-md-12">Prenom</label>
                                                     <div class="col-md-12">
                                                         <input type="text" placeholder="Prenom..." name="fname"
-                                                               class="form-control form-control-line">
+                                                               class="form-control form-control-line" value="${user.fname}">
                                                     </div>
                                                 </div>
                                             </c:when>
@@ -108,12 +129,13 @@
                                                         <label class="col-md-12">Prenom</label>
                                                         <div class="col-md-12">
                                                             <input type="text" placeholder="Prenom..." name="fname"
-                                                                   class="form-control form-control-line">
+                                                                   class="form-control form-control-line" value="${user.fname}">
                                                         </div>
                                                     </div>
                                                     <span
                                                             class="glyphicon glyphicon-remove  form-control-feedback"></span>
-                                                    <h1>veuillez entrer votre prenom</h1>
+                                                    <em id="login_email-error" class="error help-block">veuillez saisir votre prenom</em>
+
                                                 </div>
                                             </c:when>
 
@@ -121,13 +143,39 @@
                                         </c:choose>
 
 
-                                        <div class="form-group">
-                                            <label class="col-md-12">Date de naissance</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="birthDate..." name="birthDate"
-                                                       class="form-control form-control-line" value="${user.birthDate}">
-                                            </div>
-                                        </div>
+                                        <c:choose>
+                                            <c:when test="${not empty user.birthDate}">
+
+                                                <div class="form-group">
+                                                    <label class="col-md-12">Date de naissance</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="birthDate..." name="birthDate"
+                                                               class="form-control form-control-line"
+                                                               value="${user.birthDate}">
+                                                    </div>
+                                                </div>
+
+                                            </c:when>
+                                            <c:when test="${empty user.birthDate}">
+                                                <div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-12">Date de naissance</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" placeholder="birthDate..."
+                                                                   name="birthDate"
+                                                                   class="form-control form-control-line"
+                                                                   value="${user.birthDate}">
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                            class="glyphicon glyphicon-remove  form-control-feedback"></span>
+                                                    <em id="login_email-error" class="error help-block">veuillez saisir votre date de naissance</em>
+
+                                                </div>
+                                            </c:when>
+
+
+                                        </c:choose>
 
 
                                         <div class="form-group">
@@ -140,31 +188,111 @@
                                         </div>
 
 
-                                        <div class="form-group">
-                                            <label for="email" class="col-md-12">Email</label>
-                                            <div class="col-md-12">
-                                                <input type="email" placeholder="Email..."
-                                                       class="form-control form-control-line" name="email" id="email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Password</label>
-                                            <div class="col-md-12">
-                                                <input type="password" value="password" name="password"
-                                                       class="form-control form-control-line">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Telephone</label>
-                                            <div class="col-md-12">
-                                                <input type="text" placeholder="Telephone No.." name="telephone"
-                                                       class="form-control form-control-line">
-                                            </div>
-                                        </div>
+
+
+                                        <c:choose>
+                                            <c:when test="${not empty user.email}">
+
+                                                <div class="form-group">
+                                                    <label for="email" class="col-md-12">Email</label>
+                                                    <div class="col-md-12">
+                                                        <input type="email" placeholder="Email..."
+                                                               class="form-control form-control-line" name="email" id="email" value="${user.email}">
+                                                    </div>
+                                                </div>
+
+                                            </c:when>
+                                            <c:when test="${empty user.email}">
+                                                <div>
+                                                    <div class="form-group">
+                                                        <label for="email" class="col-md-12">Email</label>
+                                                        <div class="col-md-12">
+                                                            <input type="email" placeholder="Email..."
+                                                                   class="form-control form-control-line" name="email" id="email" value="${user.email}">
+                                                        </div>
+                                                    </div>
+                                                    <span
+                                                            class="glyphicon glyphicon-remove  form-control-feedback"></span>
+                                                    <em id="login_email-error" class="error help-block">veuillez saisir votre email</em>
+
+                                                </div>
+                                            </c:when>
+
+
+                                        </c:choose>
+
+
+
+
+                                        <c:choose>
+                                            <c:when test="${not empty user.password}">
+
+                                                <div class="form-group">
+                                                    <label class="col-md-12">Password</label>
+                                                    <div class="col-md-12">
+                                                        <input type="password" value="password" name="password"
+                                                               class="form-control form-control-line">
+                                                    </div>
+                                                </div>
+
+                                            </c:when>
+                                            <c:when test="${empty user.password}">
+                                                <div>
+                                                    <div class="form-group">
+                                                    <label class="col-md-12">Password</label>
+                                                    <div class="col-md-12">
+                                                        <input type="password" value="password" name="password"
+                                                               class="form-control form-control-line">
+                                                    </div>
+                                                </div>
+                                                    <span
+                                                            class="glyphicon glyphicon-remove  form-control-feedback"></span>
+
+                                                    <em id="login_email-error" class="error help-block">veuillez entrer votre mot de passe,votre mdp doit contenir en moins 8 caracteres</em>
+
+
+                                                </div>
+                                            </c:when>
+
+
+                                        </c:choose>
+
+
+
+                                        <c:choose>
+                                            <c:when test="${not empty user.telephone}">
+
+                                                <div class="form-group">
+                                                <label class="col-md-12">Telephone</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="Telephone No.." name="telephone"
+                                                           class="form-control form-control-line" value="${user.telephone}">
+                                                </div>
+                                                </div>
+
+                                            </c:when>
+                                            <c:when test="${empty user.telephone}">
+                                                <div>
+
+                                                    <div class="form-group">
+                                                    <label class="col-md-12">Telephone</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" placeholder="Telephone No.." name="telephone"
+                                                               class="form-control form-control-line" value="${user.telephone}">
+                                                    </div>
+                                                </div>
+                                                    <span
+                                                            class="glyphicon glyphicon-remove  form-control-feedback"></span>
+                                                    <em id="login_email-error" class="error help-block">Veuillez sasir un numero de telephone</em>
+                                                </div>
+                                            </c:when>
+
+
+                                        </c:choose>
                                         <div class="form-group">
                                             <label class="col-md-12">Description:</label>
                                             <div class="col-md-12">
-                                                <textarea style="resize: none" class="form-control form-control-line"
+                                                <textarea name="description" style="resize: none" class="form-control form-control-line"
                                                           rows="5" id="description" name="description"
                                                           placeholder=" Que faites-vous dans votre temps libre ? D'où faite-vous les courses le plus souvent ? ">${user.description}</textarea>
 
@@ -217,10 +345,7 @@
         <script src="ElaAdmin-master/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
         <!--Custom JavaScript -->
         <script src="ElaAdmin-master/js/custom.min.js"></script>
-        <!--[if lt IE 9]>
-        <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+
 </body>
 
 

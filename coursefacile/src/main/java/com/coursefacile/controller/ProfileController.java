@@ -48,11 +48,11 @@ public class ProfileController extends HttpServlet {
                 && ((String) request.getParameter("email") != "") && ((String) request.getParameter("password") != "")
                 && ((String) request.getParameter("password")).length() > 8
                 && (String) request.getParameter("telephone") != "") {
-
             userHandler.update(user2);
+            Util.addGlobalAlert(Util.SUCCESS, "profile modifie avec succes");
+
             this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
 
-            Util.addGlobalAlert(Util.SUCCESS, "profile modifie avec succes");
         } else {
             Util.addGlobalAlert(Util.WARNING, "s'il vous plait ne pas laisser les champs vide, le password doit contenir > 8 caracteres");
             this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
