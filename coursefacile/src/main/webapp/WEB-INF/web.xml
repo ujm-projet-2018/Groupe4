@@ -62,4 +62,12 @@
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>PublishMission</servlet-name>
+        <servlet-class>com.coursefacile.controller.PublishMission</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PublishMission</servlet-name>
+        <url-pattern>/Publish-Mission</url-pattern>
+    </servlet-mapping>
 </web-app>
