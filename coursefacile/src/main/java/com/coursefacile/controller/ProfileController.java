@@ -23,18 +23,19 @@ public class ProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         userHandler = new UserHandler();
-        if (Util.isLoggedIn(request)) {
+        String prefixPath = this.getServletContext().getInitParameter("prefixPath");
+        if (UserHandler.isLoggedIn(request)) {
             this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
         } else {
             this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
-            response.sendRedirect("/coursefacile/login");
+            response.sendRedirect(prefixPath + "/login");
         }
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         userHandler = new UserHandler();
-        user2 = Util.getLoggedInUser(request);
+        user2 = UserHandler.getLoggedInUser(request);
         String prefixPath = this.getServletContext().getInitParameter("prefixPath");
         user2.setFname((String) request.getParameter("fname"));
         user2.setLname((String) request.getParameter("lname"));
@@ -49,8 +50,10 @@ public class ProfileController extends HttpServlet {
                 && ((String) request.getParameter("email") != "") && ((String) request.getParameter("password") != "")
                 && ((String) request.getParameter("password")).length() > 8
                 && (String) request.getParameter("telephone") != "") {
-            userHandler.update(user2);
-            Util.addGlobalAlert(Util.SUCCESS, "profile modifie avec succes");
+            if (userHandler.update(user2))
+                Util.addGlobalAlert(Util.SUCCESS, "profile modifie avec succes");
+            else
+                Util.addGlobalAlert(Util.DANGER, "Une erreure est parvenue! Veuillez ressayer plus tard.");
 
             this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
 

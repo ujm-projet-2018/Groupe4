@@ -97,23 +97,7 @@ public class Util {
         return false;
     }
 
-    /**
-     * @param request The servlet request
-     * @return true if the user is logged in, if not false.
-     */
-    public static boolean isLoggedIn(HttpServletRequest request) {
-        return request.getSession().getAttribute("user") != null;
-    }
 
-    /**
-     * @param request The servlet request
-     * @return the logged in user. If no user is logged in return null
-     */
-    public static User getLoggedInUser(HttpServletRequest request) {
-        if (isLoggedIn(request))
-            return (User) request.getSession().getAttribute("user");
-        return null;
-    }
 
     /**
      * @param status  global alert status: UTIL.SUCCESS, UTIL.INFO, UTIL.WARNING, UTIL.DANGER

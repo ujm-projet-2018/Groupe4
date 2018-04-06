@@ -1,5 +1,6 @@
 <%@ page import="com.coursefacile.model.User" %>
 <%@ page import="com.coursefacile.dao.Util" %>
+<%@ page import="com.coursefacile.dao.UserHandler" %>
 <header>
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="navigation">
@@ -25,8 +26,8 @@
                             <li role="presentation"><a href="<%= prefixPath %>/services">Services</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/contact">Contact</a></li>
                             <%
-                                if (Util.isLoggedIn(request)) {
-                                    User user = Util.getLoggedInUser(request);
+                                if (UserHandler.isLoggedIn(request)) {
+                                    User user = UserHandler.getLoggedInUser(request);
                                     String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
                             %>
                             <li class="user">

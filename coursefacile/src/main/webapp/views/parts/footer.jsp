@@ -57,9 +57,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					&copy; 2015 <a target="_blank" href="http://bootstraptaste.com/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">bootstraptaste</a>.
-					All Rights Reserved.
+                    &copy; 2018 <a href="<%=prefixPath%>"
+                                   title="Courses Faciles">Courses Faciles</a>.
+                    Tout droit réservé.
 				</div>
 				<!--
                     All links in the footer should remain intact.
@@ -68,11 +68,10 @@
                 -->
 				<div class="col-md-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Services</a></li>
-						<li><a href="#">Blog</a></li>
-						<li><a href="#">Portfolio</a></li>
-						<li><a href="#">Contact</a></li>
+                        <li><a href="<%= prefixPath%>">Accueil</a></li>
+                        <li><a href="<%= prefixPath%>/services">Services</a></li>
+                        <li><a href="<%= prefixPath%>/contact">Contact</a></li>
+                        <li><a href="<%= prefixPath%>/sitemap">Site Map</a></li>
 					</ul>
 				</div>
 			</div>
