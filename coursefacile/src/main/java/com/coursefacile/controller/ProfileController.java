@@ -26,6 +26,7 @@ public class ProfileController extends HttpServlet {
         if (Util.isLoggedIn(request)) {
             this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
         } else {
+            this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
             response.sendRedirect("/coursefacile/login");
         }
 

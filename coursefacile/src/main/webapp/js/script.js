@@ -65,8 +65,7 @@ $(function () {
         $cityIdInput.val(field.id);
     });
     $.validator.methods.email = function( value, element ) {
-        //^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$
-        return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
+        return this.optional(element) || /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/.test(value);
     }
     var $loginForm = $('.login-form');
     var $formToValidate = $('.form-validation');
