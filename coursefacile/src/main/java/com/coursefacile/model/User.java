@@ -22,7 +22,8 @@ public class User {
     private boolean emailChecked;
     private boolean telChecked;
     private Date registerDate;
-    private String birthDate;
+    private Date birthDate;
+
 
 
     private String description;
@@ -73,6 +74,10 @@ public class User {
 
     public void setLname(String lname) {
         this.lname = lname;
+    }
+
+    public String getFullName() {
+        return fname + " " + lname;
     }
 
     public String getGender() {
@@ -179,11 +184,11 @@ public class User {
         this.image = image;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 }

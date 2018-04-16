@@ -84,66 +84,40 @@
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="<%=prefixPath%>/js/jquery-2.1.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script>
-    prefixPath = "<%=prefixPath%>
-	";
+    prefixPath = "<%=prefixPath%>";
 </script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<%=prefixPath%>/js/wow.min.js"></script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/jquery.easing.1.3.js"></script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/jquery.bxslider.min.js"></script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/jquery.prettyPhoto.js"></script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/jquery.isotope.min.js"></script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/jquery.autocomplete.js"></script>
-<script type="text/javascript"
-	src="<%=prefixPath%>/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="<%=prefixPath%>/js/functions.js"></script>
-<script src="<%=prefixPath%>/js/jquery.validate.min.js"></script>
+<script src="<%=prefixPath%>/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="<%=prefixPath%>/js/bootstrap.min.js"></script>
+<%= Util.includeCssOrJs(request, "*", "/js/wow.min.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/fancybox/jquery.fancybox.pack.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/jquery.easing.1.3.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/jquery.bxslider.min.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/jquery.prettyPhoto.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/jquery.isotope.min.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/jquery.autocomplete.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/bootstrap-datepicker.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
+<%= Util.includeCssOrJs(request, "*", "/js/jquery.validate.min.js")%>
+<%-- Dashboard scripts --%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/bootstrap/js/popper.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/jquery.slimscroll.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/sidebarmenu.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/raphael-min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/morris.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/dashboard1-init.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/moment.latest.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/semantic.ui.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/prism.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/pignose.calendar.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/pignose.init.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel-init.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/scripts.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/js/custom.min.js")%>
+<%-- Always include this file last --%>
 <script type="text/javascript" src="<%=prefixPath%>/js/script.js"></script>
 
-<!-- Scripts dashboard.jsp -->
-<script src="<%=prefixPath%>/js/lib/jquery/jquery.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="<%=prefixPath%>/js/lib/bootstrap/js/popper.min.js"></script>
-<script src="<%=prefixPath%>/js/lib/bootstrap/js/bootstrap.min.js"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="<%=prefixPath%>/js/jquery.slimscroll.js"></script>
-<!--Menu sidebar -->
-<script src="<%=prefixPath%>/js/sidebarmenu.js"></script>
-<!--stickey kit -->
-<script src="<%=prefixPath%>/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-<!--Custom JavaScript -->
 
-
-<!-- Amchart -->
-<script src="<%=prefixPath%>/js/lib/morris-chart/raphael-min.js"></script>
-<script src="<%=prefixPath%>/js/lib/morris-chart/morris.js"></script>
-<script src="<%=prefixPath%>/js/lib/morris-chart/dashboard1-init.js"></script>
-
-
-<script src="<%=prefixPath%>/js/lib/calendar-2/moment.latest.min.js"></script>
-<!-- scripit init-->
-<script src="<%=prefixPath%>/js/lib/calendar-2/semantic.ui.min.js"></script>
-<!-- scripit init-->
-<script src="<%=prefixPath%>/js/lib/calendar-2/prism.min.js"></script>
-<!-- scripit init-->
-<script src="<%=prefixPath%>/js/lib/calendar-2/pignose.calendar.min.js"></script>
-<!-- scripit init-->
-<script src="<%=prefixPath%>/js/lib/calendar-2/pignose.init.js"></script>
-
-<script src="<%=prefixPath%>/js/lib/owl-carousel/owl.carousel.min.js"></script>
-<script src="<%=prefixPath%>/js/lib/owl-carousel/owl.carousel-init.js"></script>
-<script src="<%=prefixPath%>/js/scripts.js"></script>
-<!-- scripit init-->
-
-<script src="<%=prefixPath%>/js/custom.min.js"></script>

@@ -7,7 +7,12 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.class_driver">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+<<<<<<< HEAD
         <property name="hibernate.connection.password">abdel0000</property>
+=======
+        <property name="hibernate.connection.password">065063246</property>
+
+>>>>>>> refs/remotes/origin/dev
         <property name="hibernate.connection.pool_size">20</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/CourseFacile</property>
         <property name="hibernate.connection.username">root</property>

@@ -7,6 +7,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -29,8 +30,8 @@ public class Util {
      */
     public static ArrayList<GlobalAlert> alerts = new ArrayList<GlobalAlert>();
 
+
     /**
-     *
      * @param stringToHash String to hash
      * @return return stringToHash hashed to MD5
      */
@@ -58,10 +59,9 @@ public class Util {
     }
 
     /**
-     *
      * @param toEmail the recipient
      * @param subject mail subject
-     * @param body mail body
+     * @param body    mail body
      * @return true if the email is sent successfully, if not return false.
      */
     public static boolean sendEmail(String toEmail, String subject, String body) {
@@ -98,7 +98,6 @@ public class Util {
     }
 
     /**
-     *
      * @param request The servlet request
      * @return true if the user is logged in, if not false.
      */
@@ -107,7 +106,6 @@ public class Util {
     }
 
     /**
-     *
      * @param request The servlet request
      * @return the logged in user. If no user is logged in return null
      */
@@ -118,8 +116,7 @@ public class Util {
     }
 
     /**
-     *
-     * @param status global alert status: UTIL.SUCCESS, UTIL.INFO, UTIL.WARNING, UTIL.DANGER
+     * @param status  global alert status: UTIL.SUCCESS, UTIL.INFO, UTIL.WARNING, UTIL.DANGER
      * @param message
      */
     public static void addGlobalAlert(int status, String message) {
@@ -130,6 +127,7 @@ public class Util {
 
     /**
      * show bootstrap dismissible alert in the top of the page
+     *
      * @return html markup String
      */
     public static String showGlobalAlerts() {
@@ -149,17 +147,25 @@ public class Util {
     }
 
     /**
-     *  check whether the email is valid or not
+     * check whether the email is valid or not
+     *
      * @param mail the mail to check
      * @return true or false
      */
-    public static boolean isValidEmail(String mail){
+    public static boolean isValidEmail(String mail) {
         String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
         Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(mail);
         return matcher.matches();
     }
 
+    /**
+     * check if the element exist in String enum
+     *
+     * @param enumeration String enum
+     * @param element     key of the element we want to search
+     * @return true or false
+     */
     public static boolean elementExistInEnum(Enumeration<String> enumeration, String element) {
         while (enumeration.hasMoreElements()) {
             if (enumeration.nextElement().equals(element))
@@ -168,8 +174,64 @@ public class Util {
         return false;
     }
 
+    /**
+     * get property from params.properties file
+     *
+     * @param paramName parameter name
+     * @return the of the given parameter
+     */
+    public static String getProperty(String paramName) {
+        String param = "";
+        try {
+            Properties prop = new Properties();
+            String propFileName = "params.properties";
+            InputStream inputStream = Util.class.getClassLoader().getResourceAsStream(propFileName);
+            if (inputStream != null) {
+                prop.load(inputStream);
+            }
+            param = prop.getProperty(paramName);
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return param;
+
+    }
+
+    /**
+     * print the style or js in the specific url
+     *
+     * @param request servlet request
+     * @param url     the specific url regular expression
+     * @param fileUrl the css file url
+     * @return link tag if url match the requested uri if not an empty string
+     */
+    public static String includeCssOrJs(HttpServletRequest request, String url, String fileUrl) {
+        String prefixPath = getProperty("prefixPath");
+        String currentUrl = request.getAttribute("javax.servlet.forward.request_uri").toString().replace(prefixPath, "");
+        fileUrl = prefixPath + fileUrl;
+        String tag = "";
+        String type = fileUrl.substring(fileUrl.lastIndexOf(".") + 1);
+        if (type.equals("css"))
+            tag = "<link href= \" " + fileUrl + "\" rel=\"stylesheet\">";
+        else if (type.equals("js"))
+            tag = "<script type=\"text/javascript\" src=\"" + fileUrl + "\"></script>";
+
+        if (url.equals("*"))
+            return tag;
+        Pattern pattern = Pattern.compile(url, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(currentUrl);
+        if (matcher.matches()) {
+            return tag;
+        }
+        return "";
+    }
+
 }
 
+/**
+ * Bootstrap alert
+ */
 class GlobalAlert {
 
     private int status;
