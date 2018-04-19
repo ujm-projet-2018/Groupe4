@@ -117,6 +117,8 @@
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel-init.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/scripts.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/custom.min.js")%>
+<%-- DateTimePicker --%>
+<%= Util.includeCssOrJs(request, "/mission", "/js/datepicker.js")%>
 <%-- Always include this file last --%>
 <script type="text/javascript" src="<%=prefixPath%>/js/script.js"></script>
 
