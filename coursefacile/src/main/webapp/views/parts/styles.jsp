@@ -19,6 +19,10 @@
 <%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/helper.css")%>
 <%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/style_dashboard.css")%>
 <%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/animate_dashboard.css")%>
+<%-- Mission Listing styles --%>
+<%= Util.includeCssOrJs(request, "/missions", "/css/style_missionListing.css")%>
+
+
 <%-- always include this file last --%>
 <link href="<%= prefixPath %>/css/main.css" rel="stylesheet">
 
