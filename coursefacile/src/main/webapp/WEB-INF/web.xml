@@ -41,14 +41,19 @@
         <servlet-name>VerifyMail</servlet-name>
         <url-pattern>/verifymail</url-pattern>
     </servlet-mapping>
+
+
+
     <servlet>
-        <servlet-name>ProfileController</servlet-name>
-        <servlet-class>com.coursefacile.controller.ProfileController</servlet-class>
+        <servlet-name>PublicProfile</servlet-name>
+        <servlet-class>com.coursefacile.controller.PublicProfile</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ProfileController</servlet-name>
-        <url-pattern>/profile</url-pattern>
+        <servlet-name>PublicProfile</servlet-name>
+        <url-pattern>/profile/*</url-pattern>
     </servlet-mapping>
+
+
     <servlet>
         <servlet-name>RecoverPassword</servlet-name>
         <servlet-class>com.coursefacile.controller.RecoverPassword</servlet-class>
