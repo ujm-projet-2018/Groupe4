@@ -33,6 +33,7 @@
         Session session1 = (Session)request.getAttribute("session1");
         
         %>
+
         <%@ include file="parts/meta.jsp" %>
         <title>Courses Faciles</title>
         <%@ include file="parts/styles.jsp" %>
@@ -45,36 +46,12 @@
                 <div class="form-group has-feedback has-icone col-sm-4 col-md-3 col-md-offset-2">
                     <label for="city" class="control-label sr-only">Ville / Code postal</label>
                     <i class="glyphicon glyphicon-map-marker form-control-feedback icon-align-left"></i>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="Ville / Code postal" autocomplete="off" value="${city_id}">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="Ville / Code postal" autocomplete="off" value="${city.name}">
                 </div>
                 <div class="form-group has-feedback has-icone col-sm-3 col-md-3">
                     <label for="date" class="control-label sr-only">de</label>
                     <i class="glyphicon glyphicon-calendar form-control-feedback icon-align-left"></i>
                     <input type="text" class="form-control" name="date" id="date" placeholder="Date" value="${date}">
-                </div>
-                <div class="row">
-                    <div class='col-sm-auto'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker3' >
-                                <input type='text' class="form-control" placeholder="De" id="heure_de"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class='col-sm-2'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker3'>    
-                                <input type='text' class="form-control" placeholder="A" id="heure_a"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-sm-4 col-md-2 has-icone">
                     <button type="submit" class="btn btn-primary">Chercher une mission</button>
@@ -89,21 +66,21 @@
                                     <li style="display: block;" class="span12 first house offices Residential">
                                     <div class="product-item">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-2 col-sm-4">
                                                 <div class="imagewrapper">
-                                                    <img alt="" class="img-circle" width="180px" height="180px" style="border-radius: 50%; vertical-align: middle;"  src="${post.owner.image}">
+                                                    <img alt="" class="img-circle" width="140px" height="140px" style="border-radius: 50%; vertical-align: middle; margin-top: 14px"  src="${post.owner.image}">
                                                     <span class="price">${post.price}<%out.println(" €");%> </span>
                                                     
                                                 </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-10">
                                                 <div class="list-right-info">
-                                                    <h3><a href="#" title="">${post.owner.fname}  ${post.owner.lname}</a></h3>
+                                                    <h3>${post.owner.fname}  ${post.owner.lname}</a></h3>
                                                     <p>
                                                         ${post.description}
                                                     </p>
                                                     <div class="row">
-                                                        <div class="col-md-4">
+                                                        <div class="col-md-3">
                                                             <ul class="title-info">
                                                                 <li>Ville <span> ${post.city.name}  ${post.city.postalCode}</span> </li>
                                                                 <li>Destination <span>${post.destination}</span></li>
@@ -120,7 +97,10 @@
                                                                 <li>Heure publication<span><fmt:formatDate type = "time" value = "${post.publishDate}" /> </span></li>
                                                                 <li>Heure mission  <span><fmt:formatDate type = "time" value = "${post.missionDate}" /></span></li>
                                                             </ul>
-                                                        </div>                                                            
+                                                        </div>
+                                                            <div class="col-md-2">
+                                                                <a class="btn btn-primary" href="#" style="margin-bottom: 12px">Voir detail</a>
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,6 +129,7 @@
             </div>
             </div>
         <%@ include file="parts/footer.jsp" %>
-        
+    
     </body>
+
 </html>
