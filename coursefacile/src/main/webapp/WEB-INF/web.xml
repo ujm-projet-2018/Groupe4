@@ -41,9 +41,6 @@
         <servlet-name>VerifyMail</servlet-name>
         <url-pattern>/verifymail</url-pattern>
     </servlet-mapping>
-
-
-
     <servlet>
         <servlet-name>PublicProfile</servlet-name>
         <servlet-class>com.coursefacile.controller.PublicProfile</servlet-class>

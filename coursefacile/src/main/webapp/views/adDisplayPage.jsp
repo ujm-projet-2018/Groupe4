@@ -43,7 +43,7 @@
         <%@include file="parts/header.jsp" %>
         <div class="main-content">
             <div class="container" >
-                <form class="form" action="/coursefacile/missions" method="Post">
+                <form class="form" action="/coursefacile/missions" method="Get">
                 <div class="row">
                     <div class="col-md-6" style="margin-top: 22px">
                         <div class='input-group' >
@@ -154,21 +154,29 @@
                         </ul>
                     </div>
                 </div>
+                <c:if test="${not empty paginationMax and paginationMax ne 0}">
                 <div class="mx-auto">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                <a class="page-link" href="<%= ((String)request.getAttribute("currentUrl"))+1%>" tabindex="-1">Previous</a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <% int cpt=1;%>
+                            <c:forEach  var="t" begin="1" end="${paginationMax-1}">
                             <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                                <a class="page-link" href="<%= ((String)request.getAttribute("currentUrl"))+(cpt+1)%>">
+                                    <%=cpt++%>
+                                </a>
+                            </li>
+                             </c:forEach>
+                            <li class="page-item">
+                                <a class="page-link" href="<%= ((String)request.getAttribute("currentUrl"))+2%>">Next</a>
                             </li>
                         </ul>
-                    </nav> 
+                    </nav>
+                    
                 </div>
+                </c:if>
             </div>
         </div>
         <%@ include file="parts/footer.jsp" %>
