@@ -126,25 +126,25 @@ nav.navbar-static-top {
 /* ------ dashboard.jsp / profilModif.jsp / profilePublic.jsp------ */
 
 #navbar {
-	height: 50px;
+    height: 50px;
 }
 
 #message-notif {
-	float:right;
+    float: right;
 }
 
 #bouton-dropdown {
-	position: absolute;
+    position: absolute;
 }
 
 #footer {
-	font-family: 'Open Sans', Arial, sans-serif;
-	font-size: 14px;
-	font-weight: 300;
-	line-height: 1.6em;
-	color: #fff;
-	background: #292929;
-	padding: 50px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6em;
+    color: #fff;
+    background: #292929;
+    padding: 50px;
 }
 
 #body-dashboard {
@@ -152,12 +152,12 @@ nav.navbar-static-top {
 }
 
 #sidebar-gauche {
-    position: absolute; 
+    position: absolute;
     margin-top: 55px;
 }
 
 #titre-dashboard {
-    margin-left : 100px;
+    margin-left: 100px;
     margin-top: -80px;
 }
 
@@ -194,4 +194,5 @@ nav.navbar-static-top {
 #myModalLabel {
     color: #ED502E;
 }
+
 /* --------------------------- */

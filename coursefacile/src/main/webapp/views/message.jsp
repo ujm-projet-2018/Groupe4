@@ -17,7 +17,7 @@
 <%@ include file="parts/header.jsp" %>
 <%
 
-    User user = Util.getLoggedInUser(request);
+    User user = UserHandler.getLoggedInUser(request);
     String imgUrl = prefixPath + "/images/" + user.getImage();
 
 %>
@@ -26,8 +26,9 @@
     <img src="<%= imgUrl%>" class="img-thumbnail" alt="Cinque Terre" width="304" height="236">
 
 
-
-   <a href="<%=prefixPath%>/profile"> <button type="button" class="btn btn-success">revenir au profil</button></a>
+    <a href="<%=prefixPath%>/profile">
+        <button type="button" class="btn btn-success">revenir au profil</button>
+    </a>
 </div>
 
 <%@ include file="parts/footer.jsp" %>

@@ -14,6 +14,7 @@ import com.coursefacile.model.User;
 
 import java.io.IOException;
 import java.util.Date;
+
 @WebServlet("/profile")
 
 public class ProfileController extends HttpServlet {
@@ -23,18 +24,36 @@ public class ProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         userHandler = new UserHandler();
-        if (Util.isLoggedIn(request)) {
-            this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
+        String pathInfo = request.getPathInfo() != null ? request.getPathInfo() : "";
+        String[] pathParts = pathInfo.split("/");
+        if (pathParts.length > 1) {
+            String param = pathParts[1];
+            int id;
+            try {
+                id = Integer.parseInt(param);
+            } catch (Exception e) {
+                e.printStackTrace();
+                response.sendRedirect("/");
+                return;
+            }
+            User user2 = userHandler.get(id);
+            request.setAttribute("user2", user2);
+            this.getServletContext().getRequestDispatcher("/views/PublicProfile.jsp").forward(request, response);
+
         } else {
-            this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
-            response.sendRedirect("/coursefacile/login");
+            if (UserHandler.isLoggedIn(request)) {
+                this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
+            } else {
+                this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
+                response.sendRedirect("/coursefacile/login");
+            }
         }
 
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        user2 = Util.getLoggedInUser(request);
+        user2 = UserHandler.getLoggedInUser(request);
 
         user2.setTelephone((String) request.getParameter("telephone"));
         user2.setBirthDate((String) request.getParameter("birthDate"));
@@ -61,7 +80,6 @@ public class ProfileController extends HttpServlet {
         }
 
     }
-
 
 
 }

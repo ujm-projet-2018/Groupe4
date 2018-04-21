@@ -1,5 +1,6 @@
-<footer">
-	<div class="footer" id="footer">
+<footer
+">
+<div class="footer" id="footer">
 		<div class="container">
 			<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
 				data-wow-delay="0.2s">

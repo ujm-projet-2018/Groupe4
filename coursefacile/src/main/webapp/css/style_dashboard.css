@@ -83,9 +83,11 @@
   top: calc(46.5%);
   left: calc(46.5%);
 }
+
 *:not(footer) {
   outline: none;
 }
+
 body:not(footer) {
   background: #fff;
   font-family: 'Open Sans', sans-serif;
@@ -203,6 +205,7 @@ h6 {
 .boxed #main-wrapper .sidebar-footer {
   position: absolute;
 }
+
 .boxed #main-wrapper {
   display: none;
 }
@@ -1443,7 +1446,8 @@ textarea {
   .mini-sidebar .page-wrapper {
     margin-left: 60px;
   }
-  .mini-sidebar {
+
+    .mini-sidebar {
     left: 60px;
   }
   .flex-wrap {
@@ -1509,7 +1513,7 @@ textarea {
 .left-sidebar {
   position: absolute;
   width: 240px;
-  height: 100%;
+    height: 100%;
   top: 0;
   z-index: 20;
   padding-top: 60px;
@@ -6659,7 +6663,8 @@ tbody tr td:last-child {
   position: fixed;
   width: 100%;
 }
-.error-box  {
+
+.error-box {
   left: 0;
   right: 0;
   width: 100%;

@@ -118,7 +118,7 @@
 				</ul>
 				<!-- User profile and search -->
 				<ul id="message-notif" class="navbar-nav my-lg-0">
-				
+
 					<!-- Comment -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle text-muted text-muted  " href="#"
@@ -281,40 +281,40 @@
 					<li><a class="" href="<%= prefixPath %>/dashboard" aria-expanded="false"><i
 							class="fa fa-tachometer"></i><span class="hide-menu">Tableau de bord
 						</span></a>
-						</li>
+					</li>
 					<li class="nav-label">Missions</li>
 					<li><a class="" href="#" aria-expanded="false"><i
 							class="fa fa-suitcase"></i><span class="hide-menu">Mes missions </span></a>
-							</li>
+					</li>
 					<li><a class="" href="#" aria-expanded="false"><i
 							class="fa fa-cart-arrow-down"></i><span class="hide-menu">Mes réservations </span></a>
-							</li>
+					</li>
 					<li class="nav-label">Mon compte</li>
 					<li><a class=" " href="#" aria-expanded="false"><i
 							class="fa fa-envelope"></i><span class="hide-menu">Messages </a>
-							</li>
+					</li>
 					<li><a class="" href="#" aria-expanded="false"><i
 							class="fa fa-bell-o"></i><span class="hide-menu">Alertes
 						</span></a>
-						</li>
+					</li>
 					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
 							class="fa fa-wpforms"></i><span class="hide-menu">Profil </span></a>
 						<ul aria-expanded="false" class="collapse">
 							<li><a href="<%= prefixPath %>/profile">Modifier mon profil</a></li>
 							<%
-			                	User user = Util.getLoggedInUser(request);
-			                	String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
-			                %>
+								User user = UserHandler.getLoggedInUser(request);
+								String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+							%>
 							<li><a href="<%= prefixPath %>/profile/<%= user.getId() %>">Voir mon profil public</a></li>
 						</ul></li>
-					<li class="nav-label">Argent </li>
+					<li class="nav-label">Argent</li>
 					<li><a class="" href="#" aria-expanded="false"><i
 							class="fa fa-euro"></i><span class="hide-menu">Argent disponnible 
 							</span></a>
-							</li>
+					</li>
 					<li><a class="" href="#" aria-expanded="false"><i
 							class="fa fa-credit-card"></i><span class="hide-menu">Paiements effectués</span></a>
-							</li>
+					</li>
 				</ul>
 				</nav>
 				<!-- End Sidebar navigation -->
@@ -327,12 +327,15 @@
 			<!-- Bread crumb -->
 			<div class="row page-titles">
 				<div class="col-md-5 align-self-center">
-                	<img id="image-dashboard" class="nav-user-photo" src="<%= imgUrl%>" alt="<%= user.getFullName() %>">
-					<h3 id="titre-dashboard" class="text-primary">Bonjour <%= user.getFullName() %></h3> 
+					<img id="image-dashboard" class="nav-user-photo" src="<%= imgUrl%>" alt="<%= user.getFullName() %>">
+					<h3 id="titre-dashboard" class="text-primary">Bonjour <%= user.getFullName() %>
+					</h3>
 					<div class="link-profil">
-						<a class="link-profil" href="<%= prefixPath %>/profile"><i class="fa fa-check text-success"></i> Modifier votre profil</a>
+						<a class="link-profil" href="<%= prefixPath %>/profile"><i class="fa fa-check text-success"></i>
+							Modifier votre profil</a>
 						<br>
-						<a class="link-profil" href="<%= prefixPath %>/profile/<%= user.getId() %>"><i class="fa fa-check text-success"></i> Voir votre profil public</a>
+						<a class="link-profil" href="<%= prefixPath %>/profile/<%= user.getId() %>"><i
+								class="fa fa-check text-success"></i> Voir votre profil public</a>
 					</div>
 				</div>
 			</div>

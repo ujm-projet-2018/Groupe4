@@ -47,7 +47,7 @@
                   <div id="select2" class="select">
 			      <select id="minute" name="minute">
 			        <option value="0"> Minute </option>
-			      </select>
+                  </select>
                   </div>
                   <input type="text" id="erreur2" name="erreur2" value="La date et/ou l'heure ne sont pas indiquer !">
                	</div>

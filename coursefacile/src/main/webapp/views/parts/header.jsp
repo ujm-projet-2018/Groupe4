@@ -1,5 +1,6 @@
 <%@ page import="com.coursefacile.model.User" %>
 <%@ page import="com.coursefacile.dao.Util" %>
+<%@ page import="com.coursefacile.dao.UserHandler" %>
 <header>
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="navigation">

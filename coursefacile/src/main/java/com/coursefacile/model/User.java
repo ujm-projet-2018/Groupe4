@@ -59,7 +59,7 @@ public class User {
     }
 
     public String getFname() {
-    	String nom = fname.toUpperCase();
+        String nom = fname.toUpperCase();
         return nom;
     }
 
@@ -68,7 +68,7 @@ public class User {
     }
 
     public String getLname() {
-    	String prenom = lname.substring(0, 1).toUpperCase() + lname.substring(1).toLowerCase();
+        String prenom = lname.substring(0, 1).toUpperCase() + lname.substring(1).toLowerCase();
         return prenom;
     }
 
