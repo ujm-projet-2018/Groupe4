@@ -24,16 +24,23 @@
         <div class="container">
             <form class="form-inline" action="/coursefacile/missions" method="GET">
                 <div class="form-group has-feedback has-icone col-sm-4 col-md-3 col-md-offset-2">
+                    <div class='input-group' >
                     <label for="city" class="control-label sr-only">Ville / Code postal</label>
-
-                    <i class="glyphicon glyphicon-map-marker form-control-feedback icon-align-left"></i>
                     <input type="text" class="form-control" id="city" name="city" placeholder="Ville / Code postal" autocomplete="off">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                </span>
+                    </div>
                 </div>
                 <div class="form-group has-feedback has-icone col-sm-4 col-md-3">
+                    <div class='input-group' >
                     <label for="date" class="control-label sr-only">Date</label>
-
-                    <i class="glyphicon glyphicon-calendar form-control-feedback icon-align-left"></i>
-                    <input type="text" class="form-control" name="date" id="date" placeholder="Date" ></div>
+                    <input type="text" class="form-control" name="date" id="date" placeholder="Date" >
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                    </div>
+                </div>
                 <div class="col-sm-4 col-md-2 has-icone">
                     <button type="submit" class="btn btn-primary">Chercher une mission</button>
                 </div>

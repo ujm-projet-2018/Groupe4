@@ -9,6 +9,7 @@ import com.coursefacile.dao.CityHandler;
 import com.coursefacile.dao.ICityHandler;
 import com.coursefacile.dao.SessionFactoryHelper;
 import com.coursefacile.model.City;
+import com.coursefacile.model.Message;
 import com.coursefacile.model.Mission;
 import com.coursefacile.model.User;
 import java.io.IOException;
@@ -28,6 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
@@ -36,17 +39,14 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author mzemroun
  */
-public class MissionListing extends HttpServlet {
 
-    
+public class MissionListing extends HttpServlet {
+    private static int pageSize = 3;
     Session session1 = SessionFactoryHelper.getSessionFactory().openSession();
-    City city = null;
-    String s;
+    Session session2 = SessionFactoryHelper.getSessionFactory().openSession();
     List<Mission> Lmissions1=new ArrayList<Mission>();
     List<Mission> Lmissions=new ArrayList<Mission>();
-    Date dateDe;
-    Date dateA;
-    Date dateJ;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,37 +72,28 @@ public class MissionListing extends HttpServlet {
             throws ServletException, IOException {
             User user1 =null;
 	    int pageSize = 3;
-            try{
-                session1.beginTransaction();
-                Criteria criteria = session1.createCriteria(City.class);
-                Criterion critere = null;
-                if(request.getParameter("city_id")!=null)
-                critere = Restrictions.eq("id", Integer.parseInt(request.getParameter("city_id")));
-                criteria.add(critere);
-                city=(City) criteria.list().get(0);
-                Criteria criteria1 = session1.createCriteria(Mission.class);
-                Criterion critere1 = Restrictions.eq("city", city);
-                SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat d2 = new SimpleDateFormat("yyyy-MM-dd");
+            Date date1=d1.parse(request.getParameter("date"));
+            String dateS1=d2.format(date1)+" 00:00:00";
+            String dateS2=d2.format(date1)+" 23:59:59";
+            session1.beginTransaction();
+            SQLQuery query = session1.createSQLQuery("select * from mission where city ="+Integer.parseInt(request.getParameter("city_id"))+" and missionDate between '"+dateS1+"' AND  '"+dateS2+"'");
+            query.addEntity(Mission.class);
+               
+            query.setMaxResults(pageSize);
+            Lmissions= query.list();
+            request.setAttribute("Lmissions", Lmissions);
+            request.setAttribute("Date",request.getParameter("date") );
+            
+            session1.getTransaction().commit();
 
-                Criterion critere2 = null;
-                try {
-                    critere2 = Restrictions.eq("missionDate", d.parse(request.getParameter("date")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(MissionListing.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                criteria1.add(critere1);
-                criteria1.add(critere2);
-                Lmissions=criteria1.list(); 
-                session1.getTransaction().commit();
-                request.setAttribute("Lmissions", Lmissions);
-                request.setAttribute("city", city);
-                request.setAttribute("date", request.getParameter("date"));
-                s=request.getParameter("date");
-             }
-	        catch (HibernateException e) {
-	            e.printStackTrace();
-	            session1.getTransaction().rollback();
-	        }
+        } catch (Exception e) {
+            session1.getTransaction().rollback();
+            e.printStackTrace();
+        } 
+            
         RequestDispatcher rd = request.getRequestDispatcher("views/adDisplayPage.jsp");
         rd.forward(request, response);
     }
@@ -118,76 +109,50 @@ public class MissionListing extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ICityHandler cityHandler =new CityHandler();
-        City city2=cityHandler.getCity(Integer.parseInt(request.getParameter("city_id")));
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat date_format = new SimpleDateFormat("HH:mm:ss");
-        try {
-            dateDe=formatter.parse(request.getParameter("heure_de"));
-            dateA=formatter.parse(request.getParameter("heure_de"));
-        } catch (ParseException ex) {
-            Logger.getLogger(MissionListing.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if(s.equals(request.getParameter("date")) && city2.equals(city)){
-            Lmissions1=Lmissions;
-            Lmissions.removeAll(Lmissions);
-            for(int i=0;i<Lmissions1.size();i++){
-                String s1 =date_format.format(Lmissions1.get(i).getMissionDate());
-                try {
-                    dateJ=formatter.parse(s1);
-                } catch (ParseException ex) {
-                    Logger.getLogger(MissionListing.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if(dateJ.compareTo(dateDe)>0 && dateJ.compareTo(dateA)<0)
-                    Lmissions.add(Lmissions1.get(i));
+            SQLQuery query=null;
+           try {
+            SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat d2 = new SimpleDateFormat("yyyy-MM-dd");
+            Date date1=d1.parse(request.getParameter("date"));
+            session2.beginTransaction();
+            if(request.getParameter("prix").length()==0 && request.getParameter("a").length()==0 && request.getParameter("de").length()==0  ){
+                String dateS1=d2.format(date1)+" 00:00:00";
+                String dateS2=d2.format(date1)+" 23:59:59";
+                query = session2.createSQLQuery("select * from mission where city ="+Integer.parseInt(request.getParameter("city_id"))+" and missionDate between '"+dateS1+"' AND  '"+dateS2+"'");
             }
-            
-        }
-        else{
-                        User user1 =null;
-	    int pageSize = 3;
-            try{
-                session1.beginTransaction();
-                Criteria criteria = session1.createCriteria(City.class);
-                Criterion critere = null;
-                if(request.getParameter("city_id")!=null)
-                critere = Restrictions.eq("id", Integer.parseInt(request.getParameter("city_id")));
-                criteria.add(critere);
-                city=(City) criteria.list().get(0);
-                Criteria criteria1 = session1.createCriteria(Mission.class);
-                Criterion critere1 = Restrictions.eq("city", city);
-                SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
+            else if(request.getParameter("a").length()==0 && request.getParameter("de").length()==0  ){
+                String dateS1=d2.format(date1)+" 00:00:00";
+                String dateS2=d2.format(date1)+" 23:59:59";
+                query = session2.createSQLQuery("select * from mission where city ="+Integer.parseInt(request.getParameter("city_id"))+"  and price ="+Integer.parseInt(request.getParameter("prix"))+" and missionDate between '"+dateS1+"' AND  '"+dateS2+"'");
+            }
+            else if(request.getParameter("prix").length()==0 && request.getParameter("a").length()==0){
+                String dateS1=d2.format(date1)+" "+request.getParameter("de")+":00";
+                String dateS2=d2.format(date1)+" 23:59:59";
+                query = session2.createSQLQuery("select * from mission where city ="+Integer.parseInt(request.getParameter("city_id"))+" and missionDate between '"+dateS1+"' AND  '"+dateS2+"'");
+            }
+            else if(request.getParameter("prix").length()==0 ){
+                String dateS1=d2.format(date1)+" "+request.getParameter("de")+":00";
+                String dateS2=d2.format(date1)+" "+request.getParameter("a")+":00";
+                query = session2.createSQLQuery("select * from mission where city ="+Integer.parseInt(request.getParameter("city_id"))+" and missionDate between '"+dateS1+"' AND  '"+dateS2+"'");
+            }
+            else{
+                String dateS1=d2.format(date1)+" "+request.getParameter("de")+":00";
+                String dateS2=d2.format(date1)+" "+request.getParameter("a")+":00";
+                query = session2.createSQLQuery("select * from mission where city ="+Integer.parseInt(request.getParameter("city_id"))+" and price ="+Integer.parseInt(request.getParameter("prix"))+" and missionDate between '"+dateS1+"' AND  '"+dateS2+"'");
+            }
+             query.addEntity(Mission.class);
+            Lmissions1= query.list();
+            request.setAttribute("Lmissions", Lmissions1);
+            request.setAttribute("Date",request.getParameter("date") );
+            session2.getTransaction().commit();
 
-                Criterion critere2 = null;
-                try {
-                    critere2 = Restrictions.eq("missionDate", d.parse(request.getParameter("date")));
-                } catch (ParseException ex) {
-                    Logger.getLogger(MissionListing.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                criteria1.add(critere1);
-                criteria1.add(critere2);
-                Lmissions1=criteria1.list(); 
-                session1.getTransaction().commit();
-                for(int i=0;i<Lmissions1.size();i++){
-                String s1 =date_format.format(Lmissions1.get(i).getMissionDate());
-                try {
-                    dateJ=formatter.parse(s1);
-                } catch (ParseException ex) {
-                    Logger.getLogger(MissionListing.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if(dateJ.compareTo(dateDe)>0 && dateJ.compareTo(dateA)<0)
-                    Lmissions.add(Lmissions1.get(i));
-                }
-            }
-            catch (HibernateException e) {
-	            e.printStackTrace();
-	            session1.getTransaction().rollback();
-	        }
-            request.setAttribute("Lmissions", Lmissions);
-            RequestDispatcher rd = request.getRequestDispatcher("views/adDisplayPage.jsp");
-            rd.forward(request, response);
+
+        } catch (Exception e) {
+            session2.getTransaction().rollback();
+            e.printStackTrace();
         }
+        RequestDispatcher rd = request.getRequestDispatcher("views/adDisplayPage.jsp");
+        rd.forward(request, response);
     }
 
     /**

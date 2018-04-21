@@ -100,6 +100,11 @@
 <%= Util.includeCssOrJs(request, "*", "/js/bootstrap-datepicker.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.validate.min.js")%>
+
+ //Util.includeCssOrJs(request, "/missions", "/js/bootstrap-datetimepicker.min.js"
+<script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
 <%-- Dashboard scripts --%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/bootstrap/js/popper.min.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/jquery.slimscroll.js")%>

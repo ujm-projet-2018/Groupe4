@@ -20,6 +20,8 @@
 <%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/style_dashboard.css")%>
 <%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/animate_dashboard.css")%>
 <%-- Mission Listing styles --%>
+<link rel="stylesheet" type="text/css" media="screen"
+     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 <%= Util.includeCssOrJs(request, "/missions", "/css/style_missionListing.css")%>
 
 

@@ -4,6 +4,7 @@
     Author     : mzemroun
 --%>
 
+<%@page import="java.util.Map"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.coursefacile.controller.MissionListing"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -26,12 +27,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <% 
-        List<Mission> Lmissions= (ArrayList < Mission >)request.getAttribute("Lmissions");
-        SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd");
-        SimpleDateFormat dt2 = new SimpleDateFormat("hh:mm");
-        Session session1 = (Session)request.getAttribute("session1");
-        
+        <%
+            List<Mission> Lmissions = (ArrayList< Mission>) request.getAttribute("Lmissions");
+            SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd");
+            SimpleDateFormat dt2 = new SimpleDateFormat("hh:mm");
+            Session session1 = (Session) request.getAttribute("session1");
+
         %>
 
         <%@ include file="parts/meta.jsp" %>
@@ -41,41 +42,83 @@
     <body>
         <%@include file="parts/header.jsp" %>
         <div class="main-content">
-            <div class="container" style="background-color: #CCC">
-                <form class="form-inline" action="/coursefacile/missions" method="Post">
-                <div class="form-group has-feedback has-icone col-sm-4 col-md-3 col-md-offset-2">
-                    <label for="city" class="control-label sr-only">Ville / Code postal</label>
-                    <i class="glyphicon glyphicon-map-marker form-control-feedback icon-align-left"></i>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="Ville / Code postal" autocomplete="off" value="${city.name}">
-                </div>
-                <div class="form-group has-feedback has-icone col-sm-3 col-md-3">
-                    <label for="date" class="control-label sr-only">de</label>
-                    <i class="glyphicon glyphicon-calendar form-control-feedback icon-align-left"></i>
-                    <input type="text" class="form-control" name="date" id="date" placeholder="Date" value="${date}">
-                </div>
-                <div class="col-sm-4 col-md-2 has-icone">
-                    <button type="submit" class="btn btn-primary">Chercher une mission</button>
-                </div>
-            </form>
-          </div>
-            <div class="container">
+            <div class="container" >
+                <form class="form" action="/coursefacile/missions" method="Post">
                 <div class="row">
-                            <div class="grid_list_product st2">
-                                <ul class="products" id="able-list">
-                                    <c:forEach items="${Lmissions}" var="post">
-                                    <li style="display: block;" class="span12 first house offices Residential">
+                    <div class="col-md-6" style="margin-top: 22px">
+                        <div class='input-group' >
+                            <label for="city" class="control-label sr-only">Ville / Code postal</label>
+                            <input type="text" class="form-control"  id="city" name="city" placeholder="Ville / Code postal" autocomplete="off">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 22px">
+                        <div class='input-group' >
+                            <label for="date" class="control-label sr-only">Date</label>
+                            <input type="text" class="form-control" value="${Date}" name="date" id="date" placeholder="Date" >
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row collapse" id="rechercheAvancéeCollapse">
+                    <div class="col-md-4" style="margin-top: 22px">
+                        <div class="input-group date timepicker" >
+                            <input type='text' class="form-control" placeholder="De" id="de" name="de" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-top: 22px">
+                        <div class="input-group date timepicker" >
+                            <input type='text' class="form-control" placeholder="A" id="a" name="a"  />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-top: 22px">
+                        <div class='input-group' >
+                            <input type='text' class="form-control" placeholder="prix" id="prix" name="prix" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-euro"></span>
+                            </span>
+                        </div>
+                    </div>
+            </div>
+                
+
+                    <div class="col-md-offset-8 col-sm-offset-2 col-sm-4 col-md-1 has-icone " >
+                        <button type="submit" class="btn btn-primary">Chercher</button>
+                    </div>
+                     </form>
+                    <div class="col-md-3 col-md-offset-0 col-sm-offset-2 col-sm-6">
+                        <button data-toggle="collapse" class="btn btn-primary" data-target="#rechercheAvancéeCollapse" aria-expanded="false" aria-controls="rechercheAvancéeCollapse">Recherche avanceé</button>
+                    </div>
+                
+
+            </div>
+              <div class="container" style="margin-top: 12px">
+                <div class="row">
+                    <div class="grid_list_product st2">
+                        <ul class="products" id="able-list">
+                            <c:forEach items="${Lmissions}" var="post">
+                                <li style="display: block;" class="span12 first house offices Residential">
                                     <div class="product-item">
                                         <div class="row">
-                                            <div class="col-md-2 col-sm-4">
+                                            <div class="col-md-2">
                                                 <div class="imagewrapper">
-                                                    <img alt="" class="img-circle" width="140px" height="140px" style="border-radius: 50%; vertical-align: middle; margin-top: 14px"  src="${post.owner.image}">
-                                                    <span class="price">${post.price}<%out.println(" €");%> </span>
-                                                    
+                                                    <a href="/coursefacile/profile/${post.owner.id}"><img alt="" class="img-circle" width="140px" height="140px" style="border-radius: 50%; vertical-align: middle; margin-top: 14px"  src="css/img/a1.jpg"></a>
+                                                    <span class="price">${post.price}<%out.println(" €");%> </span>  
                                                 </div>
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="list-right-info">
-                                                    <h3>${post.owner.fname}  ${post.owner.lname}</a></h3>
+                                                    <h3>${post.owner.fname}  ${post.owner.lname}</h3>
                                                     <p>
                                                         ${post.description}
                                                     </p>
@@ -98,38 +141,38 @@
                                                                 <li>Heure mission  <span><fmt:formatDate type = "time" value = "${post.missionDate}" /></span></li>
                                                             </ul>
                                                         </div>
-                                                            <div class="col-md-2">
-                                                                <a class="btn btn-primary" href="#" style="margin-bottom: 12px">Voir detail</a>
-                                                            </div>
+                                                        <div class="col-md-2">
+                                                            <a class="btn btn-primary" href="#" style="margin-bottom: 12px">Voir detail</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                    </c:forEach>
-                                        </ul>
-                                    </div>
-                                  </div>
-                                <div class="mx-auto">
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item disabled">
-                                              <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                              <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav> 
-                                </div>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mx-auto">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav> 
+                </div>
             </div>
-            </div>
+        </div>
         <%@ include file="parts/footer.jsp" %>
-    
+
     </body>
 
 </html>

@@ -35,6 +35,7 @@ $(function () {
             format: 'dd/mm/yyyy'
         });
     }
+    if($cityInput.length){
     $cityInput.autocomplete({
         valueKey: 'title',
         source: [
@@ -64,7 +65,7 @@ $(function () {
         }
         $cityIdInput.val(field.id);
     });
-
+    }
     $.validator.methods.email = function( value, element ) {
         return this.optional(element) || /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/.test(value);
     }
@@ -150,6 +151,13 @@ $(function () {
             unhighlight: unhighlight
         });
 
+    }
+    
+    var timePicker = $('#timepicker');
+    if (timePicker.length) {
+        timePicker.datetimepicker({
+        format: 'dd/MM/yyyy hh:mm:ss'
+      });
     }
 
 });
