@@ -151,5 +151,7 @@ $(function () {
         });
 
     }
+    //set sidebar height same as container
+    $('#sidebar-gauche').css('height',$('#body-dashboard').height());
 
 });

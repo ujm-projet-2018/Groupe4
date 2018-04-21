@@ -16,7 +16,7 @@
 
 <head>
 <%@ include file="parts/meta.jsp"%>
-<title>Profil | Courses faciles</title>
+<title>Profil public | Courses faciles</title>
 <%@ include file="parts/styles.jsp"%>
 </head>
 
@@ -332,281 +332,68 @@
 			<div class="container-fluid">
 				<!-- Start Page Content -->
 				<div class="row">
-					<!-- Column -->
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-body">
-								<div class="card-two">
-									<header>
-									<div class="avatar">
-										<img src="<%=imgUrl%>" alt="Profile picture " />
-									</div>
-									</header>
+				<br>
+				<br>
+		<div class="container">
+			<div class="span3 well" id="profil-public">
+				<br>
+				<center>
 
-									<h3>${user.lname} ${user.fname}</h3>
-									<div class="desc">${user.description}</div>
-									<div class="contacts">
-										<a href=""><i class="fa fa-plus"></i></a> <a href=""><i
-											class="fa fa-whatsapp"></i></a> <a href=""><i
-											class="fa fa-envelope"></i></a>
-										<div class="clear"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Column -->
-					<!-- Column -->
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="tab-pane" id="settings" role="tabpanel">
-								<div class="card-body">
-									<form action="profile" method="post"
-										class="form-horizontal form-material">
-
-										<c:choose>
-											<c:when test="${not empty user.lname }">
-												<div class="form-group">
-													<label class="col-md-12"> Nom </label>
-													<div class="col-md-12">
-														<input type="text" placeholder="Nom..." name="lname"
-															class="form-control form-control-line"
-															value="${user.lname}">
-													</div>
-												</div>
-											</c:when>
-											<c:when test="${empty user.lname }">
-												<div>
-													<div class="form-group">
-														<label class="col-md-12"> Nom </label>
-														<div class="col-md-12">
-															<input type="text" placeholder="Nom..." name="lname"
-																class="form-control form-control-line"
-																value="${user.lname}">
-														</div>
-													</div>
-													<em style="color: red" style="color: red"
-														id="login_email-error" class="error help-block">Veuillez
-														saisir votre nom</em>
-												</div>
-											</c:when>
-
-
-										</c:choose>
-										<c:choose>
-											<c:when test="${not empty user.fname }">
-												<div class="form-group">
-													<label class="col-md-12">Prénom</label>
-													<div class="col-md-12">
-														<input type="text" placeholder="Prenom..." name="fname"
-															class="form-control form-control-line"
-															value="${user.fname}">
-													</div>
-												</div>
-											</c:when>
-											<c:when test="${empty user.fname }">
-												<div>
-													<div class="form-group">
-														<label class="col-md-12">Prénom</label>
-														<div class="col-md-12">
-															<input type="text" placeholder="Prenom..." name="fname"
-																class="form-control form-control-line"
-																value="${user.fname}">
-														</div>
-													</div>
-													<em style="color: red" id="login_email-error"
-														class="error help-block">Veuillez saisir votre prénom</em>
-
-												</div>
-											</c:when>
-
-
-										</c:choose>
-
-
-										<c:choose>
-											<c:when test="${not empty user.birthDate}">
-
-												<div class="form-group">
-													<label class="col-md-12">Date de naissance</label>
-													<div class="col-md-12">
-														<input type="text" placeholder="JJ/MM/AAAA"
-															name="birthDate" id="date"
-															class="form-control form-control-line"
-															value="${user.birthDate}">
-													</div>
-												</div>
-
-											</c:when>
-											<c:when test="${empty user.birthDate}">
-												<div>
-													<div class="form-group">
-														<label class="col-md-12">Date de naissance</label>
-														<div class="col-md-12">
-															<input type="text" placeholder="JJ/MM/AAAA"
-																name="birthDate" id="date"
-																class="form-control form-control-line"
-																value="${user.birthDate}">
-														</div>
-													</div>
-													<em style="color: red" id="login_email-error"
-														class="error help-block">Veuillez saisir votre date
-														de naissance</em>
-
-												</div>
-											</c:when>
-
-
-										</c:choose>
-
-
-										<div class="form-group">
-											<label class="col-md-12">Date d'enregistrement</label>
-											<div class="col-md-12">
-												<input readonly type="text" name="registerDate"
-													class="form-control form-control-line"
-													value="${user.registerDate}">
-											</div>
-										</div>
-
-
-										<c:choose>
-											<c:when test="${not empty user.email}">
-
-												<div class="form-group">
-													<label for="email" class="col-md-12">Email</label>
-													<div class="col-md-12">
-														<input type="email" placeholder="Email"
-															class="form-control form-control-line" name="email"
-															id="email" value="${user.email}">
-													</div>
-												</div>
-
-											</c:when>
-											<c:when test="${empty user.email}">
-												<div>
-													<div class="form-group">
-														<label for="email" class="col-md-12">Email</label>
-														<div class="col-md-12">
-															<input type="email" placeholder="Email"
-																class="form-control form-control-line" name="email"
-																id="email" value="${user.email}">
-														</div>
-													</div>
-													<em style="color: red" id="login_email-error"
-														class="error help-block">Veuillez saisir votre email</em>
-
-												</div>
-											</c:when>
-
-
-										</c:choose>
-
-
-										<c:choose>
-											<c:when test="${not empty user.password}">
-
-												<div class="form-group">
-													<label class="col-md-12">Mot de passe</label>
-													<div class="col-md-12">
-														<input type="password" name="password"
-															class="form-control form-control-line">
-													</div>
-												</div>
-
-											</c:when>
-											<c:when test="${empty user.password}">
-												<div>
-													<div class="form-group">
-														<label class="col-md-12">Mot de passe</label>
-														<div class="col-md-12">
-															<input type="password" name="password"
-																class="form-control form-control-line">
-														</div>
-													</div>
-													<em style="color: red" id="login_email-error"
-														class="error help-block">Veuillez entrer votre mot de
-														passe, il doit contenir au moins 8 caractères</em>
-
-
-												</div>
-											</c:when>
-
-
-										</c:choose>
-
-
-										<c:choose>
-											<c:when test="${not empty user.telephone}">
-
-												<div class="form-group">
-													<label class="col-md-12">Téléphone</label>
-													<div class="col-md-12">
-														<input type="text" placeholder="+33 X XX XX XX XX"
-															name="telephone" class="form-control form-control-line"
-															value="${user.telephone}">
-													</div>
-												</div>
-
-											</c:when>
-											<c:when test="${empty user.telephone}">
-												<div>
-
-													<div class="form-group">
-														<label class="col-md-12">Téléphone</label>
-														<div class="col-md-12">
-															<input type="text" placeholder="+33 X XX XX XX XX"
-																name="telephone" class="form-control form-control-line"
-																value="${user.telephone}">
-														</div>
-													</div>
-													<em style="color: red" id="login_email-error"
-														class="error help-block">Veuillez saisir un numéro de
-														téléphone</em>
-												</div>
-											</c:when>
-
-
-										</c:choose>
-										<div class="form-group">
-											<label class="col-md-12">Description</label>
-											<div class="col-md-12">
-												<textarea name="description" style="resize: none"
-													class="form-control form-control-line" rows="5"
-													id="description" name="description"
-													placeholder="Que faites-vous dans votre temps libre ? D'où faite-vous les courses le plus souvent ? ">${user.description}</textarea>
-
-											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-md-12">Adresse</label>
-											<div class="col-md-12">
-												<textarea name="adress" style="resize: none"
-													class="form-control form-control-line" rows="5" id="adress"
-													name="adress" placeholder="Saisissez votre adresse ">${user.address}</textarea>
-
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-12">
-
-												<input type="submit" value="Mettre à jour" />
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Column -->
-				</div>
-
-				<!-- End PAge Content -->
+								<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img
+									src="<%=imgUrl%>" name="aboutme" width="140" height="140"
+									class="img-circle">
+								<h3>${user2.lname}</br> ${user2.fname}
+					</h3></a>
+					<br>
+					<a href="#aboutModal" data-toggle="modal" data-target="#myModal"><small id="plus-info">Cliquer ici pour afficher plus d'informations sur ${user2.lname}</small></a>
+				</center>
 			</div>
-			<!-- End Container fluid  -->
-			<!-- End footer -->
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true"></button>
+							<h4 class="modal-title" id="myModalLabel">A propos de
+								${user2.lname}</h4>
+						</div>
+						<div class="modal-body">
+							<center>
+
+								<img src="<%=imgUrl%>" name="aboutme" width="140" height="140"
+									border="0" class="img-circle"></a>
+									<br><br>
+								<h3 class="media-heading">${user2.lname}
+									</br> ${user2.fname}
+
+								</h3>
+
+								<a src="">
+									<button type="button" class="btn btn-primary">Envoyez
+										moi un message</button>
+								</a>
+							</center>
+							<hr>
+							<center>
+								<p style="color: #0c0c0c" class="text-left">
+									<strong style="color: #0c0c0c">Description: </strong><br>${user2.description}</p>
+								<br>
+							</center>
+						</div>
+						<div class="modal-footer">
+							<center>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Quitter</button>
+							</center>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		</div>
 		</div>
 		<!-- End Page wrapper  -->
 	</div>

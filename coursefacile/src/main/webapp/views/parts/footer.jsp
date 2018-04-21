@@ -1,5 +1,5 @@
-<footer>
-	<div class="footer">
+<footer">
+	<div class="footer" id="footer">
 		<div class="container">
 			<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
 				data-wow-delay="0.2s">
@@ -101,11 +101,11 @@
 <%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.validate.min.js")%>
 <%-- Dashboard scripts --%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/bootstrap/js/popper.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/jquery.slimscroll.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/sidebarmenu.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/raphael-min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/lib/bootstrap/js/popper.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/jquery.slimscroll.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/sidebarmenu.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|", "/js/lib/morris-chart/raphael-min.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/morris.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/dashboard1-init.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/moment.latest.min.js")%>
@@ -116,7 +116,7 @@
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel.min.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel-init.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/scripts.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/custom.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/custom.min.js")%>
 <%-- Always include this file last --%>
 <script type="text/javascript" src="<%=prefixPath%>/js/script.js"></script>
 

@@ -5,6 +5,12 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="com.coursefacile.dao.*" %>
+<%@page import="com.coursefacile.controller.*" %>
+<%@page import="com.coursefacile.model.*" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -26,7 +32,7 @@
 	<div id="main-wrapper">
 		<!-- header header  -->
 		<div class="header">
-			<nav class="navbar top-navbar navbar-expand-md navbar-light">
+			<nav id="navbar" class="navbar top-navbar navbar-expand-md navbar-light">
 			<div class="navbar-collapse">
 				<!-- toggle and nav items -->
 				<ul class="navbar-nav mr-auto mt-md-0">
@@ -34,11 +40,8 @@
 					<li class="nav-item"><a
 						class="nav-link nav-toggler hidden-md-up text-muted  "
 						href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
-					<li class="nav-item m-l-10"><a
-						class="nav-link sidebartoggler hidden-sm-down text-muted  "
-						href="javascript:void(0)"><i class="ti-menu"></i></a></li>
 					<!-- Messages -->
-					<li class="nav-item dropdown mega-dropdown"><a
+					<li id="bouton-dropdown" class="nav-item dropdown mega-dropdown"><a
 						class="nav-link dropdown-toggle text-muted  " href="#"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
 							class="fa fa-th-large"></i></a>
@@ -114,16 +117,8 @@
 					<!-- End Messages -->
 				</ul>
 				<!-- User profile and search -->
-				<ul class="navbar-nav my-lg-0">
-
-					<!-- Search -->
-					<li class="nav-item hidden-sm-down search-box"><a
-						class="nav-link hidden-sm-down text-muted  "
-						href="javascript:void(0)"><i class="ti-search"></i></a>
-						<form class="app-search">
-							<input type="text" class="form-control" placeholder="Search here">
-							<a class="srh-btn"><i class="ti-close"></i></a>
-						</form></li>
+				<ul id="message-notif" class="navbar-nav my-lg-0">
+				
 					<!-- Comment -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle text-muted text-muted  " href="#"
@@ -275,135 +270,51 @@
 		</div>
 		<!-- End header header -->
 		<!-- Left Sidebar  -->
-		<div class="left-sidebar">
+		<div id="sidebar-gauche" class="left-sidebar">
 			<!-- Sidebar scroll-->
 			<div class="scroll-sidebar">
 				<!-- Sidebar navigation-->
 				<nav class="sidebar-nav">
 				<ul id="sidebarnav">
 					<li class="nav-devider"></li>
-					<li class="nav-label">Home</li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-tachometer"></i><span class="hide-menu">Dashboard
-								<span class="label label-rouded label-primary pull-right">2</span>
+					<li class="nav-label"></li>
+					<li><a class="" href="<%= prefixPath %>/dashboard" aria-expanded="false"><i
+							class="fa fa-tachometer"></i><span class="hide-menu">Tableau de bord
 						</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="index.html">Ecommerce </a></li>
-							<li><a href="index1.html">Analytics </a></li>
-						</ul></li>
-					<li class="nav-label">Apps</li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-envelope"></i><span class="hide-menu">Email</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="email-compose.html">Compose</a></li>
-							<li><a href="email-read.html">Read</a></li>
-							<li><a href="email-inbox.html">Inbox</a></li>
-						</ul></li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-bar-chart"></i><span class="hide-menu">Charts</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="chart-flot.html">Flot</a></li>
-							<li><a href="chart-morris.html">Morris</a></li>
-							<li><a href="chart-chartjs.html">ChartJs</a></li>
-							<li><a href="chart-chartist.html">Chartist </a></li>
-							<li><a href="chart-amchart.html">AmChart</a></li>
-							<li><a href="chart-echart.html">EChart</a></li>
-							<li><a href="chart-sparkline.html">Sparkline</a></li>
-							<li><a href="chart-peity.html">Peity</a></li>
-						</ul></li>
-					<li class="nav-label">Features</li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-suitcase"></i><span class="hide-menu">Bootstrap
-								UI <span class="label label-rouded label-warning pull-right">6</span>
+						</li>
+					<li class="nav-label">Missions</li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							class="fa fa-suitcase"></i><span class="hide-menu">Mes missions </span></a>
+							</li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							class="fa fa-cart-arrow-down"></i><span class="hide-menu">Mes réservations </span></a>
+							</li>
+					<li class="nav-label">Mon compte</li>
+					<li><a class=" " href="#" aria-expanded="false"><i
+							class="fa fa-envelope"></i><span class="hide-menu">Messages </a>
+							</li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							class="fa fa-bell-o"></i><span class="hide-menu">Alertes
 						</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="ui-alert.html">Alert</a></li>
-							<li><a href="ui-button.html">Button</a></li>
-							<li><a href="ui-dropdown.html">Dropdown</a></li>
-							<li><a href="ui-progressbar.html">Progressbar</a></li>
-							<li><a href="ui-tab.html">Tab</a></li>
-							<li><a href="ui-typography.html">Typography</a></li>
-						</ul></li>
+						</li>
 					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-suitcase"></i><span class="hide-menu">Components
-								<span class="label label-rouded label-danger pull-right">6</span>
-						</span></a>
+							class="fa fa-wpforms"></i><span class="hide-menu">Profil </span></a>
 						<ul aria-expanded="false" class="collapse">
-							<li><a href="uc-calender.html">Calender</a></li>
-							<li><a href="uc-datamap.html">Datamap</a></li>
-							<li><a href="uc-nestedable.html">Nestedable</a></li>
-							<li><a href="uc-sweetalert.html">Sweetalert</a></li>
-							<li><a href="uc-toastr.html">Toastr</a></li>
-							<li><a href="uc-weather.html">Weather</a></li>
+							<li><a href="<%= prefixPath %>/profile">Modifier mon profil</a></li>
+							<%
+			                	User user = Util.getLoggedInUser(request);
+			                	String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+			                %>
+							<li><a href="<%= prefixPath %>/profile/<%= user.getId() %>">Voir mon profil public</a></li>
 						</ul></li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="form-basic.html">Basic Forms</a></li>
-							<li><a href="form-layout.html">Form Layout</a></li>
-							<li><a href="form-validation.html">Form Validation</a></li>
-							<li><a href="form-editor.html">Editor</a></li>
-							<li><a href="form-dropzone.html">Dropzone</a></li>
-						</ul></li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="table-bootstrap.html">Basic Tables</a></li>
-							<li><a href="table-datatable.html">Data Tables</a></li>
-						</ul></li>
-					<li class="nav-label">Layout</li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-columns"></i><span class="hide-menu">Layout</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="layout-blank.html">Blank</a></li>
-							<li><a href="layout-boxed.html">Boxed</a></li>
-							<li><a href="layout-fix-header.html">Fix Header</a></li>
-							<li><a href="layout-fix-sidebar.html">Fix Sidebar</a></li>
-						</ul></li>
-					<li class="nav-label">EXTRA</li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-book"></i><span class="hide-menu">Pages <span
-								class="label label-rouded label-success pull-right">8</span></span></a>
-						<ul aria-expanded="false" class="collapse">
-
-							<li><a href="#" class="has-arrow">Authentication <span
-									class="label label-rounded label-success">6</span></a>
-								<ul aria-expanded="false" class="collapse">
-									<li><a href="page-login.html">Login</a></li>
-									<li><a href="page-register.html">Register</a></li>
-									<li><a href="page-invoice.html">Invoice</a></li>
-								</ul></li>
-							<li><a href="#" class="has-arrow">Error Pages</a>
-								<ul aria-expanded="false" class="collapse">
-									<li><a href="page-error-400.html">400</a></li>
-									<li><a href="page-error-403.html">403</a></li>
-									<li><a href="page-error-404.html">404</a></li>
-									<li><a href="page-error-500.html">500</a></li>
-									<li><a href="page-error-503.html">503</a></li>
-								</ul></li>
-						</ul></li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-map-marker"></i><span class="hide-menu">Maps</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="map-google.html">Google</a></li>
-							<li><a href="map-vector.html">Vector</a></li>
-						</ul></li>
-					<li><a class="has-arrow  " href="#" aria-expanded="false"><i
-							class="fa fa-level-down"></i><span class="hide-menu">Multi
-								level dd</span></a>
-						<ul aria-expanded="false" class="collapse">
-							<li><a href="#">item 1.1</a></li>
-							<li><a href="#">item 1.2</a></li>
-							<li><a class="has-arrow" href="#" aria-expanded="false">Menu
-									1.3</a>
-								<ul aria-expanded="false" class="collapse">
-									<li><a href="#">item 1.3.1</a></li>
-									<li><a href="#">item 1.3.2</a></li>
-									<li><a href="#">item 1.3.3</a></li>
-									<li><a href="#">item 1.3.4</a></li>
-								</ul></li>
-							<li><a href="#">item 1.4</a></li>
-						</ul></li>
+					<li class="nav-label">Argent </li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							class="fa fa-euro"></i><span class="hide-menu">Argent disponnible 
+							</span></a>
+							</li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							class="fa fa-credit-card"></i><span class="hide-menu">Paiements effectués</span></a>
+							</li>
 				</ul>
 				</nav>
 				<!-- End Sidebar navigation -->
@@ -412,17 +323,17 @@
 		</div>
 		<!-- End Left Sidebar  -->
 		<!-- Page wrapper  -->
-		<div class="page-wrapper">
+		<div id="body-dashboard" class="page-wrapper">
 			<!-- Bread crumb -->
 			<div class="row page-titles">
 				<div class="col-md-5 align-self-center">
-					<h3 class="text-primary">Dashboard</h3>
-				</div>
-				<div class="col-md-7 align-self-center">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-						<li class="breadcrumb-item active">Dashboard</li>
-					</ol>
+                	<img id="image-dashboard" class="nav-user-photo" src="<%= imgUrl%>" alt="<%= user.getFullName() %>">
+					<h3 id="titre-dashboard" class="text-primary">Bonjour <%= user.getFullName() %></h3> 
+					<div class="link-profil">
+						<a class="link-profil" href="<%= prefixPath %>/profile"><i class="fa fa-check text-success"></i> Modifier votre profil</a>
+						<br>
+						<a class="link-profil" href="<%= prefixPath %>/profile/<%= user.getId() %>"><i class="fa fa-check text-success"></i> Voir votre profil public</a>
+					</div>
 				</div>
 			</div>
 			<!-- End Bread crumb -->
