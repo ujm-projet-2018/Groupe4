@@ -1,10 +1,5 @@
 package com.coursefacile.controller;
 
-/**
- * @author walid
- *
- */
-
 import com.coursefacile.dao.IUserHandler;
 import com.coursefacile.dao.UserHandler;
 import com.coursefacile.model.User;
@@ -22,6 +17,8 @@ public class PublicProfile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String prefixPath = this.getServletContext().getInitParameter("prefixPath");

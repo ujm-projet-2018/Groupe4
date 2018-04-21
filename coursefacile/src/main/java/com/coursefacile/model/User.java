@@ -22,12 +22,10 @@ public class User {
     private boolean emailChecked;
     private boolean telChecked;
     private Date registerDate;
-    private Date birthDate;
-
-
-
+    private String birthDate;
     private String description;
     private String image;
+
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Mission> publishedMissions;
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
@@ -186,11 +184,13 @@ public class User {
         this.image = image;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
+
+
 }

@@ -27,8 +27,9 @@
                             <%
                                 if (Util.isLoggedIn(request)) {
                                     User user = Util.getLoggedInUser(request);
-                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + "/images/" + user.getImage();
                             %>
+
                             <li class="user">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">
                                     <img class="nav-user-photo" src="<%= imgUrl%>" alt="<%= user.getFullName() %>">

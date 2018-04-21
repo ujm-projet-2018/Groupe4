@@ -3,7 +3,6 @@
   --
   --
 --%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -415,7 +414,7 @@
 														</div>
 													</div>
 													<em style="color: red" id="login_email-error"
-														class="error help-block">Veuillez saisir votre prénom</em>
+														class="error help-block">Veuillez saisir votre prÃ©nom</em>
 
 												</div>
 											</c:when>
@@ -526,7 +525,7 @@
 													</div>
 													<em style="color: red" id="login_email-error"
 														class="error help-block">Veuillez entrer votre mot de
-														passe, il doit contenir au moins 8 caractères</em>
+														passe, il doit contenir au moins 8 caractÃ¨res</em>
 
 
 												</div>
@@ -574,7 +573,7 @@
 												<textarea name="description" style="resize: none"
 													class="form-control form-control-line" rows="5"
 													id="description" name="description"
-													placeholder="Que faites-vous dans votre temps libre ? D'où faite-vous les courses le plus souvent ? ">${user.description}</textarea>
+													placeholder="Que faites-vous dans votre temps libre ? D'où faites-vous les courses le plus souvent ? ">${user.description}</textarea>
 
 											</div>
 										</div>
