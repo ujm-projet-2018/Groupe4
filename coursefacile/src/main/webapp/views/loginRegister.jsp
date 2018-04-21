@@ -125,8 +125,5 @@
 <%@ include file="parts/footer.jsp" %>
 
 
-<!--[if lt IE 10]>
-<script src="assets/js/placeholder.js"></script>
-<![endif]-->
 </body>
 </html>

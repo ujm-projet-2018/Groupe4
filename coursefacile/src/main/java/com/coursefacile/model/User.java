@@ -23,10 +23,9 @@ public class User {
     private boolean telChecked;
     private Date registerDate;
     private String birthDate;
-
-
     private String description;
     private String image;
+
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Mission> publishedMissions;
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
@@ -60,7 +59,8 @@ public class User {
     }
 
     public String getFname() {
-        return fname;
+    	String nom = fname.toUpperCase();
+        return nom;
     }
 
     public void setFname(String fname) {
@@ -68,7 +68,8 @@ public class User {
     }
 
     public String getLname() {
-        return lname;
+    	String prenom = lname.substring(0, 1).toUpperCase() + lname.substring(1).toLowerCase();
+        return prenom;
     }
 
     public void setLname(String lname) {
@@ -76,7 +77,7 @@ public class User {
     }
 
     public String getFullName() {
-        return fname + " " + lname;
+        return getLname() + " " + getFname();
     }
 
     public String getGender() {
@@ -190,4 +191,6 @@ public class User {
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
+
+
 }

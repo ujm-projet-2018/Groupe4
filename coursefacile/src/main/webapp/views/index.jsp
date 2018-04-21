@@ -22,7 +22,7 @@
         <h2 class="title">Courses Faciles vous facilites la vie</h2>
         <p class="sub-title"> Le Lorem Ipsum est simplement du faux texte.</p>
         <div class="container">
-            <form class="form-inline">
+            <form class="form-inline" action="/coursefacile/missions" method="GET">
                 <div class="form-group has-feedback has-icone col-sm-4 col-md-3 col-md-offset-2">
                     <label for="city" class="control-label sr-only">Ville / Code postal</label>
 

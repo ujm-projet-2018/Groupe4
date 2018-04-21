@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <welcome-file-list>
         <welcome-file>index</welcome-file>
-
     </welcome-file-list>
     <servlet>
         <servlet-name>Init</servlet-name>
@@ -19,7 +15,14 @@
         <param-name>prefixPath</param-name>
         <param-value>/coursefacile</param-value>
     </context-param>
-
+    <servlet>
+        <servlet-name>MissionListing</servlet-name>
+        <servlet-class>com.coursefacile.controller.MissionListing</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MissionListing</servlet-name>
+        <url-pattern>/missions</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>LoginRegister</servlet-name>
         <servlet-class>com.coursefacile.controller.LoginRegister</servlet-class>
@@ -38,6 +41,18 @@
         <servlet-name>VerifyMail</servlet-name>
         <url-pattern>/verifymail</url-pattern>
     </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>PublicProfile</servlet-name>
+        <servlet-class>com.coursefacile.controller.PublicProfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PublicProfile</servlet-name>
+        <url-pattern>/profile/*</url-pattern>
+	</servlet-mapping>
+	
     <servlet>
         <servlet-name>ProfileController</servlet-name>
         <servlet-class>com.coursefacile.controller.ProfileController</servlet-class>
@@ -45,7 +60,9 @@
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile</url-pattern>
-    </servlet-mapping>
+	</servlet-mapping>
+
+
     <servlet>
         <servlet-name>RecoverPassword</servlet-name>
         <servlet-class>com.coursefacile.controller.RecoverPassword</servlet-class>

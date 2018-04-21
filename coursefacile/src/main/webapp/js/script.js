@@ -64,6 +64,7 @@ $(function () {
         }
         $cityIdInput.val(field.id);
     });
+
     $.validator.methods.email = function( value, element ) {
         return this.optional(element) || /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/.test(value);
     }
@@ -150,5 +151,7 @@ $(function () {
         });
 
     }
+    //set sidebar height same as container
+    $('#sidebar-gauche').css('height',$('#body-dashboard').height());
 
 });

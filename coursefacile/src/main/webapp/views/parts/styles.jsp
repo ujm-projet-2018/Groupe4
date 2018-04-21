@@ -1,4 +1,4 @@
-<!-- Feuilles de style pour dashboard.jsp -->
+<!-- Feuilles de style communs -->
 <link href="<%= prefixPath %>/css/bootstrap.min.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/bootstrap-theme.min.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/font-awesome.min.css" rel="stylesheet">
@@ -12,13 +12,15 @@
 <%= Util.includeCssOrJs(request, "/login", "/css/form-elements.css")%>
 <%= Util.includeCssOrJs(request, "/login", "/css/loginRegister.css")%>
 <%-- Dashboard styles --%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/lib/calendar2/semantic.ui.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/lib/calendar2/pignose.calendar.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/lib/owl.carousel.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/lib/owl.theme.default.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/helper.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/style_dashboard.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile", "/css/animate_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/calendar2/semantic.ui.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/calendar2/pignose.calendar.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/owl.carousel.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/owl.theme.default.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/css/helper.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/css/style_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/css/animate_dashboard.css")%>
+<%-- Mission Listing styles --%>
+<%= Util.includeCssOrJs(request, "/missions", "/css/style_missionListing.css")%>
 <%-- always include this file last --%>
 <link href="<%= prefixPath %>/css/main.css" rel="stylesheet">
 
