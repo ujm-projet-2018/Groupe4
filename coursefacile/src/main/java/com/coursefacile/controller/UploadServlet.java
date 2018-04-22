@@ -1,4 +1,5 @@
 package com.coursefacile.controller;
+
 import com.coursefacile.dao.IUserHandler;
 import com.coursefacile.dao.UserHandler;
 import com.coursefacile.dao.Util;
@@ -13,10 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
 @WebServlet("/UploadServlet")
-@MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
-        maxFileSize=1024*1024*10,      // 10MB
-        maxRequestSize=1024*1024*50)   // 50MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 10,      // 10MB
+        maxRequestSize = 1024 * 1024 * 50)   // 50MB
 public class UploadServlet extends HttpServlet {
 
     private static final String SAVE_DIR = "images";
@@ -53,7 +55,7 @@ public class UploadServlet extends HttpServlet {
         String[] items = contentDisp.split(";");
         for (String s : items) {
             if (s.trim().startsWith("filename")) {
-                return s.substring(s.indexOf("=") + 2, s.length()-1);
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
             }
         }
         return "";
@@ -61,7 +63,7 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         user2 = Util.getLoggedInUser(request);
+        user2 = UserHandler.getLoggedInUser(request);
 
         this.getServletContext().getRequestDispatcher("/views/upload.jsp").forward(request, response);
 

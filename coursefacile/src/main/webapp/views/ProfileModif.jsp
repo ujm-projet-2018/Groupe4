@@ -1,350 +1,622 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
+<%--
+  -- @author walid
+  --
+  --
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.coursefacile.dao.*" %>
 <%@page import="com.coursefacile.controller.*" %>
 <%@page import="com.coursefacile.model.*" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-    <meta name="author" content="alaouiib">
-    <!-- Bootstrap Core CSS -->
-    <%--<link href="ElaAdmin-master/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">--%>
-    <%--<!-- Custom CSS -->--%>
-    <%--<link href="ElaAdmin-master/css/helper.css" rel="stylesheet">--%>
-    <%--<link href="ElaAdmin-master/css/style.css" rel="stylesheet">--%>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
-
-    <%@ include file="parts/meta.jsp" %>
-    <title>Course faciles | Profil</title>
-    <%@ include file="parts/styles.jsp" %>
+	<%@ include file="parts/meta.jsp" %>
+	<title>Profil | Courses faciles</title>
+	<%@ include file="parts/styles.jsp" %>
 </head>
 
 <body class="fix-header fix-sidebar">
-<%@ include file="parts/header.jsp" %>
+<%@include file="parts/header.jsp" %>
+<!-- Preloader - style you can find in spinners.css -->
+<div class="preloader">
+	<svg class="circular" viewBox="25 25 50 50">
+		<circle
+				class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2"
+				stroke-miterlimit="10"/>
+	</svg>
+</div>
+<!-- Main wrapper  -->
+<div id="main-wrapper">
+	<!-- header header  -->
+	<div class="header">
+		<nav id="navbar"
+			 class="navbar top-navbar navbar-expand-md navbar-light">
+			<div class="navbar-collapse">
+				<!-- toggle and nav items -->
+				<ul class="navbar-nav mr-auto mt-md-0">
+					<!-- This is  -->
+					<li class="nav-item"><a
+							class="nav-link nav-toggler hidden-md-up text-muted  "
+							href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
+					<!-- Messages -->
+					<li id="bouton-dropdown" class="nav-item dropdown mega-dropdown"><a
+							class="nav-link dropdown-toggle text-muted  " href="#"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+							class="fa fa-th-large"></i></a>
+						<div class="dropdown-menu animated zoomIn">
+							<ul class="mega-dropdown-menu row">
 
 
+								<li class="col-lg-3  m-b-30">
+									<h4 class="m-b-20">CONTACT US</h4> <!-- Contact -->
+									<form>
+										<div class="form-group">
+											<input type="text" class="form-control"
+												   id="exampleInputname1" placeholder="Enter Name">
+										</div>
+										<div class="form-group">
+											<input type="email" class="form-control"
+												   placeholder="Enter email">
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" id="exampleTextarea" rows="3"
+													  placeholder="Message"></textarea>
+										</div>
+										<button type="submit" class="btn btn-info">Submit</button>
+									</form>
+								</li>
+								<li class="col-lg-3 col-xlg-3 m-b-30">
+									<h4 class="m-b-20">List style</h4> <!-- List style -->
+									<ul class="list-style-none">
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+									</ul>
+								</li>
+								<li class="col-lg-3 col-xlg-3 m-b-30">
+									<h4 class="m-b-20">List style</h4> <!-- List style -->
+									<ul class="list-style-none">
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+									</ul>
+								</li>
+								<li class="col-lg-3 col-xlg-3 m-b-30">
+									<h4 class="m-b-20">List style</h4> <!-- List style -->
+									<ul class="list-style-none">
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+										<li><a href="javascript:void(0)"><i
+												class="fa fa-check text-success"></i> This Is Another Link</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<!-- End Messages -->
+				</ul>
+				<!-- User profile and search -->
+				<ul id="message-notif" class="navbar-nav my-lg-0">
 
-    <div class="container-fluid">
-        <!-- Start Page Content -->
-        <div class="row">
-            <!-- Column -->
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-two">
-                            <header>
-                                <%
+					<!-- Comment -->
+					<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle text-muted text-muted  " href="#"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-bell"></i>
+						<div class="notify">
+							<span class="heartbit"></span> <span class="point"></span>
+						</div>
+					</a>
+						<div
+								class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
+							<ul>
+								<li>
+									<div class="drop-title">Notifications</div>
+								</li>
+								<li>
+									<div class="message-center">
+										<!-- Message -->
+										<a href="#">
+											<div class="btn btn-danger btn-circle m-r-10">
+												<i class="fa fa-link"></i>
+											</div>
+											<div class="mail-contnet">
+												<h5>This is title</h5>
+												<span class="mail-desc">Just see the my new admin!</span> <span
+													class="time">9:30 AM</span>
+											</div>
+										</a>
+										<!-- Message -->
+										<a href="#">
+											<div class="btn btn-success btn-circle m-r-10">
+												<i class="ti-calendar"></i>
+											</div>
+											<div class="mail-contnet">
+												<h5>This is another title</h5>
+												<span class="mail-desc">Just a reminder that you have
+													event</span> <span class="time">9:10 AM</span>
+											</div>
+										</a>
+										<!-- Message -->
+										<a href="#">
+											<div class="btn btn-info btn-circle m-r-10">
+												<i class="ti-settings"></i>
+											</div>
+											<div class="mail-contnet">
+												<h5>This is title</h5>
+												<span class="mail-desc">You can customize this
+													template as you want</span> <span class="time">9:08 AM</span>
+											</div>
+										</a>
+										<!-- Message -->
+										<a href="#">
+											<div class="btn btn-primary btn-circle m-r-10">
+												<i class="ti-user"></i>
+											</div>
+											<div class="mail-contnet">
+												<h5>This is another title</h5>
+												<span class="mail-desc">Just see the my admin!</span> <span
+													class="time">9:02 AM</span>
+											</div>
+										</a>
+									</div>
+								</li>
+								<li><a class="nav-link text-center"
+									   href="javascript:void(0);"> <strong>Check all
+									notifications</strong> <i class="fa fa-angle-right"></i>
+								</a></li>
+							</ul>
+						</div>
+					</li>
+					<!-- End Comment -->
+					<!-- Messages -->
+					<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle text-muted  " href="#" id="2"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-envelope"></i>
+						<div class="notify">
+							<span class="heartbit"></span> <span class="point"></span>
+						</div>
+					</a>
+						<div
+								class="dropdown-menu dropdown-menu-right mailbox animated zoomIn"
+								aria-labelledby="2">
+							<ul>
+								<li>
+									<div class="drop-title">You have 4 new messages</div>
+								</li>
+								<li>
+									<div class="message-center">
+										<!-- Message -->
+										<a href="#">
+											<div class="user-img">
+												<img src="<%=prefixPath%>/images/users/5.jpg" alt="user"
+													 class="img-circle"> <span
+													class="profile-status online pull-right"></span>
+											</div>
+											<div class="mail-contnet">
+												<h5>Michael Qin</h5>
+												<span class="mail-desc">Just see the my admin!</span> <span
+													class="time">9:30 AM</span>
+											</div>
+										</a>
+										<!-- Message -->
+										<a href="#">
+											<div class="user-img">
+												<img src="<%=prefixPath%>/images/users/2.jpg" alt="user"
+													 class="img-circle"> <span
+													class="profile-status busy pull-right"></span>
+											</div>
+											<div class="mail-contnet">
+												<h5>John Doe</h5>
+												<span class="mail-desc">I've sung a song! See you at</span>
+												<span class="time">9:10 AM</span>
+											</div>
+										</a>
+										<!-- Message -->
+										<a href="#">
+											<div class="user-img">
+												<img src="<%=prefixPath%>/images/users/3.jpg" alt="user"
+													 class="img-circle"> <span
+													class="profile-status away pull-right"></span>
+											</div>
+											<div class="mail-contnet">
+												<h5>Mr. John</h5>
+												<span class="mail-desc">I am a singer!</span> <span
+													class="time">9:08 AM</span>
+											</div>
+										</a>
+										<!-- Message -->
+										<a href="#">
+											<div class="user-img">
+												<img src="<%=prefixPath%>/images/users/4.jpg" alt="user"
+													 class="img-circle"> <span
+													class="profile-status offline pull-right"></span>
+											</div>
+											<div class="mail-contnet">
+												<h5>Michael Qin</h5>
+												<span class="mail-desc">Just see the my admin!</span> <span
+													class="time">9:02 AM</span>
+											</div>
+										</a>
+									</div>
+								</li>
+								<li><a class="nav-link text-center"
+									   href="javascript:void(0);"> <strong>See all
+									e-Mails</strong> <i class="fa fa-angle-right"></i>
+								</a></li>
+							</ul>
+						</div>
+					</li>
+					<!-- End Messages -->
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<!-- End header header -->
+	<!-- Left Sidebar  -->
+	<div id="sidebar-gauche" class="left-sidebar">
+		<!-- Sidebar scroll-->
+		<div class="scroll-sidebar">
+			<!-- Sidebar navigation-->
+			<nav class="sidebar-nav">
+				<ul id="sidebarnav">
+					<li class="nav-devider"></li>
+					<li class="nav-label"></li>
+					<li><a class="" href="<%=prefixPath%>/dashboard"
+						   aria-expanded="false"><i id="icone" class="fa fa-tachometer"></i><span
+							class="hide-menu">Tableau de bord </span></a></li>
+					<li class="nav-label">Missions</li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							id="icone" class="fa fa-suitcase"></i><span class="hide-menu">Mes
+								missions </span></a></li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							id="icone" class="fa fa-cart-arrow-down"></i><span
+							class="hide-menu">Mes réservations </span></a></li>
+					<li class="nav-label">Mon compte</li>
+					<li><a class=" " href="#" aria-expanded="false"><i
+							id="icone" class="fa fa-envelope"></i><span class="hide-menu">Messages
+					</a></li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							id="icone" class="fa fa-bell-o"></i><span class="hide-menu">Alertes
+						</span></a></li>
+					<li><a class="has-arrow " href="#" aria-expanded="true"><i
+							id="icone" class="fa fa-wpforms"></i><span class="hide-menu">Profil
+						</span></a>
+						<ul aria-expanded="false" class="collapse">
+							<li><a href="<%=prefixPath%>/profile">Modifier mon
+								profil</a></li>
+							<%
+								User user = UserHandler.getLoggedInUser(request);
+								String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+							%>
+							<li><a href="<%=prefixPath%>/profile/<%=user.getId()%>">Voir
+								mon profil public</a></li>
+						</ul>
+					</li>
+					<li class="nav-label">Argent</li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							id="icone" class="fa fa-euro"></i><span class="hide-menu">Argent
+								disponnible </span></a></li>
+					<li><a class="" href="#" aria-expanded="false"><i
+							id="icone" class="fa fa-credit-card"></i><span class="hide-menu">Paiements
+								effectués</span></a></li>
+				</ul>
+			</nav>
+			<!-- End Sidebar navigation -->
+		</div>
+		<!-- End Sidebar scroll-->
+	</div>
+	<!-- End Left Sidebar  -->
+	<!-- Page wrapper  -->
+	<div id="body-dashboard" class="page-wrapper">
+		<div class="container-fluid">
+			<!-- Start Page Content -->
+			<div class="row">
+				<!-- Column -->
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="card-two">
+								<header>
+									<div class="avatar">
+										<img src="<%=imgUrl%>" alt="Profile picture "/>
+									</div>
+								</header>
 
-                                    User user = Util.getLoggedInUser(request);
-                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + "/images/" + user.getImage();
+								<h3>${user.lname} ${user.fname}</h3>
+								<div class="desc">${user.description}</div>
+								<div class="contacts">
+									<a href=""><i class="fa fa-plus"></i></a> <a href=""><i
+										class="fa fa-whatsapp"></i></a> <a href=""><i
+										class="fa fa-envelope"></i></a>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Column -->
+				<!-- Column -->
+				<div class="col-lg-12">
+					<div class="card">
+						<div class="tab-pane" id="settings" role="tabpanel">
+							<div class="card-body">
+								<form action="profile" method="post"
+									  class="form-horizontal form-material">
 
-                                %>
-                                <div class="avatar">
-                                   <a href="/coursefacile/UploadServlet" title="cliquer pour changer la photo"> <img src="<%= imgUrl%>" alt="${user.fname} ${user.lname}">
-                                    </a>
-
-                                </div>
-                            </header>
-
-                            <h3>${user.fname} ${user.lname}</h3>
-                            <div class="desc">${user.description}</div>
-                            <div class="contacts">
-                                <a href=""><i class="fa fa-plus"></i></a> <a href=""><i
-                                    class="fa fa-whatsapp"></i></a> <a href=""><i
-                                    class="fa fa-envelope"></i></a>
-
-
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Column -->
-            <!-- Column -->
-            <div class="col-lg-12">
-                <div class="card">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs profile-tab" role="tablist">
-
-                        <li class="nav-item"><a class="nav-link active"
-                                                data-toggle="tab" href="#settings" role="tab">Settings</a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="home" role="tabpanel">
-
-
-                            <div class="tab-pane" id="settings" role="tabpanel">
-                                <div class="card-body">
-
-
-                                    <form action="profile" method="post"
-                                          class="form-horizontal form-material" >
-
-                                        <c:choose>
-                                            <c:when test="${not empty user.lname }">
-                                                <div class="form-group">
-                                                    <label class="col-md-12"> Nom </label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" placeholder="Nom..." name="lname"
-                                                               class="form-control form-control-line"
-                                                               value="${user.lname}">
-                                                    </div>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${empty user.lname }">
-                                                <div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-12"> Nom </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" placeholder="Nom..." name="lname"
-                                                                   class="form-control form-control-line"
-                                                                   value="${user.lname}">
-                                                        </div>
-                                                    </div>
-                                                   <em style="color: red" style="color: red" id="login_email-error" class="error help-block">veuillez
-                                                        saisir votre nom</em>
-                                                </div>
-                                            </c:when>
-
-
-                                        </c:choose>
-                                        <c:choose>
-                                            <c:when test="${not empty user.fname }">
-                                                <div class="form-group">
-                                                    <label class="col-md-12">Prenom</label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" placeholder="Prenom..." name="fname"
-                                                               class="form-control form-control-line"
-                                                               value="${user.fname}">
-                                                    </div>
-                                                </div>
-                                            </c:when>
-                                            <c:when test="${empty user.fname }">
-                                                <div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-12">Prenom</label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" placeholder="Prenom..." name="fname"
-                                                                   class="form-control form-control-line"
-                                                                   value="${user.fname}">
-                                                        </div>
-                                                    </div>
-                                                   <em style="color: red" id="login_email-error" class="error help-block">veuillez
-                                                        saisir votre prenom</em>
-
-                                                </div>
-                                            </c:when>
-
-
-                                        </c:choose>
-
-
-                                        <c:choose>
-                                            <c:when test="${not empty user.birthDate}">
-
-                                                <div class="form-group">
-                                                    <label class="col-md-12">Date de naissance</label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" placeholder="birthDate..."
-                                                               name="birthDate" id="date"
-                                                               class="form-control form-control-line"
-                                                               value="${user.birthDate}">
-                                                    </div>
-                                                </div>
-
-                                            </c:when>
-                                            <c:when test="${empty user.birthDate}">
-                                                <div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-12">Date de naissance</label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" placeholder="birthDate..."
-                                                                   name="birthDate" id="date"
-                                                                   class="form-control form-control-line"
-                                                                   value="${user.birthDate}">
-                                                        </div>
-                                                    </div>
-                                                     <em style="color: red" id="login_email-error" class="error help-block">veuillez
-                                                        saisir votre date de naissance</em>
-
-                                                </div>
-                                            </c:when>
-
-
-                                        </c:choose>
-
-
-                                        <div class="form-group">
-                                            <label class="col-md-12">date d'enregistrement</label>
-                                            <div class="col-md-12">
-                                                <input readonly type="text" name="registerDate"
-                                                       class="form-control form-control-line"
-                                                       value="${user.registerDate}">
-                                            </div>
-                                        </div>
-
-
-                                        <c:choose>
-                                            <c:when test="${not empty user.email}">
-
-                                                <div class="form-group">
-                                                    <label for="email" class="col-md-12">Email</label>
-                                                    <div class="col-md-12">
-                                                        <input type="email" placeholder="Email..."
-                                                               class="form-control form-control-line" name="email"
-                                                               id="email" value="${user.email}">
-                                                    </div>
-                                                </div>
-
-                                            </c:when>
-                                            <c:when test="${empty user.email}">
-                                                <div>
-                                                    <div class="form-group">
-                                                        <label for="email" class="col-md-12">Email</label>
-                                                        <div class="col-md-12">
-                                                            <input type="email" placeholder="Email..."
-                                                                   class="form-control form-control-line" name="email"
-                                                                   id="email" value="${user.email}">
-                                                        </div>
-                                                    </div>
-                                                      <em style="color: red" id="login_email-error" class="error help-block">veuillez
-                                                        saisir votre email</em>
-
-                                                </div>
-                                            </c:when>
-
-
-                                        </c:choose>
-
-
-                                        <c:choose>
-                                            <c:when test="${not empty user.password}">
-
-                                                <div class="form-group">
-                                                    <label class="col-md-12">Password</label>
-                                                    <div class="col-md-12">
-                                                        <input type="password" value="${user.password }" name="password"
-                                                               class="form-control form-control-line">
-                                                    </div>
-                                                </div>
-
-                                            </c:when>
-                                            <c:when test="${empty user.password}">
-                                                <div>
-                                                    <div class="form-group">
-                                                        <label class="col-md-12">Password</label>
-                                                        <div class="col-md-12">
-                                                            <input type="password" value="${user.password }"
-                                                                   name="password"
-                                                                   class="form-control form-control-line">
-                                                        </div>
-                                                    </div>
-                                                     <em style="color: red" id="login_email-error" class="error help-block">veuillez
-                                                        entrer votre mot de passe,votre mdp doit contenir en
-                                                        moins 8 caracteres</em>
-
-
-                                                </div>
-                                            </c:when>
-
-
-                                        </c:choose>
-
-
-                                        <c:choose>
-                                            <c:when test="${not empty user.telephone}">
-
-                                                <div class="form-group">
-                                                    <label class="col-md-12">Telephone</label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" placeholder="Telephone No.."
-                                                               name="telephone" class="form-control form-control-line"
-                                                               value="${user.telephone}">
-                                                    </div>
-                                                </div>
-
-                                            </c:when>
-                                            <c:when test="${empty user.telephone}">
-                                                <div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-md-12">Telephone</label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" placeholder="Telephone No.."
-                                                                   name="telephone"
-                                                                   class="form-control form-control-line"
-                                                                   value="${user.telephone}">
-                                                        </div>
-                                                    </div>
-                                                    <em style="color: red" id="login_email-error" class="error help-block">Veuillez
-                                                        siasir un numero de telephone</em>
-                                                </div>
-                                            </c:when>
-
-
-                                        </c:choose>
-                                        <div class="form-group">
-                                            <label class="col-md-12">Description:</label>
-                                            <div class="col-md-12">
-													<textarea name="description" style="resize: none"
-                                                              class="form-control form-control-line" rows="5"
-                                                              id="description" name="description"
-                                                              placeholder=" Que faites-vous dans votre temps libre ? D'o� faite-vous les courses le plus souvent ? ">${user.description}</textarea>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group">
-                                            <label class="col-md-12">Adress:</label>
-                                            <div class="col-md-12">
-													<textarea name="adress" style="resize: none"
-                                                              class="form-control form-control-line" rows="5"
-                                                              id="adress" name="adress"
-                                                              placeholder=" vous habitiez ou? ">${user.address}</textarea>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                                <div class="col-sm-12">
-
-                                                    <input type="submit" value="Mettre � jour"/>
-                                                </div>
-                                            </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+									<c:choose>
+										<c:when test="${not empty user.lname }">
+											<div class="form-group">
+												<label class="col-md-12"> Nom </label>
+												<div class="col-md-12">
+													<input type="text" placeholder="Nom..." name="lname"
+														   class="form-control form-control-line"
+														   value="${user.lname}">
+												</div>
+											</div>
+										</c:when>
+										<c:when test="${empty user.lname }">
+											<div>
+												<div class="form-group">
+													<label class="col-md-12"> Nom </label>
+													<div class="col-md-12">
+														<input type="text" placeholder="Nom..." name="lname"
+															   class="form-control form-control-line"
+															   value="${user.lname}">
+													</div>
+												</div>
+												<em style="color: red" style="color: red"
+													id="login_email-error" class="error help-block">Veuillez
+													saisir votre nom</em>
+											</div>
+										</c:when>
 
 
-                <!-- Column -->
+									</c:choose>
+									<c:choose>
+										<c:when test="${not empty user.fname }">
+											<div class="form-group">
+												<label class="col-md-12">Prénom</label>
+												<div class="col-md-12">
+													<input type="text" placeholder="Prenom..." name="fname"
+														   class="form-control form-control-line"
+														   value="${user.fname}">
+												</div>
+											</div>
+										</c:when>
+										<c:when test="${empty user.fname }">
+											<div>
+												<div class="form-group">
+													<label class="col-md-12">Prénom</label>
+													<div class="col-md-12">
+														<input type="text" placeholder="Prenom..." name="fname"
+															   class="form-control form-control-line"
+															   value="${user.fname}">
+													</div>
+												</div>
+												<em style="color: red" id="login_email-error"
+													class="error help-block">Veuillez saisir votre prÃ©nom</em>
 
-                <!-- End PAge Content -->
-            </div>
-            <!-- End Container fluid  -->
-
-        </div>
-    </div>
+											</div>
+										</c:when>
 
 
-<%@ include file="parts/footer.jsp" %>
+									</c:choose>
+
+
+									<c:choose>
+										<c:when test="${not empty user.birthDate}">
+
+											<div class="form-group">
+												<label class="col-md-12">Date de naissance</label>
+												<div class="col-md-12">
+													<input type="text" placeholder="JJ/MM/AAAA"
+														   name="birthDate" id="date"
+														   class="form-control form-control-line"
+														   value="${user.birthDate}">
+												</div>
+											</div>
+
+										</c:when>
+										<c:when test="${empty user.birthDate}">
+											<div>
+												<div class="form-group">
+													<label class="col-md-12">Date de naissance</label>
+													<div class="col-md-12">
+														<input type="text" placeholder="JJ/MM/AAAA"
+															   name="birthDate" id="date"
+															   class="form-control form-control-line"
+															   value="${user.birthDate}">
+													</div>
+												</div>
+												<em style="color: red" id="login_email-error"
+													class="error help-block">Veuillez saisir votre date
+													de naissance</em>
+
+											</div>
+										</c:when>
+
+
+									</c:choose>
+
+
+									<div class="form-group">
+										<label class="col-md-12">Date d'enregistrement</label>
+										<div class="col-md-12">
+											<input readonly type="text" name="registerDate"
+												   class="form-control form-control-line"
+												   value="${user.registerDate}">
+										</div>
+									</div>
+
+
+									<c:choose>
+										<c:when test="${not empty user.email}">
+
+											<div class="form-group">
+												<label for="email" class="col-md-12">Email</label>
+												<div class="col-md-12">
+													<input type="email" placeholder="Email"
+														   class="form-control form-control-line" name="email"
+														   id="email" value="${user.email}">
+												</div>
+											</div>
+
+										</c:when>
+										<c:when test="${empty user.email}">
+											<div>
+												<div class="form-group">
+													<label for="email" class="col-md-12">Email</label>
+													<div class="col-md-12">
+														<input type="email" placeholder="Email"
+															   class="form-control form-control-line" name="email"
+															   id="email" value="${user.email}">
+													</div>
+												</div>
+												<em style="color: red" id="login_email-error"
+													class="error help-block">Veuillez saisir votre email</em>
+
+											</div>
+										</c:when>
+
+
+									</c:choose>
+
+
+									<c:choose>
+										<c:when test="${not empty user.password}">
+
+											<div class="form-group">
+												<label class="col-md-12">Mot de passe</label>
+												<div class="col-md-12">
+													<input type="password" name="password"
+														   class="form-control form-control-line">
+												</div>
+											</div>
+
+										</c:when>
+										<c:when test="${empty user.password}">
+											<div>
+												<div class="form-group">
+													<label class="col-md-12">Mot de passe</label>
+													<div class="col-md-12">
+														<input type="password" name="password"
+															   class="form-control form-control-line">
+													</div>
+												</div>
+												<em style="color: red" id="login_email-error"
+													class="error help-block">Veuillez entrer votre mot de
+													passe, il doit contenir au moins 8 caractÃ¨res</em>
+
+
+											</div>
+										</c:when>
+
+
+									</c:choose>
+
+
+									<c:choose>
+										<c:when test="${not empty user.telephone}">
+
+											<div class="form-group">
+												<label class="col-md-12">Téléphone</label>
+												<div class="col-md-12">
+													<input type="text" placeholder="+33 X XX XX XX XX"
+														   name="telephone" class="form-control form-control-line"
+														   value="${user.telephone}">
+												</div>
+											</div>
+
+										</c:when>
+										<c:when test="${empty user.telephone}">
+											<div>
+
+												<div class="form-group">
+													<label class="col-md-12">Téléphone</label>
+													<div class="col-md-12">
+														<input type="text" placeholder="+33 X XX XX XX XX"
+															   name="telephone" class="form-control form-control-line"
+															   value="${user.telephone}">
+													</div>
+												</div>
+												<em style="color: red" id="login_email-error"
+													class="error help-block">Veuillez saisir un numéro de
+													téléphone</em>
+											</div>
+										</c:when>
+
+
+									</c:choose>
+									<div class="form-group">
+										<label class="col-md-12">Description</label>
+										<div class="col-md-12">
+												<textarea name="description" style="resize: none"
+														  class="form-control form-control-line" rows="5"
+														  id="description" name="description"
+														  placeholder="Que faites-vous dans votre temps libre ? D'où faites-vous les courses le plus souvent ? ">${user.description}</textarea>
+
+										</div>
+									</div>
+
+
+									<div class="form-group">
+										<label class="col-md-12">Adresse</label>
+										<div class="col-md-12">
+												<textarea name="adress" style="resize: none"
+														  class="form-control form-control-line" rows="5" id="adress"
+														  name="adress"
+														  placeholder="Saisissez votre adresse ">${user.address}</textarea>
+
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+
+											<input type="submit" value="Mettre à jour"/>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Column -->
+			</div>
+
+			<!-- End PAge Content -->
+		</div>
+		<!-- End Container fluid  -->
+		<!-- End footer -->
+	</div>
+	<!-- End Page wrapper  -->
+</div>
 
 </body>
 
-
-</html>
+<%@ include file="parts/footer.jsp" %>

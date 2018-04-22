@@ -1,5 +1,6 @@
 <%@ page import="com.coursefacile.model.User" %>
 <%@ page import="com.coursefacile.dao.Util" %>
+<%@ page import="com.coursefacile.dao.UserHandler" %>
 <header>
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
         <div class="navigation">
@@ -25,16 +26,15 @@
                             <li role="presentation"><a href="<%= prefixPath %>/services">Services</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/contact">Contact</a></li>
                             <%
-                                if (Util.isLoggedIn(request)) {
-                                    User user = Util.getLoggedInUser(request);
-                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + "/images/" + user.getImage();
+                                if (UserHandler.isLoggedIn(request)) {
+                                    User user = UserHandler.getLoggedInUser(request);
+                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
                             %>
-
                             <li class="user">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">
                                     <img class="nav-user-photo" src="<%= imgUrl%>" alt="<%= user.getFullName() %>">
                                     <span class="user-info">
-									<%= user.getFname()%>
+									<%= user.getLname() %> <%= user.getFname().substring(0, 1) %>
 								</span>
 
                                     <i class="ace-icon fa fa-caret-down"></i>
@@ -43,7 +43,7 @@
                                     <li>
                                         <a href="<%= prefixPath %>/profile">
                                             <i class="ace-icon fa fa-user"></i>
-                                            Profile
+                                            Profil
                                         </a>
                                     </li>
 

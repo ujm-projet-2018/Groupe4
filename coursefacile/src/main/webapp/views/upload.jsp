@@ -13,18 +13,17 @@
 <body class="fix-header fix-sidebar">
 <%@ include file="parts/header.jsp" %>
 
-    <center>
-        <h1>File Upload</h1>
-        <form method="post" action="UploadServlet"
-              enctype="multipart/form-data">
+<center>
+    <h1>File Upload</h1>
+    <form method="post" action="UploadServlet"
+          enctype="multipart/form-data">
         <span class="btn btn-default btn-file">
     Browse <input name="file" type="file">
              <br/> <input type="submit" value="Upload"/>
 </span>
 
 
-
-</form>
+    </form>
 
 </center>
 <%@ include file="parts/footer.jsp" %>

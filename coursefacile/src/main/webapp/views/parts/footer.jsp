@@ -1,5 +1,6 @@
-<footer>
-	<div class="footer">
+<footer
+">
+<div class="footer" id="footer">
 		<div class="container">
 			<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
 				data-wow-delay="0.2s">
@@ -57,9 +58,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					&copy; 2015 <a target="_blank" href="http://bootstraptaste.com/"
-						title="Free Twitter Bootstrap WordPress Themes and HTML templates">bootstraptaste</a>.
-					All Rights Reserved.
+                    &copy; 2018 <a href="<%=prefixPath%>"
+                                   title="Courses Faciles">Courses Faciles</a>.
+                    Tout droit réservé.
 				</div>
 				<!--
                     All links in the footer should remain intact.
@@ -68,11 +69,10 @@
                 -->
 				<div class="col-md-6">
 					<ul class="pull-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Services</a></li>
-						<li><a href="#">Blog</a></li>
-						<li><a href="#">Portfolio</a></li>
-						<li><a href="#">Contact</a></li>
+                        <li><a href="<%= prefixPath%>">Accueil</a></li>
+                        <li><a href="<%= prefixPath%>/services">Services</a></li>
+                        <li><a href="<%= prefixPath%>/contact">Contact</a></li>
+                        <li><a href="<%= prefixPath%>/sitemap">Site Map</a></li>
 					</ul>
 				</div>
 			</div>
@@ -106,11 +106,11 @@
      src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
     </script>
 <%-- Dashboard scripts --%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/bootstrap/js/popper.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/jquery.slimscroll.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/sidebarmenu.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/raphael-min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/lib/bootstrap/js/popper.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/jquery.slimscroll.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/sidebarmenu.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|", "/js/lib/morris-chart/raphael-min.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/morris.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/dashboard1-init.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/moment.latest.min.js")%>
@@ -121,7 +121,7 @@
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel.min.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel-init.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/scripts.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/custom.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/custom.min.js")%>
 <%-- DateTimePicker --%>
 <%= Util.includeCssOrJs(request, "/mission", "/js/datepicker.js")%>
 <%-- Always include this file last --%>

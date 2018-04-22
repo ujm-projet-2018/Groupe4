@@ -122,3 +122,77 @@ nav.navbar-static-top {
 .notify {
     margin-top: 10px;
 }
+
+/* ------ dashboard.jsp / profilModif.jsp / profilePublic.jsp------ */
+
+#navbar {
+    height: 50px;
+}
+
+#message-notif {
+    float: right;
+}
+
+#bouton-dropdown {
+    position: absolute;
+}
+
+#footer {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6em;
+    color: #fff;
+    background: #292929;
+    padding: 50px;
+}
+
+#body-dashboard {
+    margin-top: -40px;
+}
+
+#sidebar-gauche {
+    position: absolute;
+    margin-top: 55px;
+}
+
+#titre-dashboard {
+    margin-left: 100px;
+    margin-top: -80px;
+}
+
+.notify {
+    margin-top: -2px;
+    margin-right: 7px;
+}
+
+#image-dashboard {
+    margin-top: 20px;
+    height: 80px;
+    width: 80px;
+}
+
+.link-profil {
+    margin-left: 55px;
+    margin-bottom: 11px;
+}
+
+#profil-public {
+    width: 93.5%;
+    height: 600px;
+}
+
+#plus-info {
+    color: #ED502E;
+    font-size: 1.6em;
+}
+
+#plus-info:hover {
+    color: #337ab7;
+}
+
+#myModalLabel {
+    color: #ED502E;
+}
+
+/* --------------------------- */

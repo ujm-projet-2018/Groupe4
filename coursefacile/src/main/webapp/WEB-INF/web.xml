@@ -42,11 +42,11 @@
         <url-pattern>/verifymail</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>PublicProfile</servlet-name>
-        <servlet-class>com.coursefacile.controller.PublicProfile</servlet-class>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>com.coursefacile.controller.ProfileController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>PublicProfile</servlet-name>
+        <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile/*</url-pattern>
     </servlet-mapping>
 
