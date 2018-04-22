@@ -14,7 +14,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand">
-                        <a href="<%= prefixPath %>"><h1><img src="<%= prefixPath %>/images/logo.png"
+                        <a href="<%= prefixPath %>"><h1><img id="logo" src="<%= prefixPath %>/images/logo.png"
                                                              title="Courses Faciles"></h1></a>
                     </div>
                 </div>
@@ -22,6 +22,13 @@
                 <div class="navbar-collapse collapse">
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
+                            <%
+                                if (UserHandler.isLoggedIn(request)) {
+                            %>
+                            <li><button onclick="window.location.href='<%= prefixPath %>/Publish-Mission'" id="publier-mission" class="btn"><i class="fa fa-cart-plus"> Publier une mission </i></button></li>
+                            <%
+                                }
+                            %>
                             <li role="presentation"><a href="<%= prefixPath %>/" class="active">Accueil</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/services">Services</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/contact">Contact</a></li>

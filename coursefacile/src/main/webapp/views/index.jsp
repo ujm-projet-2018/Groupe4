@@ -19,8 +19,8 @@
 <%@include file="parts/header.jsp" %>
 <div class="hero-img">
     <div class="hero-text">
-        <h2 class="title">Courses Faciles vous facilites la vie</h2>
-        <p class="sub-title"> Le Lorem Ipsum est simplement du faux texte.</p>
+        <h2 class="title">Courses Faciles vous facilite la vie</h2>
+        <p class="sub-title"> Le Lorem Ipsum est simplement du faux texte</p>
         <div class="container">
             <form class="form-inline" action="/coursefacile/missions" method="GET">
                 <div class="form-group has-feedback has-icone col-sm-4 col-md-3 col-md-offset-2">
