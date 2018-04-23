@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.coursefacile.dao.IMissionHandler;
-import com.coursefacile.dao.MissionHandler;
-import com.coursefacile.dao.UserHandler;
-import com.coursefacile.dao.Util;
+import com.coursefacile.dao.*;
+import com.coursefacile.model.City;
 import com.coursefacile.model.Mission;
 
 public class PublishMission extends HttpServlet {
@@ -28,15 +26,16 @@ public class PublishMission extends HttpServlet {
 			flag = 1;
 		}
 
-		if (request.getParameter("ville").trim().isEmpty() || request.getParameter("date").trim().isEmpty()
-				|| request.getParameter("heure").trim().isEmpty() || request.getParameter("minute").trim().isEmpty()
+        if (request.getParameter("city_id").trim().isEmpty() || request.getParameter("date").trim().isEmpty()
+                || request.getParameter("heure").trim().isEmpty() || request.getParameter("minute").trim().isEmpty()
 				|| request.getParameter("supermarche").trim().isEmpty() || flag == 1
 				|| request.getParameter("description").trim().isEmpty()) {
 			Util.addGlobalAlert(Util.DANGER, "Vous n'avez pas bien rempli le formulaire ! veuillez réessayer");
 			this.getServletContext().getRequestDispatcher("/views/publishMission.jsp").forward(request, response);
 		}
-
-		Mission myMission = new Mission();
+        ICityHandler cityHandler = new CityHandler();
+        City city = cityHandler.getCity(Integer.parseInt(request.getParameter("city_id")));
+        Mission myMission = new Mission();
 		Date date1 = new Date();
 		try {
 			date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getParameter("date") + " "
@@ -46,8 +45,8 @@ public class PublishMission extends HttpServlet {
 			e.printStackTrace();
 		}
 		Date date2 = new Date();
-
-		myMission.setMissionDate(date1);
+        myMission.setCity(city);
+        myMission.setMissionDate(date1);
 		myMission.setPublishDate(date2);
 		myMission.setPrice(price);
 		myMission.setDestination(request.getParameter("supermarche"));

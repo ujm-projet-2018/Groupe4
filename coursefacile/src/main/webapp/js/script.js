@@ -161,5 +161,61 @@ $(function () {
         format: 'dd/MM/yyyy hh:mm:ss'
       });
     }
+    var $publishMission = $('#publish-mission');
+    if ($publishMission.length) {
+        $publishMission.validate({
+            rules: {
+                city: {
+                    required: true,
+                },
+                date: {
+                    required: true,
+                },
+                heure: {
+                    required: true,
+                },
+                minute: {
+                    required: true,
+                },
+                supermarche: {
+                    required: true,
+                },
+                remuneration: {
+                    required: true,
+                },
+                description: {
+                    required: true,
+                }
+            },
+            messages: {
+                city: {
+                    required: "Veuillez saisir votre ville",
+                },
+                date: {
+                    required: "Veuillez saisir une date",
+                },
+                heure: {
+                    required: "Veuillez saisir une heure",
+                },
+                minute: {
+                    required: "Veuillez saisir les minutes",
+                },
+                supermarche: {
+                    required: "Veuillez saisir le supermarché",
+                },
+                remuneration: {
+                    required: "Veuillez saisir la renumeration",
+                },
+                description: {
+                    required: "Veuillez saisir une description",
+                }
+
+            },
+            errorElement: "em",
+            errorPlacement: errorPlacement,
+            highlight: highlight,
+            unhighlight: unhighlight
+        });
+    }
 
 });

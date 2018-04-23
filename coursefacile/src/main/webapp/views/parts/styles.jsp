@@ -6,7 +6,7 @@
 <link href="<%= prefixPath %>/css/animate.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/prettyPhoto.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/style.css" rel="stylesheet">
-<%= Util.includeCssOrJs(request, "/|/profile", "/css/datepicker.css")%>
+<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission", "/css/datepicker.css")%>
 <%-- Login page styles --%>
 <%= Util.includeCssOrJs(request, "/", "/css/jquery.autocomplete.css")%>
 <%= Util.includeCssOrJs(request, "/login", "/css/form-elements.css")%>

@@ -75,7 +75,7 @@
 .hero-text .sub-title{
     font-size: 20px;
     text-shadow: 0 0 12px rgba(0,0,0,0.1);
-    font-weight: 510;
+    font-weight: 500;
     margin-bottom: 40px;
 }
 .hero-text .btn-primary {
@@ -279,7 +279,7 @@ nav.navbar-static-top {
   }
 
   #verifications {
-    font-family: 'Open Sans', sans-serif
+      font-family: 'Open Sans', sans-serif;
     width: 300px;
     margin-left : 120px;
   }
@@ -316,3 +316,17 @@ nav.navbar-static-top {
     font-size: 1.2em;
 }
 /* --------------------------- */
+ul li a.btn-publish-mission {
+    color: white;
+    background: #ED502E;
+    border-radius: 50px;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+ul li a.btn-publish-mission:hover {
+    background-color: #ed502eab;
+    border-radius: 50px;
+    color: white;
+}
