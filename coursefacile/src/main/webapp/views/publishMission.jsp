@@ -13,83 +13,95 @@
     <%@ include file="parts/styles.jsp" %>
 
 </head>
-<body>
+<body onload="completerFormulaire()">
 
 <%@include file="parts/header.jsp" %>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <h2 class="title">Publier une mission</h2>
+<div id="global">
+    <h2 class="title">Publier une mission</h2>
+    <div class="container01">
 
-
-            <form name="publishForm" id="publish-mission" method="post" class="form-horizontal"
-                  action="<%= prefixPath %>/Publish-Mission">
-                <div class="form-group">
-                    <label for="city" class="control-label col-sm-2">Ville</label>
-                    <div class="col-sm-10">
-                        <div class='input-group'>
-                            <input type="text" class="form-control" id="city" name="city"
-                                   placeholder="Ville / Code postal" autocomplete="off">
-
-                        </div>
+        <form name="publishForm" method="post" action="<%= prefixPath %>/Publish-Mission"
+              onsubmit="return verifierDonnees()">
+            <div class="row">
+                <div class="col-25">
+                    <label for="city">Ville / Code postal</label>
+                </div>
+                <div class="col-75">
+                    <div class='input-group'>
+                        <label for="city" class="control-label sr-only">Ville / Code postal</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Ville / Code postal"
+                               autocomplete="off">
+                        <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                </span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="date" class="col-sm-2 control-label">Date</label>
-                    <div class="col-sm-5">
-                        <div class='input-group'>
-                            <input type="text" class="form-control"
-                                   placeholder="Veuillez indiquer la date des courses JJ/MM/AAAA .." name="date"
-                                   id="date" placeholder="Date">
+                <input type="text" id="erreur1" name="erreur1" value="La ville n'est pas indiquer !">
+            </div>
 
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <select id="heure" name="heure" class="form-control">
-                            <option value="0"> Heure</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3">
-                        <select id="minute" name="minute" class="form-control">
-                            <option value="0"> Minute</option>
-                        </select>
-                    </div>
-                    <input type="text" id="erreur2" name="erreur2" value="La date et/ou l'heure ne sont pas indiquer !">
+            <div class="row">
+                <div class="col-25">
+                    <label for="date">Date</label>
                 </div>
-                <div class="form-group">
-                    <label for="supermarche" class="col-sm-2 control-label">Supermarché</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="supermarche" class="form-control" name="supermarche"
-                               placeholder="Veuillez indiquer le supermarché dont vous voulez faire vos courses ..">
-                    </div>
+                <div class="col-29">
+                    <input type="text" name="date" id="date"
+                           placeholder="Veuillez indiquer la date des courses JJ/MM/AAAA ..">
                 </div>
-                <div class="form-group">
-                    <label for="remuneration" class="col-sm-2 control-label">Rémunération</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="remuneration" class="form-control" name="remuneration"
-                               placeholder="Veuillez indiquer le montant que vous voulez payer pour le service ..">
-                    </div>
+                <div id="select1" class="select">
+                    <select id="heure" name="heure" class="inline">
+                        <option value="0"> Heure</option>
+                    </select> h
                 </div>
-                <div class="form-group">
-                    <label for="description" class="col-sm-2 control-label">Description</label>
-                    <div class="col-sm-10">
-                    <textarea id="description" class="form-control" name="description"
+                <div id="select2" class="select">
+                    <select id="minute" name="minute">
+                        <option value="0"> Minute</option>
+                    </select> m
+                </div>
+                <input type="text" id="erreur2" name="erreur2" value="La date et/ou l'heure ne sont pas indiquer !">
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="supermarche">Supermarché</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="supermarche" name="supermarche"
+                           placeholder="Veuillez indiquer le supermarché dont vous voulez faire vos courses ..">
+                </div>
+                <input type="text" id="erreur3" name="erreur3" value="Le supermarché n'est pas indiquez !">
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="remuneration">Rémunération</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="remuneration" name="remuneration"
+                           placeholder="Veuillez indiquer le montant que vous voulez payer pour le service ..">
+                </div>
+                <input type="text" id="erreur4" name="erreur4" value="Le montant indiqué n'est pas valide !">
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="description">Description</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="description" name="description"
                               placeholder="Décrivez un peu votre demande de service, vous êtes flexible pour la marge horaire ? la composition de vos courses ? ..."
                               style="height:200px"></textarea>
-                    </div>
                 </div>
+                <input type="text" id="erreur5" name="erreur5"
+                       value="Il est très important de décrire votre demande de service !">
+            </div>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <input type="submit" class="btn btn-primary" value="Valider">
-                    </div>
-                </div>
+            <div class="row">
+                <input type="submit" value="Valider">
+            </div>
 
-            </form>
-        </div>
+        </form>
     </div>
-
 </div>
 
 <%@ include file="parts/footer.jsp" %>

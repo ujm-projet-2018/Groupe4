@@ -112,7 +112,16 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <div class="imagewrapper">
-                                                    <a href="/coursefacile/profile/${post.owner.id}"><img alt="" class="img-circle" width="140px" height="140px" style="border-radius: 50%; vertical-align: middle; margin-top: 14px"  src="css/img/a1.jpg"></a>
+                                                    <c:set var="image" value="/coursefacile/images/people.png"></c:set>
+                                                    <c:if test="${not empty post.owner.image}">
+                                                        <c:set var="image" value="${ post.owner.image}"></c:set>
+                                                    </c:if>
+                                                    <a href="/coursefacile/profile/${post.owner.id}"><img alt=""
+                                                                                                          class="img-circle"
+                                                                                                          width="140px"
+                                                                                                          height="140px"
+                                                                                                          style="border-radius: 50%; vertical-align: middle; margin-top: 14px"
+                                                                                                          src="${image}"></a>
                                                     <span class="price">${post.price}<%out.println(" €");%> </span>  
                                                 </div>
                                             </div>

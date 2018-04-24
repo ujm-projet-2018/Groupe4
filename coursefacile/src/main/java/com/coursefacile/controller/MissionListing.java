@@ -87,6 +87,7 @@ public class MissionListing extends HttpServlet {
             str = str + "&";
            
         }
+        System.out.println(request.getParameter("city_id"));
         str = str.split("page")[0];
         request.setAttribute("currentUrl", str+"page=");
         try {

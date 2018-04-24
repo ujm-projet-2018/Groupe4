@@ -3,16 +3,19 @@ package com.coursefacile.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.DateFormatter;
 
 import com.coursefacile.dao.*;
 import com.coursefacile.model.City;
 import com.coursefacile.model.Mission;
+import com.coursefacile.model.User;
 
 public class PublishMission extends HttpServlet {
 
@@ -38,8 +41,16 @@ public class PublishMission extends HttpServlet {
         Mission myMission = new Mission();
 		Date date1 = new Date();
 		try {
-			date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getParameter("date") + " "
-					+ request.getParameter("heure") + request.getParameter("minute"));
+
+			String dateParam = request.getParameter("date");
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			date1 = formatter.parse(dateParam);
+			date1.setMinutes(Integer.parseInt(request.getParameter("minute")));
+			date1.setHours(Integer.parseInt(request.getParameter("heure")));
+			System.out.println(date1.toString());
+//			date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(request.getParameter("date") + " "
+//					+ request.getParameter("heure") + request.getParameter("minute"));
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,7 +70,9 @@ public class PublishMission extends HttpServlet {
 			this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
 			response.sendRedirect("/coursefacile/login");
 		} else {
-			myMission.setOwner(UserHandler.getLoggedInUser(request));
+			User currentUser = UserHandler.getLoggedInUser(request);
+			System.out.println(currentUser.getId());
+			myMission.setOwner(currentUser);
 			IMissionHandler missionHandler = new MissionHandler();
 			myMission.setPublished(true);
 			if (missionHandler.add(myMission)) {
