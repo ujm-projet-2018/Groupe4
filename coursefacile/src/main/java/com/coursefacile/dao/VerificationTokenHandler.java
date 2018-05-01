@@ -2,12 +2,11 @@ package com.coursefacile.dao;
 
 import com.coursefacile.model.User;
 import com.coursefacile.model.VerificationToken;
+import com.coursefacile.utilities.Util;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.*;
 
 public class VerificationTokenHandler implements IVerificationTokenHandler {

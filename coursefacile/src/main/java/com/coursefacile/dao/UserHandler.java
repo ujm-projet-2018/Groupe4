@@ -2,14 +2,13 @@ package com.coursefacile.dao;
 
 import com.coursefacile.model.User;
 import com.coursefacile.model.VerificationToken;
+import com.coursefacile.utilities.Util;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class UserHandler implements IUserHandler {
@@ -114,7 +113,7 @@ public class UserHandler implements IUserHandler {
                     description = request.getParameter("description");
             if (fName.trim().length() > 0 && lName.trim().length() > 0 && email.trim().length() > 0 && pwd.trim().length() > 0 && confirmPwd.trim().length() > 0) {
                 if (pwd.equals(confirmPwd)) {
-                    if(Util.isValidEmail(email)){
+                    if (Util.isValidEmail(email)) {
                         User newUser = new User();
                         newUser.setEmail(email);
                         newUser.setFname(fName);
@@ -128,16 +127,38 @@ public class UserHandler implements IUserHandler {
                         IVerificationTokenHandler verificationTokenHandler = new VerificationTokenHandler();
                         verificationTokenHandler.sendVerificationMail(newUser, VerificationToken.VALIDATION_MAIL_TOKEN);
                         return true;
-                    }
-                    else{
-                        Util.addGlobalAlert(Util.DANGER,"Veuillez entrer un email valide");
+                    } else {
+                        Util.addGlobalAlert(Util.DANGER, "Veuillez entrer un email valide");
                     }
 
-                }else
-                    Util.addGlobalAlert(Util.DANGER,"Les mots de passe entrée ne sont pas identiques!");
-            }else
-                Util.addGlobalAlert(Util.DANGER,"Tous les champs avec * sont obligatoires");
+                } else
+                    Util.addGlobalAlert(Util.DANGER, "Les mots de passe entrée ne sont pas identiques!");
+            } else
+                Util.addGlobalAlert(Util.DANGER, "Tous les champs avec * sont obligatoires");
 
+        }
+        return false;
+    }
+
+    public boolean validatePwd(String email, String pwd) {
+        Session session = SessionFactoryHelper.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query query = session.createQuery("from User where email=:email AND password=:pwd");
+            query.setString("email", email);
+            query.setString("pwd", Util.hashString(pwd));
+            Object object = query.uniqueResult();
+
+            session.getTransaction().commit();
+
+            if (object != null) {
+                return true;
+            }
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
         return false;
     }

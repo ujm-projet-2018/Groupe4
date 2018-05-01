@@ -3,19 +3,18 @@ package com.coursefacile.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.DateFormatter;
 
 import com.coursefacile.dao.*;
 import com.coursefacile.model.City;
 import com.coursefacile.model.Mission;
 import com.coursefacile.model.User;
+import com.coursefacile.utilities.Util;
 
 public class PublishMission extends HttpServlet {
 
@@ -66,8 +65,8 @@ public class PublishMission extends HttpServlet {
 		if (!UserHandler.isLoggedIn(request)) {
 			Util.addGlobalAlert(Util.WARNING,
 					"Vous devez vous connecter ou vous inscrire avant de publier votre annonce !");
-			this.getServletContext().setAttribute("myMission", myMission);
-			this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
+            request.getSession().setAttribute("myMission", myMission);
+            request.getSession().setAttribute("fromUrl", request.getRequestURI());
 			response.sendRedirect("/coursefacile/login");
 		} else {
 			User currentUser = UserHandler.getLoggedInUser(request);
@@ -88,13 +87,13 @@ public class PublishMission extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String prefixPath = this.getServletContext().getInitParameter("prefixPath");
-		if (Util.elementExistInEnum(this.getServletContext().getAttributeNames(), "myMission")
+        if (Util.elementExistInEnum(request.getSession().getAttributeNames(), "myMission")
 				&& UserHandler.isLoggedIn(request)) {
-			Mission myMission = (Mission) this.getServletContext().getAttribute("myMission");
+            Mission myMission = (Mission) request.getSession().getAttribute("myMission");
 			IMissionHandler missionHandler = new MissionHandler();
 			myMission.setPublished(true);
-			this.getServletContext().removeAttribute("myMission");
-			this.getServletContext().removeAttribute("fromUrl");
+            request.getSession().removeAttribute("myMission");
+            request.getSession().removeAttribute("fromUrl");
 			if (missionHandler.add(myMission)) {
 				Util.addGlobalAlert(Util.SUCCESS, "Votre Annonce vient d'être publié");
 				response.sendRedirect("/coursefacile");

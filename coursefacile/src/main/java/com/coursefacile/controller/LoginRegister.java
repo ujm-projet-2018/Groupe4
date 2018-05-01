@@ -2,7 +2,7 @@ package com.coursefacile.controller;
 
 import com.coursefacile.dao.IUserHandler;
 import com.coursefacile.dao.UserHandler;
-import com.coursefacile.dao.Util;
+import com.coursefacile.utilities.Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,9 +24,9 @@ public class LoginRegister extends HttpServlet {
                 if (type.equals("login")) {
                     boolean checkLogin = userHandler.authenticate(request);
                     if (checkLogin) {
-                        if (Util.elementExistInEnum(this.getServletContext().getAttributeNames(), "fromUrl")) {
-                            String fromUrl = this.getServletContext().getAttribute("fromUrl").toString();
-                            this.getServletContext().removeAttribute("fromUrl");
+                        if (Util.elementExistInEnum(request.getSession().getAttributeNames(), "fromUrl")) {
+                            String fromUrl = request.getSession().getAttribute("fromUrl").toString();
+                            request.getSession().removeAttribute("fromUrl");
                             if (fromUrl.length() != 0) {
                                 response.sendRedirect(fromUrl);
                             } else

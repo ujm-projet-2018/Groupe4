@@ -3,6 +3,7 @@ package com.coursefacile.controller;
 import com.coursefacile.dao.*;
 import com.coursefacile.model.User;
 import com.coursefacile.model.VerificationToken;
+import com.coursefacile.utilities.Util;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

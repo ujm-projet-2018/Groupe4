@@ -6,10 +6,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="com.coursefacile.dao.*" %>
-<%@page import="com.coursefacile.controller.*" %>
-<%@page import="com.coursefacile.model.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -284,8 +280,8 @@
 							class="fa fa-cart-arrow-down"></i><span class="hide-menu">Mes réservations </span></a>
 					</li>
 					<li class="nav-label">Mon compte</li>
-					<li><a class=" " href="#" aria-expanded="false"><i
-							class="fa fa-envelope"></i><span class="hide-menu">Messages </a>
+                    <li><a class=" " href="<%= prefixPath%>/dashboard/messages" aria-expanded="false"><i
+                            class="fa fa-envelope"></i><span class="hide-menu">Messages</span> </a>
 					</li>
 					<li><a class="" href="#" aria-expanded="false"><i
 							class="fa fa-bell-o"></i><span class="hide-menu">Alertes

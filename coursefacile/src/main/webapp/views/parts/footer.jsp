@@ -1,7 +1,7 @@
-<footer
-">
+<%@ page import="com.coursefacile.utilities.Util" %>
+<footer>
 <div class="footer" id="footer">
-		<div class="container">
+    <div class="container-fluid">
 			<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
 				data-wow-delay="0.2s">
 				<h2>Multi</h2>
@@ -24,8 +24,8 @@
 				</ul>
 			</div>
 
-			<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
-				data-wow-delay="0.4s">
+        <div class="col-md-offset-1 col-md-3 wow fadeInUp" data-wow-offset="0"
+             data-wow-delay="0.4s">
 				<h3>RECENT POSTS</h3>
 				<ul>
 					<li>Awesome Design with Overviews</li>
@@ -38,8 +38,8 @@
 				</ul>
 			</div>
 
-			<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
-				data-wow-delay="0.6s">
+        <div class="col-md-offset-1 col-md-3 wow fadeInUp" data-wow-offset="0"
+             data-wow-delay="0.6s">
 				<h3>CONTACT INFO</h3>
 				<ul>
 					<li><i class="fa fa-home fa-2x"></i> Office # 38, Suite 54
@@ -101,30 +101,29 @@
 <%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.validate.min.js")%>
 
- //Util.includeCssOrJs(request, "/missions", "/js/bootstrap-datetimepicker.min.js"
 <script type="text/javascript"
      src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
     </script>
 <%-- Dashboard scripts --%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/lib/bootstrap/js/popper.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/jquery.slimscroll.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/sidebarmenu.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*|/dashboard/*", "/js/lib/bootstrap/js/popper.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*|/dashboard/*", "/js/jquery.slimscroll.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*|/dashboard/*", "/js/sidebarmenu.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*|/dashboard/*", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/raphael-min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/morris.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/dashboard1-init.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/moment.latest.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/semantic.ui.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/prism.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/pignose.calendar.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/calendar-2/pignose.init.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/owl-carousel/owl.carousel-init.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/js/scripts.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/1", "/js/custom.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/moment.latest.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/semantic.ui.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/prism.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/pignose.calendar.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/pignose.init.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/owl-carousel/owl.carousel.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/owl-carousel/owl.carousel-init.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/scripts.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*|/dashboard/*", "/js/custom.min.js")%>
 <%-- DateTimePicker --%>
 <%= Util.includeCssOrJs(request, "/mission", "/js/datepicker.js")%>
 <%-- Always include this file last --%>
+<script src="<%=prefixPath%>/js/bootbox.min.js"></script>
 <script type="text/javascript" src="<%=prefixPath%>/js/script.js"></script>
+
 
 

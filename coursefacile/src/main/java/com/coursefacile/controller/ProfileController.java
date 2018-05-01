@@ -1,9 +1,10 @@
 package com.coursefacile.controller;
+
 import com.coursefacile.dao.IUserHandler;
 import com.coursefacile.dao.UserHandler;
-import com.coursefacile.dao.Util;
+import com.coursefacile.utilities.Util;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.coursefacile.model.User;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.Map;
 
 @WebServlet("/profile")
 
@@ -21,12 +22,14 @@ public class ProfileController extends HttpServlet {
     IUserHandler userHandler = new UserHandler();
     User user2;
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String prefixPath = this.getServletContext().getInitParameter("prefixPath");
         userHandler = new UserHandler();
         String pathInfo = request.getPathInfo() != null ? request.getPathInfo() : "";
         String[] pathParts = pathInfo.split("/");
-        if (pathParts.length > 1) {
+        if (pathParts.length == 2) {
             String param = pathParts[1];
             int id;
             try {
@@ -44,8 +47,8 @@ public class ProfileController extends HttpServlet {
             if (UserHandler.isLoggedIn(request)) {
                 this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
             } else {
-                this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
-                response.sendRedirect("/coursefacile/login");
+                request.getSession().setAttribute("fromUrl", request.getRequestURI());
+                response.sendRedirect(prefixPath + "/login");
             }
         }
 
@@ -53,32 +56,56 @@ public class ProfileController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        user2 = UserHandler.getLoggedInUser(request);
+        String prefixPath = this.getServletContext().getInitParameter("prefixPath");
+        Map<String, String[]> params = request.getParameterMap();
+        if (params.containsKey("confirmationPwd") && request.getRequestURI().equals(prefixPath + "/confirm-pwd") && UserHandler.isLoggedIn(request)) {
+            request.setCharacterEncoding("utf8");
+            response.setContentType("application/json");
+            User currentUser = UserHandler.getLoggedInUser(request);
+            String status = Boolean.toString(userHandler.validatePwd(currentUser.getEmail(), request.getParameter("confirmationPwd")));
+            response.getWriter().println("[" + status + ",\"" + Util.hashString(currentUser.getPassword()) + "\"]");
+        } else if (request.getRequestURI().equals(prefixPath + "/profile")) {
 
-        user2.setTelephone((String) request.getParameter("telephone"));
-        user2.setBirthDate((String) request.getParameter("birthDate"));
-        user2.setAddress((String) request.getParameter("address"));
-        user2.setDescription((String) request.getParameter("description"));
+            if (UserHandler.isLoggedIn(request)) {
+                if (params.containsKey("checkSubmit")) {
+                    user2 = UserHandler.getLoggedInUser(request);
+                    if (params.containsKey("telephone"))
+                        user2.setTelephone(request.getParameter("telephone"));
+                    if (params.containsKey("birthDate"))
+                        user2.setBirthDate(request.getParameter("birthDate"));
+                    if (params.containsKey("address"))
+                        user2.setAddress(request.getParameter("address"));
+                    if (params.containsKey("description"))
+                        user2.setDescription(request.getParameter("description"));
 
+                    if (params.containsKey("fname") && params.containsKey("lname") && params.containsKey("email")) {
+                        // check if an input is empty or password < 8 char and input contains smthing
+                        if ((request.getParameter("fname") != "") && (request.getParameter("lname") != "")
+                                && (request.getParameter("email") != "") && (request.getParameter("password") != "")
+                                && (request.getParameter("password")).length() >= 8) {
+                            user2.setFname(request.getParameter("fname"));
+                            user2.setLname(request.getParameter("lname"));
+                            user2.setEmail(request.getParameter("email"));
+                            if (params.containsKey("password"))
+                                user2.setPassword(Util.hashString(request.getParameter("password")));
+                            userHandler.update(user2);
+                            Util.addGlobalAlert(Util.SUCCESS, "profile modifie avec succes");
+                        } else {
+                            Util.addGlobalAlert(Util.WARNING,
+                                    "s'il vous plait ne pas laisser les champs vide, le password doit contenir > 8 caracteres");
+                        }
+                        this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
+                    }
+                } else {
+                    Util.addGlobalAlert(Util.WARNING, "Les données inserées sont incorrectes");
+                }
+            } else {
+                request.getSession().setAttribute("fromUrl", request.getRequestURI());
+                response.sendRedirect(prefixPath + "/login");
 
-        // check if an input is empty or password < 8 char and input contains smthing
-        if (((String) request.getParameter("fname") != "") && ((String) request.getParameter("lname") != "")
-                && ((String) request.getParameter("email") != "") && ((String) request.getParameter("password") != "")
-                && ((String) request.getParameter("password")).length() >= 8) {
-            user2.setFname((String) request.getParameter("fname"));
-            user2.setLname((String) request.getParameter("lname"));
-            user2.setEmail((String) request.getParameter("email"));
-            user2.setPassword((String) request.getParameter("password"));
-            userHandler.update(user2);
-            Util.addGlobalAlert(Util.SUCCESS, "profile modifie avec succes");
-            this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
+            }
 
-        } else {
-            Util.addGlobalAlert(Util.WARNING,
-                    "s'il vous plait ne pas laisser les champs vide, le password doit contenir > 8 caracteres");
-            this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
         }
-
     }
 
 

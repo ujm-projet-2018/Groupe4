@@ -27,7 +27,7 @@ public class Dashboard extends HttpServlet {
         if (UserHandler.isLoggedIn(request)) {
             this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
         } else {
-            this.getServletContext().setAttribute("fromUrl", request.getRequestURI());
+            request.getSession().setAttribute("fromUrl", request.getRequestURI());
             response.sendRedirect("/coursefacile/login");
         }
     }

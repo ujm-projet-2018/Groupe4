@@ -2,7 +2,6 @@ package com.coursefacile.controller;
 
 import com.coursefacile.dao.IUserHandler;
 import com.coursefacile.dao.UserHandler;
-import com.coursefacile.dao.Util;
 import com.coursefacile.model.User;
 
 import java.io.File;

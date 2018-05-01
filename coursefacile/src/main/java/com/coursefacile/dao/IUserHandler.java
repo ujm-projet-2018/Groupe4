@@ -61,5 +61,11 @@ public interface IUserHandler {
      */
     User get(String mail);
 
+    /**
+     * @param email
+     * @param pwd
+     * @return
+     */
+    boolean validatePwd(String email, String pwd);
 
 }

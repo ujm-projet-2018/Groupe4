@@ -48,6 +48,7 @@
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile/*</url-pattern>
+        <url-pattern>/confirm-pwd</url-pattern>
     </servlet-mapping>
 
 
@@ -74,5 +75,22 @@
     <servlet-mapping>
         <servlet-name>PublishMission</servlet-name>
         <url-pattern>/Publish-Mission</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Messages</servlet-name>
+        <servlet-class>com.coursefacile.controller.Messages</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Messages</servlet-name>
+        <url-pattern>/dashboard/messages</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Chat</servlet-name>
+        <servlet-class>com.coursefacile.controller.Chat</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Chat</servlet-name>
+        <url-pattern>/dashboard/send-messages/*</url-pattern>
     </servlet-mapping>
 </web-app>

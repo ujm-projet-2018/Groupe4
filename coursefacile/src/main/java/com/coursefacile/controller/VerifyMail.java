@@ -2,6 +2,7 @@ package com.coursefacile.controller;
 
 import com.coursefacile.dao.*;
 import com.coursefacile.model.VerificationToken;
+import com.coursefacile.utilities.Util;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,7 +35,7 @@ public class VerifyMail extends HttpServlet {
             }
         } else {
             Util.addGlobalAlert(Util.WARNING,"Vous devez vous connecter pour pouvoir continuer");
-            servletContext.setAttribute("fromUrl", request.getRequestURL().append('?').append(request.getQueryString()));
+            request.getSession().setAttribute("fromUrl", request.getRequestURL().append('?').append(request.getQueryString()));
             servletContext.getRequestDispatcher("/login").forward(request, response);
         }
 
