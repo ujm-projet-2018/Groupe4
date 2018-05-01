@@ -28,6 +28,15 @@
         <div class="col-md-12">
             <form id="publish-mission" class="form-horizontal" name="publishForm" method="post"
                   action="<%= prefixPath %>/Publish-Mission">
+
+                <div class="form-group">
+                    <label for="mission-name" class="col-sm-2 control-label">Nom de la mission</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="mission-name" class="form-control" name="missionName"
+                               placeholder="Un nom qui décrit votre mission">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="city" class="col-sm-2 control-label">Ville / Code postal</label>
                     <div class="col-sm-10">
@@ -47,7 +56,8 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="input-append date form_time" data-date="" data-date-format="hh:ii">
-                            <input class="span2 form-control" placeholder="le temps de les courses" size="16"
+                            <input class="span2 form-control" placeholder="le temps de les courses" name="time"
+                                   size="16"
                                    type="text"
                                    value="">
                             <span class="add-on"><i class="icon-th"></i></span>

@@ -165,19 +165,16 @@ $(function () {
             format: 'dd/MM/yyyy hh:mm:ss'
         });
     }
+    setTimeout(function () {
+        var $nextR = $(".table-condensed th.next"), prevR = $(".table-condensed th.prev");
+        if ($nextR.length && prevR.length) {
+            prevR.html('<i class="glyphicon glyphicon-arrow-left"></i>');
+            $nextR.html('<i class="glyphicon glyphicon-arrow-right"></i>');
+        }
+    }, 600);
     var $publishMission = $('#publish-mission');
     if ($publishMission.length) {
-        $('.form_time').datetimepicker({
-            language: 'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 0
-        });
+
         $publishMission.validate({
             rules: {
                 city: {
@@ -472,5 +469,18 @@ $(function () {
         });
 
     }
+    var $formTime = $('.form_time');
+    if ($formTime.length)
+        $formTime.datetimepicker({
+            language: 'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
+        });
 
 });

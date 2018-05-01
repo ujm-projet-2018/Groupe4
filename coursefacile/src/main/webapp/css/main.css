@@ -95,28 +95,32 @@
 nav.navbar-static-top {
     margin-bottom: 0;
 }
-.xdsoft_autocomplete_dropdown, .datepicker.dropdown-menu {
+
+.xdsoft_autocomplete_dropdown, .datepicker.dropdown-menu, .datetimepicker.dropdown-menu {
     color: black;
 }
 .xdsoft_autocomplete_dropdown b {
     color: #ed502e;
 }
-.datepicker td span.active {
+
+.datepicker td span.active, .datetimepicker td span.active {
     background-color: #ed502e !important;
-    background-image: -moz-linear-gradient(top,#ed9c2e,#ed502e);
+    background-image: -moz-linear-gradient(top, #ed9c2e, #ed502e) !important;
     background-image: -ms-linear-gradient(top,#ed9c2e,#ed502e);
-    background-image: -webkit-gradient(linear,0 0,0 100%,from(#ed9c2e),to(#ed502e));
-    background-image: -webkit-linear-gradient(top,#ed9c2e,#ed502e);
-    background-image: -o-linear-gradient(top,#ed9c2e,#ed502e);
-    background-image: linear-gradient(to bottom,#ed9c2e,#ed502e);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ed9c2e), to(#ed502e)) !important;
+    background-image: -webkit-linear-gradient(top, #ed9c2e, #ed502e) !important;
+    background-image: -o-linear-gradient(top, #ed9c2e, #ed502e) !important;
+    background-image: linear-gradient(to bottom, #ed9c2e, #ed502e) !important;
 }
-.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
-    background-image: -moz-linear-gradient(top,#ed9c2e,#ed502e);
-    background-image: -ms-linear-gradient(top,#ed9c2e,#ed502e);
-    background-image: -webkit-gradient(linear,0 0,0 100%,from(#ed9c2e),to(#ed502e));
-    background-image: -webkit-linear-gradient(top,#ed9c2e,#ed502e);
-    background-image: -o-linear-gradient(top,#ed9c2e,#ed502e);
-    background-image: linear-gradient(to bottom,#ed9c2e,#ed502e);
+
+.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover,
+.datetimepicker table tr td.active, .datetimepicker table tr td.active:hover, .datetimepicker table tr td.active.disabled, .datetimepicker table tr td.active.disabled:hover {
+    background-image: -moz-linear-gradient(top, #ed9c2e, #ed502e) !important;
+    background-image: -ms-linear-gradient(top, #ed9c2e, #ed502e) !important;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ed9c2e), to(#ed502e)) !important;
+    background-image: -webkit-linear-gradient(top, #ed9c2e, #ed502e) !important;
+    background-image: -o-linear-gradient(top, #ed9c2e, #ed502e) !important;
+    background-image: linear-gradient(to bottom, #ed9c2e, #ed502e) !important;
 }
 
 .nav .user a.dropdown-toggle{

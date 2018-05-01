@@ -66,7 +66,7 @@
                 </div>
                 <div class="row collapse" id="rechercheAvancéeCollapse">
                     <div class="col-md-4" style="margin-top: 22px">
-                        <div class="input-group date timepicker" >
+                        <div class="input-group date form_time">
                             <input type='text' class="form-control" placeholder="De" id="de" name="de" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <div class="col-md-4" style="margin-top: 22px">
-                        <div class="input-group date timepicker" >
+                        <div class="input-group date form_time">
                             <input type='text' class="form-control" placeholder="A" id="a" name="a"  />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
