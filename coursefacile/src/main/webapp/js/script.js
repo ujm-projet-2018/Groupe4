@@ -1,4 +1,6 @@
 $(function () {
+    var MAX_MSG = 5;
+
     /**
      * validation functions
      */
@@ -306,6 +308,8 @@ $(function () {
     $btnSendMsg = $('#send-message');
     if ($btnSendMsg.length) {
         var $chatHistory = $('.chat-history');
+        $chatHistory.data("pag-start", 0);
+        $chatHistory.data("pag-end", MAX_MSG);
         var $chatContainer = $('<ul>');
         var chatClient = new WebSocket("ws://" + location.host + "/coursefacile/chat/" + $btnSendMsg.parent().data('sender'));
         $chatHistory.scrollTop($chatHistory.prop("scrollHeight"));
@@ -380,6 +384,81 @@ $(function () {
 
         });
 
+        $chatHistory.scroll(function () {
+            var pos = $chatHistory.scrollTop();
+            if (pos == 0) {
+                var $loader = $('.loader');
+                $loader.css('width', '100%')
+                var $loaderImg = $('<img>', {src: "https://www.ourshopee.com/img/loader.gif"});
+                $loaderImg.css({
+                    height: "45px",
+                    width: "45px",
+                    margin: "auto",
+                    display: "block"
+                });
+                $loader.append($loaderImg);
+                $chatHistory.prepend($loader);
+                var pagStart = (parseInt($chatHistory.data("pag-end")) + 1);
+                var pagEnd = (parseInt($chatHistory.data("pag-end")) + MAX_MSG);
+                $chatHistory.data("pag-end", pagEnd);
+                $.ajax({
+                    type: 'post',
+                    url: location.href,
+                    data: {start: pagStart, end: pagEnd},
+                    dataType: 'json',
+                    cache: false,
+                    success: function (data) {
+                        $loader.html("");
+
+                        if (data.length && data[0] !== "error") {
+                            var $chatContainer = $('<ul>');
+                            for (var i = 2; i < data.length; i++) {
+                                //emetteur
+                                if (data[i].sender == 'moi') {
+                                    var $emetteurMarkup;
+                                    $emetteurMarkup = $('<li>', {class: 'clearfix'});
+                                    var $emMsgData = $('<div>', {class: 'message-data align-right'});
+                                    var $emMsgDataTime = $('<span>', {class: 'message-data-time'});
+                                    $emMsgDataTime.html(data[i].sentDate);
+                                    var $emMsgDataName = $('<span>', {class: 'message-data-name'});
+                                    $emMsgDataName.html(' Moi');
+                                    var $iconeMe = $('<i>', {class: "fa fa-circle me"});
+                                    $emMsgData.append($emMsgDataTime);
+                                    $emMsgData.append($emMsgDataName);
+                                    $emMsgData.append($iconeMe);
+                                    $emetteurMarkup.append($emMsgData);
+                                    var $emMessage = $('<div>', {class: 'message other-message float-right'});
+                                    $emMessage.html(data[i].message);
+                                    $emetteurMarkup.append($emMessage);
+                                    $chatContainer.append($emetteurMarkup);
+                                } else {
+                                    //recepteur
+
+                                    var $recepteurMarkup;
+                                    $recepteurMarkup = $('<li>');
+                                    var $recMsgData = $('<div>', {class: 'message-data'});
+                                    var $recMsgDataName = $('<span>', {class: 'message-data-name'});
+                                    var $recIcone = $('<i>', {class: "fa fa-circle online"});
+                                    $recMsgData.append($recIcone);
+                                    $recMsgDataName.html(data[i].sender);
+                                    var $recMsgDataTime = $('<span>', {class: 'message-data-time'});
+                                    $recMsgDataTime.html(data[i].sentDate);
+                                    $recMsgData.append($recMsgDataName);
+                                    $recMsgData.append($recMsgDataTime);
+                                    var $recmessage = $('<div>', {class: 'message my-message'});
+                                    $recmessage.html(data[i].message);
+                                    $recepteurMarkup.append($recMsgData);
+                                    $recepteurMarkup.append($recmessage);
+                                    $chatContainer.append($recepteurMarkup);
+                                }
+                                $chatHistory.prepend($chatContainer);
+                                $chatHistory.scrollTop($chatHistory.prop("scrollHeight") - ($chatHistory.prop("scrollHeight") * 85 / 100))
+                            }
+                        }
+                    }
+                });
+            }
+        });
 
     }
 

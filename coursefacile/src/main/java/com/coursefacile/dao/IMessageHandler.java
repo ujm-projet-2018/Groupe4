@@ -1,7 +1,6 @@
 package com.coursefacile.dao;
 
 import com.coursefacile.model.Message;
-import com.coursefacile.model.User;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public interface IMessageHandler {
 
     Message get(int messageId);
 
-    List<Message> getMessages(int sender, int receiver);
+    List<Message> getMessages(int sender, int receiver, int start, int end);
 
     List<Message> getContacts(int userId, String userName, int start, int end);
 

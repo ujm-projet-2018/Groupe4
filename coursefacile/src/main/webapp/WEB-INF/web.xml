@@ -92,5 +92,6 @@
     <servlet-mapping>
         <servlet-name>Chat</servlet-name>
         <url-pattern>/dashboard/send-messages/*</url-pattern>
+        <url-pattern>/dashboard/send-messages-load/*</url-pattern>
     </servlet-mapping>
 </web-app>

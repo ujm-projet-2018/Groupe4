@@ -45,7 +45,8 @@
                     <a class="btn btn-primary" href="#">Envoyer un message</a>
                 </c:if>
                 <c:if test="${user.id ne user2.id}">
-                    <a class="btn btn-primary" href="<%= prefixPath %>/send-message/${user2.id}">Envoyer un message</a>
+                    <a class="btn btn-primary" href="<%= prefixPath %>/dashboard/send-messages/${user2.id}">Envoyer un
+                        message</a>
                 </c:if>
             </div>
         </div>

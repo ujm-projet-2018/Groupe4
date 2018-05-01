@@ -143,14 +143,16 @@ public class MessageHandler implements IMessageHandler {
         return count;
     }
 
-    public List<Message> getMessages(int sender, int receiver) {
+    public List<Message> getMessages(int sender, int receiver, int start, int end) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         List<Message> messages = null;
         try {
             session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT DISTINCT * FROM message WHERE (sender=:sender AND receiver=:receiver) OR (sender=:receiver AND receiver=:sender)").addEntity("message", Message.class);
+            Query query = session.createSQLQuery("SELECT DISTINCT * FROM message WHERE (sender=:sender AND receiver=:receiver) OR (sender=:receiver AND receiver=:sender) ORDER BY date ASC").addEntity("message", Message.class);
             query.setParameter("sender", sender);
             query.setParameter("receiver", receiver);
+            query.setFirstResult(start);
+            query.setMaxResults(end);
             messages = (List<Message>) query.list();
             session.getTransaction().commit();
         } catch (Exception e) {

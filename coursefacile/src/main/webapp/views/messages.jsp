@@ -69,7 +69,8 @@
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <div class="list-right-info">
-                                                        <h3><a href="#" title="">${contact.lname} ${contact.fname}</a>
+                                                        <h3><a href="<%=prefixPath%>/profile/${contact.id}"
+                                                               title="">${contact.lname} ${contact.fname}</a>
                                                         </h3>
                                                         <p>
                                                             <c:if test="${msg.sender.id eq user.id}">you : </c:if>${msg.text}

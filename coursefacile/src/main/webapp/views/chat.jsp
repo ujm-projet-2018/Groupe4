@@ -39,6 +39,7 @@
                 <!-- end chat-header -->
 
                 <div class="chat-history">
+                    <div class="loader"></div>
                     <ul>
                         <c:if test="${not empty messages}">
                             <c:forEach items="${messages}" var="msg">
