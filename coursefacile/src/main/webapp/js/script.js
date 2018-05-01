@@ -1,5 +1,5 @@
 $(function () {
-    var MAX_MSG = 5;
+    var MAX_MSG = 10;
 
     /**
      * validation functions
@@ -391,10 +391,12 @@ $(function () {
             $message.val('');
 
         });
+        var previousScrollHeight;
 
         $chatHistory.scroll(function () {
             var pos = $chatHistory.scrollTop();
             if (pos == 0) {
+                previousScrollHeight = $chatHistory.prop("scrollHeight");
                 var $loader = $('.loader');
                 $loader.css('width', '100%')
                 var $loaderImg = $('<img>', {src: "https://www.ourshopee.com/img/loader.gif"});
@@ -420,7 +422,8 @@ $(function () {
 
                         if (data.length && data[0] !== "error") {
                             var $chatContainer = $('<ul>');
-                            for (var i = 2; i < data.length; i++) {
+                            var i;
+                            for (i = 0; i < data.length; i++) {
                                 //emetteur
                                 if (data[i].sender == 'moi') {
                                     var $emetteurMarkup;
@@ -460,7 +463,7 @@ $(function () {
                                     $chatContainer.append($recepteurMarkup);
                                 }
                                 $chatHistory.prepend($chatContainer);
-                                $chatHistory.scrollTop($chatHistory.prop("scrollHeight") - ($chatHistory.prop("scrollHeight") * 85 / 100))
+                                $chatHistory.scrollTop($chatHistory.prop("scrollHeight") - previousScrollHeight);
                             }
                         }
                     }

@@ -49,8 +49,8 @@ public class ChatServer {
 //        return "Server received [" + message + "]";
                 if (s.isOpen() && chatMessage.get("receiver").equals(sessions.get(s.getId()))) {
                     LOGGER.log(Level.INFO, "New message from Client [{0}]: {1} to client " + chatMessage.get("receiver"), new Object[]{session.getId(), chatMessage.get("message")});
-
                     s.getBasicRemote().sendText(chatMessageJsonHelper.encodeMessage(chatMessage));
+                }
                     System.out.println(chatMessageJsonHelper.encodeMessage(chatMessage));
                     IMessageHandler messageHandler = new MessageHandler();
                     IUserHandler userHandler = new UserHandler();
@@ -62,7 +62,6 @@ public class ChatServer {
                     newMessage.setReceiver(receiver);
                     newMessage.setDate(new Date());
                     messageHandler.add(newMessage);
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
