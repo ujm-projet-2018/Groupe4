@@ -1,0 +1,120 @@
+
+
+input[type=text], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    color: #111111;
+}
+
+#erreur1, #erreur2, #erreur3, #erreur4, #erreur5 {
+	background-color : #ff7675;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d63031;
+    border-radius: 4px;
+    resize: vertical;
+    color: #111111;
+    display : none;
+}
+
+select{
+	background-color : #ffffff;
+	padding-top : 10px;
+    padding-bottom : 10px;
+    color: #111111;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    color: #111111;
+}
+
+input[type=submit] {
+    background-color: #ed502e;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+#global {
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 100px;
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+.container01 {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.col-29 {
+    float: left;
+    width: 35%;
+    margin-top: 6px;
+}
+
+#select1 {
+	padding-left: 50px;
+    float: left;
+    width: 20%;
+    margin-top: 6px;
+}
+
+#select2{
+  	padding-left: 20px;
+    float: left;
+    width: 20%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 666px) {
+    .col-25, .col-75, input[type=submit], .col-29 {
+        width: 100%;
+        margin-top: 0;
+    }
+    #select1, #select2 {
+    
+        width: 50%;
+    }
+}
+@media screen and (max-width: 317px) {
+    #select1, #select2 {
+    	padding-left: 0px;
+        width: 100%;
+    }
+}
