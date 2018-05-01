@@ -6,6 +6,7 @@
 <link href="<%= prefixPath %>/css/animate.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/prettyPhoto.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/style.css" rel="stylesheet">
+<link href="<%= prefixPath %>/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission", "/css/datepicker.css")%>
 <%-- Login page styles --%>
 <%= Util.includeCssOrJs(request, "/|/Publish-Mission", "/css/jquery.autocomplete.css")%>
@@ -16,12 +17,12 @@
 <%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/calendar2/pignose.calendar.min.css")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/owl.carousel.min.css")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/owl.theme.default.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*", "/css/helper.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*", "/css/style_dashboard.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile|/profile/*", "/css/animate_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*", "/css/helper.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*", "/css/style_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*", "/css/animate_dashboard.css")%>
 <%-- Mission Listing styles --%>
-<link rel="stylesheet" type="text/css" media="screen"
-     href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+<%--<link rel="stylesheet" type="text/css" media="screen"--%>
+<%--href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">--%>
 <%= Util.includeCssOrJs(request, "/missions|/dashboard/messages", "/css/style_missionListing.css")%>
 <%-- always include this file last --%>
 <link href="<%= prefixPath %>/css/main.css" rel="stylesheet">

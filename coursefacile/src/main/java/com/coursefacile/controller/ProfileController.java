@@ -29,6 +29,7 @@ public class ProfileController extends HttpServlet {
         userHandler = new UserHandler();
         String pathInfo = request.getPathInfo() != null ? request.getPathInfo() : "";
         String[] pathParts = pathInfo.split("/");
+        System.out.println(request.getRequestURI());
         if (pathParts.length == 2) {
             String param = pathParts[1];
             int id;
@@ -43,7 +44,7 @@ public class ProfileController extends HttpServlet {
             request.setAttribute("user2", user2);
             this.getServletContext().getRequestDispatcher("/views/PublicProfile.jsp").forward(request, response);
 
-        } else {
+        } else if (request.getRequestURI().equals(prefixPath + "/dashboard/profile")) {
             if (UserHandler.isLoggedIn(request)) {
                 this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
             } else {

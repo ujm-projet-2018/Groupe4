@@ -13,7 +13,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <div class="navbar-brand">
+                    <div class="">
                         <a href="<%= prefixPath %>"><h1><img id="logo" src="<%= prefixPath %>/images/logo.png"
                                                              title="Courses Faciles"></h1></a>
                     </div>
@@ -26,7 +26,6 @@
                                                        class="btn btn-default btn-publish-mission"><i
                                     class="fa fa-cart-plus"></i>Publier une mission</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/" class="active">Accueil</a></li>
-                            <li role="presentation"><a href="<%= prefixPath %>/services">Services</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/contact">Contact</a></li>
                             <%
                                 if (UserHandler.isLoggedIn(request)) {
@@ -44,7 +43,7 @@
                                 </a>
                                 <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                                     <li>
-                                        <a href="<%= prefixPath %>/profile">
+                                        <a href="<%= prefixPath %>/dashboard/profile">
                                             <i class="ace-icon fa fa-user"></i>
                                             Profil
                                         </a>

@@ -48,6 +48,7 @@
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile/*</url-pattern>
+        <url-pattern>/dashboard/profile</url-pattern>
         <url-pattern>/confirm-pwd</url-pattern>
     </servlet-mapping>
 

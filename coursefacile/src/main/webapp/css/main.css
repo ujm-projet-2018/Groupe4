@@ -50,7 +50,7 @@
     padding-left: 0;
 }
 .hero-img {
-    background-image: url("../images/slider/1.jpg");
+    background-image: url("../images/grocery-groceries-commerce-online-ss-1920.jpg");
     height: 550px;
     width: 100%;
     background-position: center;
@@ -312,7 +312,7 @@ nav.navbar-static-top {
     font-size: 1.2em;
 }
 /* --------------------------- */
-ul li a.btn-publish-mission {
+ul li a.btn-publish-mission, .btn-publish-mission {
     color: white;
     background: #ED502E;
     border-radius: 50px;
@@ -321,7 +321,7 @@ ul li a.btn-publish-mission {
     font-size: 12px;
 }
 
-ul li a.btn-publish-mission:hover {
+ul li a.btn-publish-mission:hover, .btn-publish-mission:hover {
     background-color: #ed502eab;
     border-radius: 50px;
     color: white;
@@ -331,7 +331,7 @@ hr.separator {
     border-color: #b2b2b2;
 }
 
-.public-profile-header {
+.public-profile-header, .banner-header {
     padding: 30px 0;
     margin-bottom: 30px;
     width: 100%;
@@ -342,7 +342,7 @@ hr.separator {
     position: relative;
 }
 
-.public-profile-header .header-overlay {
+.public-profile-header .header-overlay, .banner-header .header-overlay {
     background-color: #2927278c;
     position: absolute;
     top: 0;
@@ -633,4 +633,32 @@ img.img-user-listing {
 
 .loader {
     width: 100%;
+}
+
+.avatar img {
+    cursor: pointer;
+}
+
+.banner-header {
+    height: 338px;
+}
+
+.banner-header h2.title {
+    margin-top: 170px;
+    color: white;
+    font-weight: 600;
+}
+
+.publish-mission-bg {
+    background-image: url("/coursefacile/images/ecommerce.jpg");
+}
+
+.mg-top-50 {
+    margin-top: 50px !important;
+}
+
+@media (min-width: 769px) {
+    .info-publish-home {
+        padding-top: 50px;
+    }
 }

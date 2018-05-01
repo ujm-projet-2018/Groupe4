@@ -13,94 +13,81 @@
     <%@ include file="parts/styles.jsp" %>
 
 </head>
-<body onload="completerFormulaire()">
+<body>
 
 <%@include file="parts/header.jsp" %>
+<div class="banner-header publish-mission-bg">
+    <div class="header-overlay"></div>
+    <div class="row">
+        <div class="col-md-12 text-center"><h2 class="title">Publier une mission</h2></div>
+    </div>
 
-<div id="global">
-    <h2 class="title">Publier une mission</h2>
-    <div class="container01">
-
-        <form name="publishForm" method="post" action="<%= prefixPath %>/Publish-Mission"
-              onsubmit="return verifierDonnees()">
-            <div class="row">
-                <div class="col-25">
-                    <label for="city">Ville / Code postal</label>
-                </div>
-                <div class="col-75">
-                    <div class='input-group'>
-                        <label for="city" class="control-label sr-only">Ville / Code postal</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="Ville / Code postal"
-                               autocomplete="off">
-                        <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-map-marker"></span>
-                                </span>
+</div>
+<div class="container">
+    <div class="row well">
+        <div class="col-md-12">
+            <form id="publish-mission" class="form-horizontal" name="publishForm" method="post"
+                  action="<%= prefixPath %>/Publish-Mission">
+                <div class="form-group">
+                    <label for="city" class="col-sm-2 control-label">Ville / Code postal</label>
+                    <div class="col-sm-10">
+                        <div class='input-group'>
+                            <input type="text" class="form-control" id="city" name="city"
+                                   placeholder="Ville / Code postal"
+                                   autocomplete="off">
+                        </div>
                     </div>
                 </div>
-                <input type="text" id="erreur1" name="erreur1" value="La ville n'est pas indiquer !">
-            </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="date">Date</label>
+                <div class="form-group">
+                    <label for="date" class="col-sm-2 control-label">Date</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="date" id="date"
+                               placeholder="Veuillez indiquer la date des courses JJ/MM/AAAA ..">
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-append date form_time" data-date="" data-date-format="hh:ii">
+                            <input class="span2 form-control" placeholder="le temps de les courses" size="16"
+                                   type="text"
+                                   value="">
+                            <span class="add-on"><i class="icon-th"></i></span>
                 </div>
-                <div class="col-29">
-                    <input type="text" name="date" id="date"
-                           placeholder="Veuillez indiquer la date des courses JJ/MM/AAAA ..">
-                </div>
-                <div id="select1" class="select">
-                    <select id="heure" name="heure" class="inline">
-                        <option value="0"> Heure</option>
-                    </select> h
-                </div>
-                <div id="select2" class="select">
-                    <select id="minute" name="minute">
-                        <option value="0"> Minute</option>
-                    </select> m
-                </div>
-                <input type="text" id="erreur2" name="erreur2" value="La date et/ou l'heure ne sont pas indiquer !">
             </div>
+                </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="supermarche">Supermarché</label>
+                <div class="form-group">
+                    <label for="supermarche" class="col-sm-2 control-label">Supermarché</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="supermarche" class="form-control" name="supermarche"
+                               placeholder="Veuillez indiquer le supermarché dont vous voulez faire vos courses ..">
+                    </div>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="supermarche" name="supermarche"
-                           placeholder="Veuillez indiquer le supermarché dont vous voulez faire vos courses ..">
-                </div>
-                <input type="text" id="erreur3" name="erreur3" value="Le supermarché n'est pas indiquez !">
-            </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="remuneration">Rémunération</label>
+                <div class="form-group">
+                    <label for="remuneration" class="col-sm-2 control-label">Rémunération</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="remuneration" name="remuneration" class="form-control"
+                               placeholder="Veuillez indiquer le montant que vous voulez payer pour le service ..">
+                    </div>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="remuneration" name="remuneration"
-                           placeholder="Veuillez indiquer le montant que vous voulez payer pour le service ..">
-                </div>
-                <input type="text" id="erreur4" name="erreur4" value="Le montant indiqué n'est pas valide !">
-            </div>
 
-            <div class="row">
-                <div class="col-25">
-                    <label for="description">Description</label>
-                </div>
-                <div class="col-75">
-                    <textarea id="description" name="description"
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                    <textarea id="description" class="form-control" name="description"
                               placeholder="Décrivez un peu votre demande de service, vous êtes flexible pour la marge horaire ? la composition de vos courses ? ..."
                               style="height:200px"></textarea>
+                    </div>
                 </div>
-                <input type="text" id="erreur5" name="erreur5"
-                       value="Il est très important de décrire votre demande de service !">
-            </div>
 
-            <div class="row">
-                <input type="submit" value="Valider">
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" class="btn btn-primary pull-left" value="Valider">
             </div>
+                </div>
 
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 

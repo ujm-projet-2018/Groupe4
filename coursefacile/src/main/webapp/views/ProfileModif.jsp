@@ -339,7 +339,14 @@
                             <div class="card-two">
                                 <header>
                                     <div class="avatar">
-                                        <img src="<%=imgUrl%>" alt="Profile picture "/>
+                                        <span><label class="ace-file-input ace-file-multiple"
+                                                     style="width: 100%;">
+                                            <input type="file" name="avatar">
+                                            <span class="ace-file-container">
+                                            <img src="<%=imgUrl%>" alt="Profile picture "/>
+                                            </span>
+                                            </label>
+                                        </span>
                                     </div>
                                 </header>
 
