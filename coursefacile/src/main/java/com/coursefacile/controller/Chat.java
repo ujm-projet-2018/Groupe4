@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 
 public class Chat extends HttpServlet {
@@ -64,6 +65,7 @@ public class Chat extends HttpServlet {
                     User receiver = userHandler.get(Integer.parseInt(pathParts[1]));
                     request.setAttribute("receiver", receiver);
                     List<Message> messages = messageHandler.getMessages(UserHandler.getLoggedInUser(request).getId(), receiver.getId(), 0, 10);
+                    Collections.reverse(messages);
                     request.setAttribute("messages", messages);
 
                     this.getServletContext().getRequestDispatcher("/views/chat.jsp").forward(request, response);

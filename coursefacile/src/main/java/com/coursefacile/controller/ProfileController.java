@@ -51,7 +51,8 @@ public class ProfileController extends HttpServlet {
                 request.getSession().setAttribute("fromUrl", request.getRequestURI());
                 response.sendRedirect(prefixPath + "/login");
             }
-        }
+        } else
+            response.sendRedirect(prefixPath + "/dashboard/profile");
 
     }
 

@@ -148,7 +148,7 @@ public class MessageHandler implements IMessageHandler {
         List<Message> messages = null;
         try {
             session.beginTransaction();
-            Query query = session.createSQLQuery("SELECT DISTINCT * FROM message WHERE (sender=:sender AND receiver=:receiver) OR (sender=:receiver AND receiver=:sender) ORDER BY date ASC").addEntity("message", Message.class);
+            Query query = session.createSQLQuery("SELECT DISTINCT * FROM message WHERE (sender=:sender AND receiver=:receiver) OR (sender=:receiver AND receiver=:sender) ORDER BY date DESC").addEntity("message", Message.class);
             query.setParameter("sender", sender);
             query.setParameter("receiver", receiver);
             query.setFirstResult(start);
