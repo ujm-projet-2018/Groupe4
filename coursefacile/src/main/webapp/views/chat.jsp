@@ -32,7 +32,7 @@
 
                     <div class="chat-about">
                         <div class="chat-with"><a
-                                href="<%=prefixPath%>/profil/${receiver.id}">${receiver.fname} ${receiver.lname}</a>
+                                href="<%=prefixPath%>/profile/${receiver.id}">${receiver.fname} ${receiver.lname}</a>
                         </div>
                     </div>
                 </div>

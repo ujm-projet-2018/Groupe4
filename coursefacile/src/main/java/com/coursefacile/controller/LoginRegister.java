@@ -53,7 +53,10 @@ public class LoginRegister extends HttpServlet {
             request.getSession().removeAttribute("user");
             response.sendRedirect(prefixPath);
         } else {
-            this.getServletContext().getRequestDispatcher("/views/loginRegister.jsp").forward(request, response);
+            if (!UserHandler.isLoggedIn(request))
+                this.getServletContext().getRequestDispatcher("/views/loginRegister.jsp").forward(request, response);
+            else
+                response.sendRedirect(prefixPath);
         }
 
     }

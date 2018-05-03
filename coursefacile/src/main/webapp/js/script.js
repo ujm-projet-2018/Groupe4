@@ -313,7 +313,7 @@ $(function () {
         return val < 10 ? "0" + val : val;
     }
 
-    $btnSendMsg = $('#send-message');
+    var $btnSendMsg = $('#send-message');
     if ($btnSendMsg.length) {
         var $chatHistory = $('.chat-history');
         $chatHistory.data("pag-start", 0);
