@@ -23,6 +23,7 @@ public class User {
     private boolean telChecked;
     private Date registerDate;
     private String birthDate;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private String image;
 

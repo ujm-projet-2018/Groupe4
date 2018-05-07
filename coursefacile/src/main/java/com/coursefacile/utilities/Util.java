@@ -201,7 +201,8 @@ public class Util {
 
         if (url.equals("*"))
             return tag;
-        url.replace("*", "[\\w\\d]*");
+
+        url = url.replace("*", "[\\w\\d]*");
         Pattern pattern = Pattern.compile(url, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(currentUrl);
         if (matcher.matches()) {

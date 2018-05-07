@@ -23,7 +23,7 @@
 <%-- Mission Listing styles --%>
 <%--<link rel="stylesheet" type="text/css" media="screen"--%>
 <%--href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">--%>
-<%= Util.includeCssOrJs(request, "/missions|/dashboard/messages", "/css/style_missionListing.css")%>
+<%= Util.includeCssOrJs(request, "/missions|/dashboard/messages|/mission/*", "/css/style_missionListing.css")%>
 <%-- always include this file last --%>
 <link href="<%= prefixPath %>/css/main.css" rel="stylesheet">
 

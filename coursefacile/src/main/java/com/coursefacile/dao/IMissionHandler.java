@@ -2,6 +2,8 @@ package com.coursefacile.dao;
 
 import com.coursefacile.model.Mission;
 
+import java.util.List;
+
 public interface IMissionHandler {
     public boolean add(Mission mission);
 
@@ -9,5 +11,7 @@ public interface IMissionHandler {
 
     public boolean delete(Mission mission);
 
-    public Mission get(Mission mission);
+    public Mission get(int missionId);
+
+    public List<Mission> relatedMissions(int cityId, int missionId);
 }

@@ -2,8 +2,7 @@
 <footer>
 <div class="footer" id="footer">
 	<div class="container-fluid">
-		<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
-			 data-wow-delay="0.2s">
+        <div class="col-md-4 wow fadeInUp">
 			<h2>Course Faciles</h2>
 			<p>In a elit in lorem congue varius. Sed nec arcu. Etiam sit
 				amet augue. Fusce fermen tum neque a rutrum varius odio pede

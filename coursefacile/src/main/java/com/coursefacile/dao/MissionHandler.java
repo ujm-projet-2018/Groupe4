@@ -1,7 +1,11 @@
 package com.coursefacile.dao;
 
 import com.coursefacile.model.Mission;
+import org.hibernate.Query;
 import org.hibernate.Session;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MissionHandler implements IMissionHandler {
     public boolean add(Mission mission) {
@@ -57,11 +61,12 @@ public class MissionHandler implements IMissionHandler {
         return check;
     }
 
-    public Mission get(Mission mission) {
+    public Mission get(int missionId) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
+        Mission mission = null;
         try {
             session.beginTransaction();
-            // TODO get Mission by mail and pwd
+            mission = session.get(Mission.class, missionId);
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -69,6 +74,29 @@ public class MissionHandler implements IMissionHandler {
         } finally {
             session.close();
         }
-        return null;
+        return mission;
+    }
+
+    public List<Mission> relatedMissions(int cityId, int missionId) {
+
+        List<Mission> missions = new ArrayList<Mission>();
+        Session session = SessionFactoryHelper.getSessionFactory().openSession();
+
+        try {
+            session.beginTransaction();
+            Query query = session.createSQLQuery("SELECT * FROM mission where city=:city AND isPublished = 1 AND id <>:mission").addEntity(Mission.class);
+            query.setParameter("city", cityId);
+            query.setParameter("mission", missionId);
+            query.setMaxResults(3);
+            missions = (List<Mission>) query.list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return missions;
     }
 }

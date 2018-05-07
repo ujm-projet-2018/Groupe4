@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+    <context-param>
+        <param-name>prefixPath</param-name>
+        <param-value>/coursefacile</param-value>
+    </context-param>
+    <context-param>
+        <param-name>adminEmail</param-name>
+        <param-value>abdelmoghit.madih@gmail.com</param-value>
+    </context-param>
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
@@ -11,10 +20,6 @@
         <servlet-name>Init</servlet-name>
         <url-pattern>/index</url-pattern>
     </servlet-mapping>
-    <context-param>
-        <param-name>prefixPath</param-name>
-        <param-value>/coursefacile</param-value>
-    </context-param>
     <servlet>
         <servlet-name>MissionListing</servlet-name>
         <servlet-class>com.coursefacile.controller.MissionListing</servlet-class>
@@ -95,4 +100,32 @@
         <url-pattern>/dashboard/send-messages/*</url-pattern>
         <url-pattern>/dashboard/send-messages-load/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>MissionDetail</servlet-name>
+        <servlet-class>com.coursefacile.controller.MissionDetail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MissionDetail</servlet-name>
+        <url-pattern>/mission/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EffectuerMission</servlet-name>
+        <servlet-class>com.coursefacile.controller.EffectuerMission</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EffectuerMission</servlet-name>
+        <url-pattern>/book/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Contact</servlet-name>
+        <servlet-class>com.coursefacile.controller.Contact</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Contact</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/views/erreur404.jsp</location>
+    </error-page>
 </web-app>

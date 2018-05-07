@@ -666,3 +666,20 @@ img.img-user-listing {
         padding-top: 50px;
     }
 }
+
+.related-mission {
+    height: 70px;
+    border-radius: 50%;
+}
+
+.pad-20 {
+    padding-top: 20px !important;
+}
+
+.no-mg {
+    margin: 0 !important;
+}
+
+.detail-mission-bg {
+    background-image: url("/coursefacile/images/grocery-shopping-e1457564196533.jpg");
+}

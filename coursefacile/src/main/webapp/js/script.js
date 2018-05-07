@@ -156,6 +156,39 @@ $(function () {
         });
 
     }
+    var $contactForm = $('#contact-form');
+    if ($contactForm.length) {
+        $contactForm.validate({
+            rules: {
+                name: {
+                    required: true,
+                },
+                tel: {
+                    required: true,
+                },
+                message: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                name: "Veuillez saisir votre nom",
+                tel: "Veuillez saisir votre numéro de telephone",
+                message: "Veuillez saisir votre message",
+                email: {
+                    required: "Veuillez saisir votre adresse email",
+                    email: "Veuillez sasir une adresse email correcte"
+                }
+            },
+            errorElement: "em",
+            errorPlacement: errorPlacement,
+            highlight: highlight,
+            unhighlight: unhighlight
+        });
+    }
     //set sidebar height same as container
     $('#sidebar-gauche').css('height', $('#body-dashboard').height());
 

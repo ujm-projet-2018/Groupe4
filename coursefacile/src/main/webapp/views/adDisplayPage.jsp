@@ -122,7 +122,7 @@
                                                                                                           height="140px"
                                                                                                           style="border-radius: 50%; vertical-align: middle; margin-top: 14px"
                                                                                                           src="${image}"></a>
-                                                    <span class="price">${post.price}<%out.println(" €");%> </span>  
+                                                    <span class="price">${post.price} €</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-10">
@@ -151,7 +151,9 @@
                                                             </ul>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <a class="btn btn-primary" href="#" style="margin-bottom: 12px">Voir detail</a>
+                                                            <a class="btn btn-primary"
+                                                               href="<%=prefixPath%>/mission/${post.id}"
+                                                               style="margin-bottom: 12px">Voir detail</a>
                                                         </div>
                                                     </div>
                                                 </div>

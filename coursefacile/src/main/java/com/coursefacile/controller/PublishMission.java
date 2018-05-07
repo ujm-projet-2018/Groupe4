@@ -57,6 +57,7 @@ public class PublishMission extends HttpServlet {
                 myMission.setPrice(price);
                 myMission.setDestination(supermarche);
                 myMission.setDescription(description);
+                myMission.setName(missionName);
 
                 if (!UserHandler.isLoggedIn(request)) {
                     Util.addGlobalAlert(Util.WARNING,
