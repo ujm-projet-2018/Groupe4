@@ -3,7 +3,7 @@
 <div class="footer" id="footer">
 	<div class="container-fluid">
         <div class="col-md-4 wow fadeInUp">
-			<h2>Course Faciles</h2>
+			<h2>Courses Faciles</h2>
 			<p>In a elit in lorem congue varius. Sed nec arcu. Etiam sit
 				amet augue. Fusce fermen tum neque a rutrum varius odio pede
 				ullamcorp-er tellus ut dignissim nisi risus non tortor. Aliquam

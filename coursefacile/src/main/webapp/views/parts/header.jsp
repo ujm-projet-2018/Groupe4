@@ -24,7 +24,7 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation"><a href="<%= prefixPath %>/Publish-Mission"
                                                        class="btn btn-default btn-publish-mission"><i
-                                    class="fa fa-cart-plus"></i>Publier une mission</a></li>
+                                    class="fa fa-cart-plus"></i>  Publier une mission</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/" class="active">Accueil</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/contact">Contact</a></li>
                             <%

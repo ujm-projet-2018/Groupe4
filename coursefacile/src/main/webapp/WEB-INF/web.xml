@@ -75,6 +75,38 @@
         <url-pattern>/dashboard</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>MesMissions</servlet-name>
+        <servlet-class>com.coursefacile.controller.MesMissions</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MesMissions</servlet-name>
+        <url-pattern>/dashboard/mesmissions</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MesReservations</servlet-name>
+        <servlet-class>com.coursefacile.controller.MesReservations</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MesReservations</servlet-name>
+        <url-pattern>/dashboard/mesreservations</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReservationDetail</servlet-name>
+        <servlet-class>com.coursefacile.controller.ReservationDetail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReservationDetail</servlet-name>
+        <url-pattern>/reservation/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AnnulerReservation</servlet-name>
+        <servlet-class>com.coursefacile.controller.AnnulerReservation</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AnnulerReservation</servlet-name>
+        <url-pattern>/annulerreservation/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>PublishMission</servlet-name>
         <servlet-class>com.coursefacile.controller.PublishMission</servlet-class>
     </servlet>

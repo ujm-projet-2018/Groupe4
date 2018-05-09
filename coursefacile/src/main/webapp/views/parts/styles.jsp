@@ -13,17 +13,17 @@
 <%= Util.includeCssOrJs(request, "/login", "/css/form-elements.css")%>
 <%= Util.includeCssOrJs(request, "/login", "/css/loginRegister.css")%>
 <%-- Dashboard styles --%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/calendar2/semantic.ui.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/calendar2/pignose.calendar.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/owl.carousel.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard", "/css/lib/owl.theme.default.min.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*", "/css/helper.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*", "/css/style_dashboard.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*", "/css/animate_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/css/lib/calendar2/semantic.ui.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/css/lib/calendar2/pignose.calendar.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/css/lib/owl.carousel.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/css/lib/owl.theme.default.min.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*", "/css/helper.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*", "/css/style_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*", "/css/animate_dashboard.css")%>
 <%-- Mission Listing styles --%>
 <%--<link rel="stylesheet" type="text/css" media="screen"--%>
 <%--href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">--%>
-<%= Util.includeCssOrJs(request, "/missions|/dashboard/messages|/mission/*", "/css/style_missionListing.css")%>
+<%= Util.includeCssOrJs(request, "/missions|/dashboard/messages|/mission/*|/reservation/*|/dashboard/mesmissions", "/css/style_missionListing.css")%>
 <%-- always include this file last --%>
 <link href="<%= prefixPath %>/css/main.css" rel="stylesheet">
 

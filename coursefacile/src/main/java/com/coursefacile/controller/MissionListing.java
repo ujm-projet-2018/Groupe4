@@ -46,7 +46,11 @@ import org.hibernate.criterion.Restrictions;
  */
 public class MissionListing extends HttpServlet {
 
-    private final int PAGE_SIZE = 10;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final int PAGE_SIZE = 10;
     Session session1 = SessionFactoryHelper.getSessionFactory().openSession();
     List<Mission> Lmissions = new ArrayList<Mission>();
 

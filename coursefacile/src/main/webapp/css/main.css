@@ -174,6 +174,7 @@ nav.navbar-static-top {
 #sidebar-gauche {
     position: absolute;
     margin-top: 55px;
+    left: 2px;
 }
 
 #titre-dashboard {
@@ -297,9 +298,16 @@ nav.navbar-static-top {
   }
 
   #infos ul li {
-    color: #5DD167;
     font-weight: 500;
     font-size: 1.2em;
+  }
+
+  #verifie {
+    color: #5DD167;
+  }
+
+  #nonverifie {
+  	color: red;
   }
 
  #infos hr {
@@ -682,4 +690,39 @@ img.img-user-listing {
 
 .detail-mission-bg {
     background-image: url("/coursefacile/images/grocery-shopping-e1457564196533.jpg");
+}
+
+#mesmissions {
+	margin-left: 80px;
+}
+
+#prix {
+	background: #d84949;
+	color: #ffffff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	padding: 10px 15px;
+	font-weight: 14px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+}
+
+#bouton_mes_missions {    
+	padding: 8px 20px;
+    background: #ED502E;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+}
+
+#fullwidth2 {
+	margin-left: 250px;
+	height: 536px;
+}
+
+#details_reservation {
+	background-image: url("/coursefacile/images/courses.png");
 }

@@ -140,20 +140,20 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <ul class="title-info">
-                                                                <li>Date publication<span><fmt:formatDate pattern = "yyyy-MM-dd" value = "${post.publishDate}" /></span></li>
+                                                                <li>Date publication <span><fmt:formatDate pattern = "yyyy-MM-dd" value = "${post.publishDate}" /></span></li>
                                                                 <li>Date mission  <span><fmt:formatDate pattern = "yyyy-MM-dd" value = "${post.missionDate}" /></span></li>
                                                             </ul>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <ul class="title-info">
-                                                                <li>Heure publication<span><fmt:formatDate type = "time" value = "${post.publishDate}" /> </span></li>
+                                                                <li>Heure publication <span><fmt:formatDate type = "time" value = "${post.publishDate}" /> </span></li>
                                                                 <li>Heure mission  <span><fmt:formatDate type = "time" value = "${post.missionDate}" /></span></li>
                                                             </ul>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <a class="btn btn-primary"
                                                                href="<%=prefixPath%>/mission/${post.id}"
-                                                               style="margin-bottom: 12px">Voir detail</a>
+                                                               style="margin-bottom: 12px">Voir détails</a>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -1,10 +1,9 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: pret
-  Date: 05/05/2018
-  Time: 14:47
-  To change this template use File | Settings | File Templates.
+  -- @author walid
+  --
+  --
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!DOCTYPE html>
@@ -12,13 +11,13 @@
 <head>
 
 <%@ include file="parts/meta.jsp"%>
-<title>Details mission | Courses Faciles</title>
+<title>Details réservation | Courses Faciles</title>
 <%@ include file="parts/styles.jsp"%>
 
 </head>
 <body>
 	<%@include file="parts/header.jsp"%>
-	<div class="banner-header detail-mission-bg no-mg">
+	<div class="banner-header detail-mission-bg no-mg" id="details_reservation">
 		<div class="header-overlay"></div>
 		<div class="row">
 			<div class="col-md-12 text-center">
@@ -54,6 +53,9 @@
 												<li>Date de publication <span> <fmt:formatDate
 															pattern="dd/MM/yyyy   HH:mm:ss"
 															value="${mission.publishDate}" /></span></li>
+												<li>Date de réservation <span> <fmt:formatDate
+															pattern="dd/MM/yyyy   HH:mm:ss"
+															value="${mission.reservationDate}" /></span></li>
 											</ul>
 										</div>
 									</div>
@@ -65,10 +67,10 @@
 									<%
 										User user = UserHandler.getLoggedInUser(request);
 									%>
-									<c:if test="${user.id ne mission.owner.id}">
+									<c:if test="${mission.published}">
 										<div class="share">
 											<a class="btn btn-primary"
-												href="<%=prefixPath%>/book/${mission.id}">Effectuer cette mission</a>
+												href="<%=prefixPath%>/annulerreservation/${mission.id}">Annuler cette réservation</a>
 										</div>
 									</c:if>
 								</div>
@@ -110,39 +112,6 @@
 											</div></li>
 									</ul>
 								</div>
-								<!-- End sidebar-box our-box -->
-
-
-								<!-- sidebar-box product_list_wg -->
-								<c:if test="${not empty relatedMissions}">
-									<div class="sidebar-box">
-										<h3>Mission dans la même ville</h3>
-										<ul class="product_list_wg">
-
-											<c:forEach var="rm" items="${relatedMissions}">
-												<c:set var="rmImgUrl"
-													value="/coursefacile/images/people.png"></c:set>
-												<c:if test="${not empty rm.owner.image}">
-													<c:set var="rmImgUrl" value="${rm.owner.image}"></c:set>
-												</c:if>
-												<li>
-													<div class="clearfix">
-														<a title="" href="<%=prefixPath%>/mission/${rm.id}"> <img
-															alt="" class="thumbnail_pic related-mission"
-															src="${rmImgUrl}"> ${rm.name}
-														</a>
-														<div class="amount">${rm.price}€</div>
-													</div>
-												</li>
-											</c:forEach>
-										</ul>
-									</div>
-								</c:if>
-
-								<!-- End sidebar-box product_list_wg -->
-
-								<!-- sidebar-box searchbox -->
-								<!-- End sidebar-box searchbox -->
 
 							</div>
 						</div>
