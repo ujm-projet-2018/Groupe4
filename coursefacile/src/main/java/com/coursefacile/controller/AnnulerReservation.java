@@ -55,7 +55,7 @@ public class AnnulerReservation extends HttpServlet {
 			if (UserHandler.getLoggedInUser(request).getId() == idM) {
 				IMissionHandler missionHandler = new MissionHandler();
 				Mission mission = missionHandler.get(idM);
-				mission.setPublished(false);
+				mission.setCustomer(null);
 				missionHandler.update(mission);
 			}
 			Util.addGlobalAlert(Util.SUCCESS, "Réservation annulée avec succès!");

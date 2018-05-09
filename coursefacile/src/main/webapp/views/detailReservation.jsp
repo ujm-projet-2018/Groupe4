@@ -17,7 +17,8 @@
 </head>
 <body>
 	<%@include file="parts/header.jsp"%>
-	<div class="banner-header detail-mission-bg no-mg" id="details_reservation">
+	<div class="banner-header detail-mission-bg no-mg"
+		id="details_reservation">
 		<div class="header-overlay"></div>
 		<div class="row">
 			<div class="col-md-12 text-center">
@@ -67,10 +68,11 @@
 									<%
 										User user = UserHandler.getLoggedInUser(request);
 									%>
-									<c:if test="${mission.published}">
+									<c:if test="${mission.customer.id eq user.id}">
 										<div class="share">
 											<a class="btn btn-primary"
-												href="<%=prefixPath%>/annulerreservation/${mission.id}">Annuler cette réservation</a>
+												href="<%=prefixPath%>/annulerreservation/${mission.id}">Annuler
+												cette réservation</a>
 										</div>
 									</c:if>
 								</div>

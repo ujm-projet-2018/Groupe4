@@ -720,7 +720,7 @@ img.img-user-listing {
 
 #fullwidth2 {
 	margin-left: 250px;
-	height: 536px;
+	min-height: 536px;
 }
 
 #details_reservation {

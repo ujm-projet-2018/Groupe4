@@ -88,7 +88,7 @@
 											</div>
 											<div class="col-md-10">
 												<div class="list-right-info">
-													<h3>${post.owner.lname} ${post.owner.fname}</h3>
+													<h3>${post.name}</h3>
 													<p>${post.description}</p>
 													<div class="row">
 														<div class="col-md-3">
