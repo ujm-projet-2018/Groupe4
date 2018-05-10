@@ -298,44 +298,41 @@ $(function () {
             highlight: highlight,
             unhighlight: unhighlight
         });
-        $profile_form.find('#confirm').click(function (e) {
+        // $.ajax({
+        //     method: 'POST',
+        //     url: '/coursefacile/confirm-pwd',
+        //     data: {confirmationPwd: result},
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         console.log("kaka");
+        //         if (data.length && data[0]) {
+        //             $('#check-submit').val(data[1]);
+        //             $profile_form.submit();
+        //         }
+        //     }
+        // });
+        $('#confirm').click(function (e) {
             e.preventDefault();
-            if ($profile_form.valid())
-                bootbox.prompt({
-                    title: 'Veuillez entrer votre mot de passe actuel',
-                    placeholder: 'mot de passe',
-                    inputType: 'password',
-                    size: 'small',
-                    buttons: {
-                        confirm: {
-                            label: 'Confirmer',
-                            className: 'btn-success'
-                        },
-                        cancel: {
-                            label: 'Annuler',
-                            className: 'btn-danger'
-                        }
-                    },
-                    callback: function (result) {
-                        if (result === null) {
-                        } else {
-                            $.ajax({
-                                method: 'POST',
-                                url: '/coursefacile/confirm-pwd',
-                                data: {confirmationPwd: result},
-                                dataType: 'json',
-                                success: function (data) {
-                                    console.log("kaka");
-                                    if (data.length && data[0]) {
-                                        $('#check-submit').val(data[1]);
-                                        $profile_form.submit();
-                                    }
-                                }
-                            });
+            var $pwdConfirm = $('#pwd-confirm');
+            if ($profile_form.valid()) {
+                $.ajax({
+                    method: 'POST',
+                    url: '/coursefacile/confirm-pwd',
+                    data: {confirmationPwd: $pwdConfirm.val()},
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("kaka");
+                        if (data.length && data[0]) {
+                            $('#check-submit').val(data[1]);
+                            $profile_form.submit();
+                        } else if (!data[0]) {
+                            $pwdConfirm.parent().find('.pwd-error').remove();
+                            $pwdConfirm.parent().append('<div class="alert alert-danger pwd-error" role="alert">Mot de passe incorrecte</div>');
                         }
                     }
                 });
-            else {
+
+            } else {
                 $(window).scrollTop($("em.error:first").offset().top - 200);
             }
         })

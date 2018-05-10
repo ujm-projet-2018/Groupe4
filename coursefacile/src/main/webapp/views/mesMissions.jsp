@@ -62,7 +62,7 @@
             Session session1 = (Session) request.getAttribute("session1");
 
         	%>
-			<div class="container" id="mesmissions" style="margin-top: 12px">
+            <div class="container" style="margin-top: 12px">
 				<br><br>
 				<div class="row">
 					<div class="grid_list_product st2">
@@ -71,8 +71,8 @@
 								<li style="display: block;"
 									class="span12 first house offices Residential">
 									<div class="product-item">
-										<div class="row">
-											<div class="col-md-2">
+                                        <div class="row mg-top-10">
+                                            <div class="col-md-offset-1 col-md-2">
 												<div class="imagewrapper">
 													<c:set var="image" value="/coursefacile/images/people.png"></c:set>
 													<c:if test="${not empty post.owner.image}">
@@ -85,10 +85,10 @@
 														€</span>
 												</div>
 											</div>
-											<div class="col-md-10">
+                                            <div class="col-md-8">
 												<div class="list-right-info">
 													<h3>${post.name}</h3>
-													<p>${post.description}</p>
+                                                    <p class="text-justify">${post.description}</p>
 													<div class="row">
 														<div class="col-md-3">
 															<ul class="title-info">
@@ -114,12 +114,15 @@
 																			type="time" value="${post.missionDate}" /></span></li>
 															</ul>
 														</div>
-														<div class="col-md-2">
-															<a class="btn btn-primary" id="bouton_mes_missions"
-																href="<%=prefixPath%>/mission/${post.id}"
-																style="margin-bottom: 12px">Voir détails</a>
-														</div>
-													</div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <a class="btn btn-primary" id="bouton_mes_missions"
+                                                               href="<%=prefixPath%>/mission/${post.id}"
+                                                               style="margin-bottom: 12px">Voir détails</a>
+                                                        </div>
+                                                    </div>
 												</div>
 											</div>
 										</div>

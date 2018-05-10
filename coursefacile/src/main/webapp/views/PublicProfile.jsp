@@ -32,7 +32,7 @@
                     <c:set var="imgUrl" value="${user2.image}"></c:set>
                 </c:if>
                 <img src="${imgUrl}" name="aboutme" width="140" height="140" class="img-circle"/>
-                <div class="lead">${user2.lname}</br> ${user2.fname}
+                <div class="lead color-white">${user2.lname} ${user2.fname}
                 </div>
 
 
@@ -51,6 +51,24 @@
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="progress-bar-profil-punlic">
+                <h3 class="text-primary text-center">Niveau
+                    d'expérience</h3>
+                <ul class="progressbar">
+                    <li <c:if test="${score ge 0}">class="activated"</c:if>>Débutant</li>
+                    <li <c:if test="${score ge 2}">class="activated"</c:if>>Habitué</li>
+                    <li <c:if test="${score ge 3}">class="activated"</c:if>>Confirmé</li>
+                    <li <c:if test="${score ge 4}">class="activated"</c:if>>Expert</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 <div class="container well public-profile-body">
     <!-- Start Page Content -->
@@ -96,7 +114,7 @@
                     <label class="col-sm-4 control-label">Date d'enregistrement</label>
                     <div class="col-sm-8">
 
-                        <p class="form-control-static"><fmt:formatDate pattern="dd-MM-yyyy"
+                        <p class="form-control-static"><fmt:formatDate pattern="dd/MM/yyyy"
                                                                        value="${user2.registerDate}"/></p>
                     </div>
                 </div>

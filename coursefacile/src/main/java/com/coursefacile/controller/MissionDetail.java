@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 public class MissionDetail extends HttpServlet {
@@ -39,7 +40,7 @@ public class MissionDetail extends HttpServlet {
 
             IMissionHandler missionHandler = new MissionHandler();
             Mission mission = missionHandler.get(idM);
-            if (mission != null && mission.isPublished()) {
+            if (mission != null && mission.isPublished() && mission.getMissionDate().compareTo(new Date()) >= 0) {
                 request.setAttribute("mission", mission);
                 List<Mission> missions = missionHandler.relatedMissions(mission.getCity().getId(), mission.getId());
                 request.setAttribute("relatedMissions", missions);

@@ -1,9 +1,11 @@
 package com.coursefacile.dao;
 
 import com.coursefacile.model.Mission;
+import com.coursefacile.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,5 +100,29 @@ public class MissionHandler implements IMissionHandler {
         }
 
         return missions;
+    }
+
+    public int getScore(User user) {
+
+        Session session = SessionFactoryHelper.getSessionFactory().openSession();
+        int score = 0;
+        try {
+            session.beginTransaction();
+            Query query = session.createSQLQuery("SELECT count(*) from mission WHERE owner = :idU OR customer = :idU");
+            query.setParameter("idU", user.getId());
+            score = ((BigInteger) query.uniqueResult()).intValue();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        if (user.getAddress() == null || user.getTelephone() == null || user.getDescription() == null || user.getAddress().length() == 0 || !user.isEmailChecked() || user.getTelephone().length() == 0 || user.getDescription().length() == 0)
+            score = 0;
+        else
+            score /= Mission.SCORE_MIN;
+
+        return score;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 @Entity
 @Table(name = "mission")
 public class Mission {
+    public static final int SCORE_MIN = 10;
     @Id
     @GeneratedValue
     int id;

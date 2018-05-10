@@ -2,11 +2,11 @@
 #publier-mission {
     margin-top: 20px;
     background-color: DodgerBlue;
-    border: none; 
-    color: white; 
-    padding: 12px 16px; 
-    font-size: 16px; 
-    cursor: pointer; 
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
     border-radius: 18px;
 }
 
@@ -665,6 +665,13 @@ img.img-user-listing {
     background-image: url("/coursefacile/images/ecommerce.jpg");
 }
 
+.mg-top-10 {
+    margin-top: 10px !important;
+}
+
+.mg-top-20 {
+    margin-top: 20px !important;
+}
 .mg-top-50 {
     margin-top: 50px !important;
 }
@@ -710,7 +717,7 @@ img.img-user-listing {
 	font-weight: 700;
 }
 
-#bouton_mes_missions {    
+#bouton_mes_missions {
 	padding: 8px 20px;
     background: #ED502E;
     color: #fff;
@@ -725,4 +732,15 @@ img.img-user-listing {
 
 #details_reservation {
 	background-image: url("/coursefacile/images/courses.png");
+}
+
+.progress-bar-profil-punlic .progressbar li:after :not .progress-bar-profil-punlic .progressbar li.activated {
+    width: 83%;
+    height: 2px;
+    content: '';
+    position: absolute;
+    background-color: #67757c;
+    top: 15px;
+    left: -43%;
+    z-index: unset;
 }

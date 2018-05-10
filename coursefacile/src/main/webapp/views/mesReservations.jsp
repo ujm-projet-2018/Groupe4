@@ -54,17 +54,7 @@
 			<%@ include file="parts/sidebar_dashboard.jsp"%>
 
 			<!-- Container fluid  -->
-
-			<%
-            List<Mission> Lmissions = (ArrayList< Mission>) request.getAttribute("Lmissions");
-            SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd");
-            SimpleDateFormat dt2 = new SimpleDateFormat("hh:mm");
-            Session session1 = (Session) request.getAttribute("session1");
-
-        	%>
-        	
-			<div class="container" id="mesmissions" style="margin-top: 12px">
-			<br><br>
+            <div class="container-fluid">
 				<div class="row">
 					<div class="grid_list_product st2">
 						<ul class="products" id="able-list">
@@ -72,8 +62,8 @@
 								<li style="display: block;"
 									class="span12 first house offices Residential">
 									<div class="product-item">
-										<div class="row">
-											<div class="col-md-2">
+                                        <div class="row mg-top-20">
+                                            <div class="col-md-offset-1 col-md-2">
 												<div class="imagewrapper">
 													<c:set var="image" value="/coursefacile/images/people.png"></c:set>
 													<c:if test="${not empty post.owner.image}">
@@ -86,33 +76,34 @@
 														€</span>
 												</div>
 											</div>
-											<div class="col-md-10">
+                                            <div class="col-md-8">
 												<div class="list-right-info">
 													<h3>${post.name}</h3>
-													<p>${post.description}</p>
+                                                    <p class="text-justify">${post.description}</p>
 													<div class="row">
 														<div class="col-md-3">
 															<ul class="title-info">
-																<li>Ville <span> ${post.city.name}
-																		${post.city.postalCode}</span>
+                                                                <li>Ville: <span> ${post.city.name}</span>
 																</li>
-																<li>Destination <span>${post.destination}</span></li>
+                                                                <li>Destination: <span>${post.destination}</span></li>
 															</ul>
 														</div>
 														<div class="col-md-4">
 															<ul class="title-info">
-																<li>Date réservation <span><fmt:formatDate
+                                                                <li>Date réservation: <span><fmt:formatDate
 																			pattern="yyyy-MM-dd" value="${post.reservationDate}" /></span></li>
-																<li>Date mission <span><fmt:formatDate
+                                                                <li>Date mission: <span><fmt:formatDate
 																			pattern="yyyy-MM-dd" value="${post.missionDate}" /></span></li>
 															</ul>
 														</div>
 														<div class="col-md-4">
 															<ul class="title-info">
-																<li>Heure réservation <span><fmt:formatDate
-																			type="time" value="${post.reservationDate}" /> </span></li>
-																<li>Heure mission <span><fmt:formatDate
-																			type="time" value="${post.missionDate}" /></span></li>
+                                                                <li>Heure réservation: <span><fmt:formatDate
+                                                                        pattern="HH:mm"
+                                                                        type="time" value="${post.reservationDate}" /> </span></li>
+                                                                <li>Heure mission: <span><fmt:formatDate
+                                                                        pattern="HH:mm" type="time"
+                                                                        value="${post.missionDate}"/></span></li>
 															</ul>
 														</div>
 														<div class="col-md-2">

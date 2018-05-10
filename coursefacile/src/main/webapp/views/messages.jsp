@@ -122,9 +122,6 @@
 											href="${url}start=${ param.start - 1 ge 1 ? param.start-1 : 1}"><img
 												alt="" src="<%=prefixPath%>/images/pre1.png"></a></li>
 									</c:if>
-									<%
-										System.out.println(request.getParameterNames().hasMoreElements());
-									%>
 									<c:forEach var="i" begin="1" end="${pagination}">
 										<li><a
 											<c:if test="${param.start eq i}">class="current"</c:if>
