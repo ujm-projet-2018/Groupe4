@@ -83,7 +83,7 @@
                     </div>
                     <div class="col-md-4" style="margin-top: 22px">
                         <div class='input-group' >
-                            <input type='text' class="form-control" placeholder="prix" id="prix" name="prix" />
+                            <input type='text' class="form-control" placeholder="prix min" id="prix" name="prix" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-euro"></span>
                             </span>
@@ -105,8 +105,11 @@
               <div class="container" style="margin-top: 12px">
                 <div class="row">
                     <div class="grid_list_product st2">
-                        <ul class="products" id="able-list">
+                        <ul class="products" id="able-list">                           
+                            <c:if test="${not empty Lmissions}">
+                            <% int i=0;%>
                             <c:forEach items="${Lmissions}" var="post">
+                                <%i++;%>
                                 <li style="display: block;" class="span12 first house offices Residential">
                                     <div class="product-item">
                                         <div class="row">
@@ -116,37 +119,32 @@
                                                     <c:if test="${not empty post.owner.image}">
                                                         <c:set var="image" value="${ post.owner.image}"></c:set>
                                                     </c:if>
-                                                    <a href="/coursefacile/profile/${post.owner.id}"><img alt=""
-                                                                                                          class="img-circle"
-                                                                                                          width="140px"
-                                                                                                          height="140px"
-                                                                                                          style="border-radius: 50%; vertical-align: middle; margin-top: 14px"
-                                                                                                          src="${image}"></a>
-                                                    <span class="price">${post.price} €</span>
+                                                    <a href="/coursefacile/profile/${post.owner.id}"><img alt="" accesskey=""class="img-circle" width="140px" height="140px" style="border-radius: 50%; vertical-align: middle; margin-top: 14px" src="${image}"></a>
+                                                    <span class="price">${post.price}<%out.println(" €");%> </span>  
                                                 </div>
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="list-right-info">
-                                                    <h3>${post.owner.fname}  ${post.owner.lname}</h3>
+                                                    <h3>${post.description}</h3>
                                                     <p>
-                                                        ${post.description}
+                                                        ${post.owner.fname}  ${post.owner.lname}
                                                     </p>
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <ul class="title-info">
-                                                                <li>Ville <span> ${post.city.name}  ${post.city.postalCode}</span> </li>
+                                                                <li>Ville <span> ${post.city.name}</span> </li>
                                                                 <li>Destination <span>${post.destination}</span></li>
                                                             </ul>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <ul class="title-info">
-                                                                <li>Date publication <span><fmt:formatDate pattern = "yyyy-MM-dd" value = "${post.publishDate}" /></span></li>
+                                                                <li>Date publication<span><fmt:formatDate pattern = "yyyy-MM-dd" value = "${post.publishDate}" /></span></li>
                                                                 <li>Date mission  <span><fmt:formatDate pattern = "yyyy-MM-dd" value = "${post.missionDate}" /></span></li>
                                                             </ul>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <ul class="title-info">
-                                                                <li>Heure publication <span><fmt:formatDate type = "time" value = "${post.publishDate}" /> </span></li>
+                                                                <li>Heure publication<span><fmt:formatDate type = "time" value = "${post.publishDate}" /> </span></li>
                                                                 <li>Heure mission  <span><fmt:formatDate type = "time" value = "${post.missionDate}" /></span></li>
                                                             </ul>
                                                         </div>
@@ -165,29 +163,40 @@
                         </ul>
                     </div>
                 </div>
-                <c:if test="${not empty paginationMax and paginationMax ne 0}">
-                <div class="mx-auto">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="<%= ((String)request.getAttribute("currentUrl"))+1%>" tabindex="-1">Previous</a>
-                            </li>
-                            <% int cpt=1;%>
-                            <c:forEach  var="t" begin="1" end="${paginationMax-1}">
-                            <li class="page-item">
-                                <a class="page-link" href="<%= ((String)request.getAttribute("currentUrl"))+(cpt+1)%>">
-                                    <%=cpt++%>
-                                </a>
-                            </li>
-                             </c:forEach>
-                            <li class="page-item">
-                                <a class="page-link" href="<%= ((String)request.getAttribute("currentUrl"))+2%>">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    
-                </div>
-                </c:if>
+               
+                            <div class="grid_full_width">
+                <div class="page-ination">
+                        <div class="page-in">
+                            <ul class="clearfix">
+                                <c:if test="${paginationMax gt 1}">
+                                    <li><a href="${currentUrl}start=1"><img alt="" src="<%=prefixPath%>/images/pre2.png"></a>
+                                    </li>
+                                    <li><a href="${currentUrl}start=${ param.start - 1 ge 1 ? param.start-1 : 1}"><img alt=""
+                                                                                                                src="<%=prefixPath%>/images/pre1.png"></a>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="i" begin="1" end="${paginationMax}">
+                                    <li><a
+                                            <c:if test="${param.start eq i}">class="current"</c:if>
+                                            href="${currentUrl}start=${i}">${i}</a></li>
+                                </c:forEach>
+                                <c:if test="${paginationMax gt 1}">
+                                    <li>
+                                        <a href="${currentUrl}start=${ param.start + 1 le paginationMax ? param.start+1 : paginationMax}"><img
+                                                alt="" src="<%=prefixPath%>/images/next1.png"></a></li>
+                                    <li><a href="${currentUrl}start=${paginationMax}"><img alt=""
+                                                                                 src="<%=prefixPath%>/images/next2.png"></a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </div>
+                    </c:if>
+                    <c:if test="${empty Lmissions}">
+                                
+                                <p class="lead">Votre recherche n'a donné aucun résultat</p>
+                    </c:if>           
+                    </div>
+       </div>
             </div>
         </div>
         <%@ include file="parts/footer.jsp" %>
