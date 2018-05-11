@@ -71,8 +71,8 @@ public class MissionListing extends HttpServlet {
 
         }
         System.out.println(request.getParameter("city_id"));
-        str = str.split("page")[0];
-        request.setAttribute("currentUrl", str );
+        str = str.split("start")[0];
+        request.setAttribute("currentUrl", str +"start=" );
         try {
             SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat d2 = new SimpleDateFormat("yyyy-MM-dd");

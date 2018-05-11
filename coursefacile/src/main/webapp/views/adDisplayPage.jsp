@@ -125,9 +125,12 @@
                                             </div>
                                             <div class="col-md-10">
                                                 <div class="list-right-info">
-                                                    <h3>${post.description}</h3>
-                                                    <p>
+                                                    <h3>${post.name}</h3>
+                                                    <p class="lead">
                                                         ${post.owner.fname}  ${post.owner.lname}
+                                                    </p>
+                                                    <p>
+                                                        ${post.description}
                                                     </p>
                                                     <div class="row">
                                                         <div class="col-md-3">
@@ -169,22 +172,22 @@
                         <div class="page-in">
                             <ul class="clearfix">
                                 <c:if test="${paginationMax gt 1}">
-                                    <li><a href="${currentUrl}start=1"><img alt="" src="<%=prefixPath%>/images/pre2.png"></a>
+                                    <li><a href="${currentUrl}1"><img alt="" src="<%=prefixPath%>/images/pre2.png"></a>
                                     </li>
-                                    <li><a href="${currentUrl}start=${ param.start - 1 ge 1 ? param.start-1 : 1}"><img alt=""
+                                    <li><a href="${currentUrl}${ param.start - 1 ge 1 ? param.start-1 : 1}"><img alt=""
                                                                                                                 src="<%=prefixPath%>/images/pre1.png"></a>
                                     </li>
                                 </c:if>
                                 <c:forEach var="i" begin="1" end="${paginationMax}">
                                     <li><a
                                             <c:if test="${param.start eq i}">class="current"</c:if>
-                                            href="${currentUrl}start=${i}">${i}</a></li>
+                                            href="${currentUrl}${i}">${i}</a></li>
                                 </c:forEach>
                                 <c:if test="${paginationMax gt 1}">
                                     <li>
-                                        <a href="${currentUrl}start=${ param.start + 1 le paginationMax ? param.start+1 : paginationMax}"><img
+                                        <a href="${currentUrl}${ param.start + 1 le paginationMax ? param.start+1 : paginationMax}"><img
                                                 alt="" src="<%=prefixPath%>/images/next1.png"></a></li>
-                                    <li><a href="${currentUrl}start=${paginationMax}"><img alt=""
+                                    <li><a href="${currentUrl}${paginationMax}"><img alt=""
                                                                                  src="<%=prefixPath%>/images/next2.png"></a>
                                     </li>
                                 </c:if>
