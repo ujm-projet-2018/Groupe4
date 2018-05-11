@@ -116,7 +116,11 @@
 <script src="<%=prefixPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script src="<%=prefixPath%>/js/bootstrap-datetimepicker.fr.js"></script>
 <script src="<%=prefixPath%>/js/bootbox.min.js"></script>
+<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0r_j4uSAKM-lQxERp_80MfGd9QwRISfM&libraries=places">
+</script>
 <script type="text/javascript" src="<%=prefixPath%>/js/script.js"></script>
+
 
 
 
