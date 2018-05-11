@@ -515,5 +515,111 @@ $(function () {
             maxView: 1,
             forceParse: 0
         });
+    /**
+     * map itinerary
+     */
+    var $getItinerary = $('#get-itinerary');
+    if ($getItinerary.length) {
+        var directionsDisplay;
+        var directionsService;
+        var travelMode = 'WALKING';
+        var currentPosition;
+
+        function initMap() {
+            directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsService = new google.maps.DirectionsService;
+
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: currentPosition,
+                zoom: 15
+            });
+            directionsDisplay.setMap(map);
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: currentPosition,
+                // radius: 10000,
+                type: ['store'],
+                keyword: $getItinerary.data('key-word'),
+                rankBy: google.maps.places.RankBy.DISTANCE
+            }, callback);
+
+
+        }
+
+        function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                // for (var i = 0; i < results.length; i++) {
+                createMarker(results[0]);
+                // }
+            }
+        }
+
+        function createMarker(place) {
+            var directionServiceRoute = {
+                origin: currentPosition,
+                destination: place.geometry.location,
+                travelMode: travelMode,
+                avoidFerries: true,
+                avoidHighways: true,
+                avoidTolls: true
+            };
+            if (travelMode == 'TRANSIT') {
+                directionServiceRoute = {
+                    origin: currentPosition,
+                    destination: place.geometry.location,
+                    travelMode: travelMode,
+                    transitOptions: {
+                        modes: ['BUS', 'RAIL', 'SUBWAY', 'TRAIN', 'TRAM'],
+                        routingPreference: 'LESS_WALKING'
+                    }
+                }
+            }
+            directionsService.route(directionServiceRoute, function (response, status) {
+                if (status === 'OK') {
+                    console.log(response);
+                    directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+            infowindow.setContent(place.name);
+            infowindow.open(map, marker);
+
+        }
+
+
+        function buildMapInit() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(mapBuilder);
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function mapBuilder(position) {
+            currentPosition = {lat: position.coords.latitude, lng: position.coords.longitude};
+            initMap();
+            console.log(position)
+            // x.innerHTML = "Latitude: " + position.coords.latitude +
+            //     "<br>Longitude: " + position.coords.longitude;
+        }
+
+        $getItinerary.on('click', function () {
+            buildMapInit();
+        });
+        $('.travel-mode').on('click', function () {
+            $('#map').html('');
+            travelMode = $(this).data('travel-mode');
+            buildMapInit();
+        });
+    }
+
 
 });

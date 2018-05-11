@@ -744,3 +744,12 @@ img.img-user-listing {
     left: -43%;
     z-index: unset;
 }
+
+.btn-default.travel-mode {
+    background-color: #f8f8f8;
+    font-size: 14px;
+}
+
+#map {
+    width: 100%;
+}
