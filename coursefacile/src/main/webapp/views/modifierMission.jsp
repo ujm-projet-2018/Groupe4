@@ -43,7 +43,7 @@
                     <div class="col-sm-10">
                         <div class='input-group'>
                             <input type="text" class="form-control" id="city" name="city"
-                                    value="${mission.city.name}"
+                                   value="${mission.city.name}"
                                    autocomplete="off">
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                     <label for="date" class="col-sm-2 control-label">Date</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="date" id="date"
-                                value="${mission.missionDate}">
+                               value="${mission.missionDate}">
                     </div>
                     <div class="col-sm-4">
                         <div class="input-append date form_time" data-date="" data-date-format="hh:ii">
@@ -62,8 +62,8 @@
                                    type="text"
                                    value="">
                             <span class="add-on"><i class="icon-th"></i></span>
-                </div>
-            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -93,7 +93,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <input type="submit" class="btn btn-primary pull-left" value="Valider">
-            </div>
+                    </div>
                 </div>
 
             </form>
