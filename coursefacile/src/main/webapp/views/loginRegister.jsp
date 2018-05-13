@@ -11,7 +11,7 @@
 <html lang="fr">
 <head>
     <%@ include file="parts/meta.jsp" %>
-    <title>Course faciles | connéxion ou inscription</title>
+    <title>Course faciles | connexion ou inscription</title>
     <%@ include file="parts/styles.jsp" %>
 
 </head>
