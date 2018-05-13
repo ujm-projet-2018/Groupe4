@@ -27,6 +27,7 @@
     <servlet-mapping>
         <servlet-name>MissionListing</servlet-name>
         <url-pattern>/missions</url-pattern>
+        <url-pattern>/get-missions</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>LoginRegister</servlet-name>

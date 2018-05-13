@@ -6,7 +6,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MissionHandler implements IMissionHandler {
@@ -124,5 +126,45 @@ public class MissionHandler implements IMissionHandler {
             score /= Mission.SCORE_MIN;
 
         return score;
+    }
+
+    public List<Mission> getMissions(String cityId, String date, String from, String to, String minP, String maxP) {
+        List<Mission> missions = new ArrayList<Mission>();
+        if (cityId.length() != 0 && date.length() != 0) {
+            Session session = SessionFactoryHelper.getSessionFactory().openSession();
+            try {
+                SimpleDateFormat toDb = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat fromHtml = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                session.beginTransaction();
+                Date fromParsedDate = new Date();
+                Date toParsedDate;
+                cityId = "city=" + cityId;
+                String fromTo = " AND missionDate ";
+                String price = "";
+                if (from.length() != 0)
+                    fromParsedDate = fromHtml.parse(date + " " + from);
+                else
+                    fromParsedDate = fromHtml.parse(date + " 00:00");
+                if (to.length() != 0)
+                    toParsedDate = fromHtml.parse(date + " " + to);
+                else
+                    toParsedDate = fromHtml.parse(date + " 23:59");
+                fromTo += " BETWEEN '" + toDb.format(fromParsedDate) + "' AND '" + toDb.format(toParsedDate) + "'";
+
+                if (minP.length() != 0 && maxP.length() != 0) {
+                    price = " AND Price BETWEEN " + minP + " AND " + maxP;
+                }
+                System.out.println("SELECT * from mission WHERE " + cityId + fromTo);
+                Query query = session.createSQLQuery("SELECT * from mission WHERE " + cityId + fromTo + price).addEntity(Mission.class);
+                missions = (List<Mission>) query.list();
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                e.printStackTrace();
+            } finally {
+                session.close();
+            }
+        }
+        return missions;
     }
 }

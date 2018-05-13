@@ -744,14 +744,27 @@ img.img-user-listing {
     left: -43%;
     z-index: unset;
 }
-.list-right-info p.lead{
-    font-size: 14px;
 
+.list-right-info p.lead {
+    font-size: 14px;
+}
 .btn-default.travel-mode {
     background-color: #f8f8f8;
     font-size: 14px;
 }
 
-#map {
+#map, #map-missions {
     width: 100%;
+}
+
+#map-missions {
+    min-height: 500px;
+}
+
+#amount {
+    padding: 0;
+}
+
+.mg-top-5 {
+    margin-top: 5px !important;
 }

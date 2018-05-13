@@ -92,8 +92,7 @@
 													<div class="row">
 														<div class="col-md-3">
 															<ul class="title-info">
-																<li>Ville <span> ${post.city.name}
-																		${post.city.postalCode}</span>
+                                                                <li>Ville <span> ${post.city.name}</span>
 																</li>
 																<li>Destination <span>${post.destination}</span></li>
 															</ul>

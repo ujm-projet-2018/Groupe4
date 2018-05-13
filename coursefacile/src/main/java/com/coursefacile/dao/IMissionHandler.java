@@ -17,4 +17,6 @@ public interface IMissionHandler {
     List<Mission> relatedMissions(int cityId, int missionId);
 
     int getScore(User user);
+
+    List<Mission> getMissions(String cityId, String date, String from, String to, String minP, String maxP);
 }
