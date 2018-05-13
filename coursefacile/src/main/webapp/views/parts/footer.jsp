@@ -87,6 +87,7 @@
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.bxslider.min.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.prettyPhoto.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.isotope.min.js")%>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.autocomplete.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/bootstrap-datepicker.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
@@ -119,7 +120,6 @@
 <script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0r_j4uSAKM-lQxERp_80MfGd9QwRISfM&libraries=places">
 </script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="<%=prefixPath%>/js/script.js"></script>
 
 

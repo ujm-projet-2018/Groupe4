@@ -121,7 +121,6 @@
                         <label for="travel-method">Methode</label>
                         <select type="text" class="form-control" id="travel-method" placeholder="Jane Doe">
                             <option value="WALKING">Randonnée</option>
-                            <option value="TRANSIT">Transit</option>
                             <option value="DRIVING">Conduire</option>
                             <option value="BICYCLING">Aller à vélo</option>
                         </select>

@@ -534,7 +534,7 @@ $(function () {
 
     }
 
-    function createItinerary(keyWord) {
+    function createItinerary(keyWord, currentPosition) {
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
             location: currentPosition,
@@ -605,8 +605,9 @@ $(function () {
     function nearbySearchCallback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             // for (var i = 0; i < results.length; i++) {
+            console.log(results);
             createMarker(results[0]);
-            drawItinirary(currentPosition, travelMode, results[0]);
+            drawItinirary(currentPosition, travelMode, results[0], '');
 
         }
     }
@@ -789,19 +790,21 @@ $(function () {
 
     function setPosition(position) {
         currentPosition = {lat: position.coords.latitude, lng: position.coords.longitude};
-        // console.log(position)
     }
 
     if ($getItinerary.length) {
 
         function buildItineraryToShop() {
-            getCurrentPosition();
+            currentPosition = getCurrentPosition();
             setTimeout(function () {
                 // console.log(currentPosition);
+
+                console.log("== buildItineraryToShop ==");
+                console.log(currentPosition);
                 initMap('map', 15);
                 var keyWord = $getItinerary.data('key-word');
-                createItinerary(keyWord);
-            }, 400);
+                createItinerary(keyWord, currentPosition);
+            }, 600);
 
         }
 
@@ -899,7 +902,7 @@ $(function () {
                                         console.log(missionsItineraries);
                                         drawItinirary(currentPosition, travel, missionsItineraries[0].missionInfos.place, wayPoint);
 
-                                    }, 1400);
+                                    }, 2400);
                                     createMarkerWithValue(missions, travel);
                                 }
 
