@@ -28,7 +28,7 @@
     <div class="row well">
         <div class="col-md-12">
             <form id="publish-mission" class="form-horizontal" name="publishForm" method="post"
-                  action="<%= prefixPath %>/dashboard/modificationmission/${mission.id}">
+                  action="<%= prefixPath %>/dashboard/update-mission/${mission.id}">
 
                 <div class="form-group">
                     <label for="mission-name" class="col-sm-2 control-label">Nom de la mission</label>
@@ -43,8 +43,9 @@
                     <div class="col-sm-10">
                         <div class='input-group'>
                             <input type="text" class="form-control" id="city" name="city"
-                                   value="${mission.city.name}"
+                                   value="${mission.city.name} ${mission.city.postalCode}"
                                    autocomplete="off">
+                            <input type="hidden" value="${mission.city.id}" id="city_id" name="city_id">
                         </div>
                     </div>
                 </div>
@@ -53,14 +54,14 @@
                     <label for="date" class="col-sm-2 control-label">Date</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="date" id="date"
-                               value="${mission.missionDate}">
+                               value="<fmt:formatDate pattern="dd/MM/yyyy" value="${mission.missionDate}"/>">
                     </div>
                     <div class="col-sm-4">
                         <div class="input-append date form_time" data-date="" data-date-format="hh:ii">
                             <input class="span2 form-control" placeholder="le temps de les courses" name="time"
                                    size="16"
                                    type="text"
-                                   value="">
+                                   data-time="<fmt:formatDate pattern="HH:mm" value="${mission.missionDate}"/>">
                             <span class="add-on"><i class="icon-th"></i></span>
                         </div>
                     </div>
@@ -70,6 +71,7 @@
                     <label for="supermarche" class="col-sm-2 control-label">Supermarché</label>
                     <div class="col-sm-10">
                         <input type="text" id="supermarche" class="form-control" name="supermarche"
+                               value="${mission.destination}"
                                placeholder="Veuillez indiquer le supermarché dont vous voulez faire vos courses ..">
                     </div>
                 </div>
@@ -92,7 +94,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <input type="submit" class="btn btn-primary pull-left" value="Valider">
+                        <input type="submit" class="btn btn-primary pull-left" value="Modifier">
                     </div>
                 </div>
 

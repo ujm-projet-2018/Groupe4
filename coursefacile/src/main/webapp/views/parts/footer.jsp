@@ -82,14 +82,13 @@
 <script src="<%=prefixPath%>/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="<%=prefixPath%>/js/bootstrap.min.js"></script>
 <%= Util.includeCssOrJs(request, "*", "/js/wow.min.js")%>
-<%= Util.includeCssOrJs(request, "*", "/js/fancybox/jquery.fancybox.pack.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.easing.1.3.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.bxslider.min.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.prettyPhoto.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.isotope.min.js")%>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<%= Util.includeCssOrJs(request, "*", "/js/jquery.autocomplete.js")%>
-<%= Util.includeCssOrJs(request, "*", "/js/bootstrap-datepicker.js")%>
+<%= Util.includeCssOrJs(request, "/|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/js/jquery.autocomplete.js")%>
+<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/js/bootstrap-datepicker.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.validate.min.js")%>
 

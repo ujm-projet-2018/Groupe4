@@ -2,6 +2,7 @@ package com.coursefacile.controller;
 
 import com.coursefacile.dao.IMissionHandler;
 import com.coursefacile.dao.MissionHandler;
+import com.coursefacile.dao.UserHandler;
 import com.coursefacile.model.Mission;
 
 import javax.servlet.ServletException;
@@ -40,7 +41,10 @@ public class MissionDetail extends HttpServlet {
 
             IMissionHandler missionHandler = new MissionHandler();
             Mission mission = missionHandler.get(idM);
-            if (mission != null && mission.isPublished() && mission.getMissionDate().compareTo(new Date()) >= 0) {
+            if (mission != null && (
+                    (mission.isPublished() && mission.getMissionDate().compareTo(new Date()) >= 0) ||
+                            UserHandler.isLoggedIn(request) && UserHandler.getLoggedInUser(request).getId() == mission.getOwner().getId()
+            )) {
                 request.setAttribute("mission", mission);
                 List<Mission> missions = missionHandler.relatedMissions(mission.getCity().getId(), mission.getId());
                 request.setAttribute("relatedMissions", missions);

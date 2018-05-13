@@ -121,6 +121,13 @@
                                            href="<%=prefixPath%>/book/${mission.id}">Effectuer cette mission</a>
                                     </div>
                                 </c:if>
+                                <c:if test="${user.id eq mission.owner.id}">
+                                    <div class="share">
+                                        <a class="btn btn-primary"
+                                           href="<%=prefixPath%>/dashboard/update-mission/${mission.id}">Modifier cette
+                                            mission</a>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         <!-- End Property -->

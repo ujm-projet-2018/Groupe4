@@ -111,15 +111,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ModifierMission</servlet-name>
-        <url-pattern>/dashboard/modifiermission/*</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ModificationMission</servlet-name>
-        <servlet-class>com.coursefacile.controller.ModificationMission</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ModificationMission</servlet-name>
-        <url-pattern>/dashboard/modificationmission/*</url-pattern>
+        <url-pattern>/dashboard/update-mission/*</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>PublishMission</servlet-name>

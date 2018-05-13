@@ -44,9 +44,6 @@ $(function () {
             valueKey: 'title',
             source: [
                 function (q, add) {
-                    var $cityIdInput = $("#city_id");
-                    if ($cityIdInput.length)
-                        $cityIdInput.val("");
                     $.ajax({
                         type: 'GET',
                         url: '/coursefacile/filterCities',
@@ -502,7 +499,7 @@ $(function () {
 
     }
     var $formTime = $('.form_time');
-    if ($formTime.length)
+    if ($formTime.length) {
         $formTime.datetimepicker({
             language: 'fr',
             weekStart: 1,
@@ -512,8 +509,14 @@ $(function () {
             startView: 1,
             minView: 0,
             maxView: 1,
-            forceParse: 0
+            forceParse: 1,
+            showClear: true,
+            format: 'HH:mm',
         });
+        var $formTimeInput = $formTime.find('input');
+        $formTimeInput.val($formTimeInput.data('time'))
+
+    }
     /**
      * map itinerary
      */

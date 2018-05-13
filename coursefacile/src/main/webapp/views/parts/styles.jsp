@@ -7,9 +7,9 @@
 <link href="<%= prefixPath %>/css/prettyPhoto.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/style.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/modifiermission/*|/missions*", "/css/datepicker.css")%>
+<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/css/datepicker.css")%>
 <%-- Login page styles --%>
-<%= Util.includeCssOrJs(request, "/|/Publish-Mission|/dashboard/modifiermission/*|/missions*", "/css/jquery.autocomplete.css")%>
+<%= Util.includeCssOrJs(request, "/|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/css/jquery.autocomplete.css")%>
 <%= Util.includeCssOrJs(request, "/login", "/css/form-elements.css")%>
 <%= Util.includeCssOrJs(request, "/login", "/css/loginRegister.css")%>
 <%-- Dashboard styles --%>

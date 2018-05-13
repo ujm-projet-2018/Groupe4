@@ -54,6 +54,7 @@
                         <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-map-marker"></span>
                             </span>
+                        <input type="hidden" value="${param.city_id}" id="city_id" name="city_id">
                     </div>
                 </div>
                 <div class="col-md-6 mg-top-20">
