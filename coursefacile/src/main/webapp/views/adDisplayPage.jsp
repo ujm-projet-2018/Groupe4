@@ -68,18 +68,21 @@
                     </div>
                 </div>
             </div>
-            <div class="row collapse" id="rechercheAvancéeCollapse">
+            <div class="row collapse <c:if test="${not empty param.minP or not empty param.maxP or not empty param.from or not empty param.to}">in</c:if> "
+                 id="rechercheAvancéeCollapse">
                 <div class="col-md-4 mg-top-20">
-                    <div class="input-group date form_time">
-                        <input type='text' class="form-control" placeholder="De" id="de" name="de"/>
+                    <div class="input-group date form_time" data-date-format="hh:ii">
+                        <input type='text' class="form-control" data-time="${param.from}" value="" placeholder="De"
+                               id="de" name="from"/>
                         <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
                     </div>
                 </div>
                 <div class="col-md-4 mg-top-20">
-                    <div class="input-group date form_time">
-                        <input type='text' class="form-control" placeholder="A" id="a" name="a"/>
+                    <div class="input-group date form_time" data-date-format="hh:ii">
+                        <input type='text' class="form-control" data-time="${param.to}" value="" placeholder="A" id="a"
+                               name="to"/>
                         <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-time"></span>
                             </span>
@@ -88,13 +91,16 @@
                 <div class="col-md-4 mg-top-20">
                     <div class='form-group'>
                         <%--<input type='range' class="form-control" placeholder="prix min" id="prix" name="prix"/>--%>
-                        <div class="col-md-6 mg-top-5">
+                        <div class="col-md-5 mg-top-5">
                             <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                         </div>
-                        <div class="col-md-6 mg-top-10">
-                            <input type="hidden" id="minP" name="minP">
-                            <input type="hidden" id="maxP" name="maxP">
+                        <div class="col-md-5 mg-top-10">
+                            <input type="hidden" id="minP" value="${param.minP}" name="minP">
+                            <input type="hidden" id="maxP" value="${param.maxP}" name="maxP">
                             <div class="slider-range-price"></div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn" type="button" id="reset-search-form">Rénitialiser</button>
                         </div>
                     </div>
                 </div>

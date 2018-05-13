@@ -509,12 +509,17 @@ $(function () {
             startView: 1,
             minView: 0,
             maxView: 1,
-            forceParse: 1,
-            showClear: true,
-            format: 'HH:mm',
+            forceParse: 0
         });
         var $formTimeInput = $formTime.find('input');
-        $formTimeInput.val($formTimeInput.data('time'))
+        $formTimeInput.val($formTimeInput.data('time'));
+
+        var $de = $('#de');
+        var $a = $('#a');
+        if ($a.length && $de.length) {
+            $a.val($a.data('time'));
+            $de.val($de.data('time'));
+        }
 
     }
     /**
@@ -951,11 +956,18 @@ $(function () {
     }
     var $sliderRangePrice = $(".slider-range-price");
     if ($sliderRangePrice.length) {
+        var min = 5, max = 50;
+        var $minP = $('#minP');
+        var $maxP = $('#maxP');
+        if ($minP.length && $maxP.length) {
+            min = $minP.val();
+            max = $maxP.val();
+        }
         $sliderRangePrice.slider({
             range: true,
             min: 0,
             max: 200,
-            values: [5, 50],
+            values: [min.length ? min : 5, max.length ? max : 55],
             slide: function (event, ui) {
                 $("#amount").val("Prix: de " + ui.values[0] + " € - à " + ui.values[1] + " €");
             },
@@ -966,7 +978,25 @@ $(function () {
 
             }
         });
-        $("#amount").val("Prix: de " + $sliderRangePrice.slider("values", 0) +
-            " € - à " + $sliderRangePrice.slider("values", 1) + " €");
+
+
+        if (min.length && max.length)
+            $("#amount").val("Prix: de " + min +
+                " € - à " + max + " €");
+        else
+            $("#amount").val("Interval de prix");
+
     }
-});
+    var $reset = $('#reset-search-form');
+    if ($reset.length) {
+        $reset.on('click', function () {
+            $("#amount").val("Interval de prix");
+            $('#minP').val('');
+            $('#maxP').val('');
+            $('#de').val('');
+            $('#a').val('');
+        });
+
+    }
+})
+;

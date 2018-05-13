@@ -18,5 +18,7 @@ public interface IMissionHandler {
 
     int getScore(User user);
 
-    List<Mission> getMissions(String cityId, String date, String from, String to, String minP, String maxP);
+    List<Mission> getMissions(String cityId, String date, String from, String to, String minP, String maxP, int start, int end);
+
+    int getCountMissions(String cityId, String date, String from, String to, String minP, String maxP);
 }

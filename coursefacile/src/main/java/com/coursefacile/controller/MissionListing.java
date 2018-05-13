@@ -31,8 +31,6 @@ import org.json.JSONObject;
 public class MissionListing extends HttpServlet {
 
     private final int PAGE_SIZE = 10;
-    Session session1 = SessionFactoryHelper.getSessionFactory().openSession();
-    List<Mission> Lmissions = new ArrayList<Mission>();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -57,23 +55,24 @@ public class MissionListing extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Map<String, String[]> params = request.getParameterMap();
-        if (request.getRequestURI().equals("/coursefacile/get-missions")) {
-            if (params.containsKey("city_id") && params.containsKey("date")) {
-                IMissionHandler missionHandler = new MissionHandler();
-                String cityId = request.getParameter("city_id");
-                String date = request.getParameter("date");
-                String from = "", to = "", minP = "", maxP = "";
+        if (params.containsKey("city_id") && params.containsKey("date")) {
+            IMissionHandler missionHandler = new MissionHandler();
+            String cityId = request.getParameter("city_id");
+            String date = request.getParameter("date");
+            String from = "", to = "", minP = "", maxP = "";
 
-                if (params.containsKey("from"))
-                    from = request.getParameter("from");
-                if (params.containsKey("to"))
-                    to = request.getParameter("to");
-                if (params.containsKey("minP") && params.containsKey("maxP")) {
-                    minP = request.getParameter("minP");
-                    maxP = request.getParameter("maxP");
-                }
-
-                List<Mission> missions = missionHandler.getMissions(cityId, date, from, to, minP, maxP);
+            if (params.containsKey("from")) {
+                from = request.getParameter("from");
+            }
+            if (params.containsKey("to")) {
+                to = request.getParameter("to");
+            }
+            if (params.containsKey("minP") && params.containsKey("maxP")) {
+                minP = request.getParameter("minP");
+                maxP = request.getParameter("maxP");
+            }
+            if (request.getRequestURI().equals("/coursefacile/get-missions")) {
+                List<Mission> missions = missionHandler.getMissions(cityId, date, from, to, minP, maxP, -1, -1);
                 request.setCharacterEncoding("utf8");
                 response.setContentType("application/json");
                 JSONArray jsonArray = new JSONArray();
@@ -92,103 +91,45 @@ public class MissionListing extends HttpServlet {
                     jsonArray.put(jsonMission);
                 }
                 response.getWriter().println(jsonArray.toString());
-            }
-
-        } else {
-            User user1 = null;
-            SQLQuery query = null;
-            SQLQuery query2 = null;
-            String str = request.getRequestURL() + "?";
-            Enumeration<String> paramNames = request.getParameterNames();
-            while (paramNames.hasMoreElements()) {
-                String paramName = paramNames.nextElement();
-                String[] paramValues = request.getParameterValues(paramName);
-                for (int i = 0; i < paramValues.length; i++) {
-                    String paramValue = paramValues[i];
-                    str = str + paramName + "=" + paramValue;
-                }
-                str = str + "&";
-
-            }
-            System.out.println(request.getParameter("city_id"));
-            str = str.split("start")[0];
-            request.setAttribute("currentUrl", str + "start=");
-            try {
-                SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat d2 = new SimpleDateFormat("yyyy-MM-dd");
-                SimpleDateFormat d3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                SimpleDateFormat d4 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date date1 = d1.parse(request.getParameter("date"));
-
-
-                session1.beginTransaction();
-                if (params.containsKey("prix") == false && params.containsKey("prix") == false && params.containsKey("prix") == false) {
-                    String dateS1 = d2.format(date1) + " 00:00:00";
-                    String dateS2 = d2.format(date1) + " 23:59:59";
-                    query = session1.createSQLQuery("select * from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and  isPublished = 1 and  missionDate between '" + dateS1 + "' AND '" + dateS2 + "'");
-                    query2 = session1.createSQLQuery("select count(*) from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and  isPublished = 1 and  missionDate between '" + dateS1 + "' AND '" + dateS2 + "'");
-                } else {
-                    if (request.getParameter("prix").length() == 0 && request.getParameter("a").length() == 0 && request.getParameter("de").length() == 0) {
-                        String dateS1 = d2.format(date1) + " 00:00:00";
-                        String dateS2 = d2.format(date1) + " 23:59:59";
-                        query = session1.createSQLQuery("select * from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                        query2 = session1.createSQLQuery("select count(*) from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                    } else if (request.getParameter("a").length() == 0 && request.getParameter("de").length() == 0) {
-                        String dateS1 = d2.format(date1) + " 00:00:00";
-                        String dateS2 = d2.format(date1) + " 23:59:59";
-                        query = session1.createSQLQuery("select * from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + "  and isPublished = 1 and price >=" + Integer.parseInt(request.getParameter("prix")) + " and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                        query2 = session1.createSQLQuery("select count(*) from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + "  and isPublished = 1 and price =" + Integer.parseInt(request.getParameter("prix")) + " and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                    } else if (request.getParameter("prix").length() == 0 && request.getParameter("a").length() == 0) {
-                        Date date2 = d3.parse(request.getParameter("de"));
-                        String dateS1 = d4.format(date2);
-                        String dateS2 = d2.format(date1) + " 23:59:59";
-                        query = session1.createSQLQuery("select * from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                        query2 = session1.createSQLQuery("select count(*) from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                    } else if (request.getParameter("prix").length() == 0) {
-                        Date date2 = d3.parse(request.getParameter("de"));
-                        Date date3 = d3.parse(request.getParameter("a"));
-                        String dateS1 = d4.format(date2);
-                        String dateS2 = d4.format(date3);
-                        query2 = session1.createSQLQuery("select count(*) from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                        query = session1.createSQLQuery("select * from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                    } else {
-                        Date date2 = d3.parse(request.getParameter("de"));
-                        Date date3 = d3.parse(request.getParameter("a"));
-                        String dateS1 = d4.format(date2);
-                        String dateS2 = d4.format(date3);
-                        query = session1.createSQLQuery("select * from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and price >=" + Integer.parseInt(request.getParameter("prix")) + " and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
-                        query2 = session1.createSQLQuery("select count(*) from mission where city =" + Integer.parseInt(request.getParameter("city_id")) + " and isPublished = 1 and missionDate between '" + dateS1 + "' AND  '" + dateS2 + "'");
+            } else {
+                String str = request.getRequestURL() + "?";
+                Enumeration<String> paramNames = request.getParameterNames();
+                while (paramNames.hasMoreElements()) {
+                    String paramName = paramNames.nextElement();
+                    String[] paramValues = request.getParameterValues(paramName);
+                    for (int i = 0; i < paramValues.length; i++) {
+                        String paramValue = paramValues[i];
+                        str = str + paramName + "=" + paramValue;
                     }
+                    str = str + "&";
+
                 }
-                int missionRowsCount = ((BigInteger) query2.uniqueResult()).intValue();
-                query.addEntity(Mission.class);
-                String page = "0";
-                if (params.containsKey("page")) {
-                    page = request.getParameter("page");
+                System.out.println(request.getParameter("city_id"));
+                str = str.split("start")[0];
+                request.setAttribute("currentUrl", str + "start=");
+                int start = request.getParameter("start") == null ? 0 : Integer.parseInt(request.getParameter("start"));
+                List<Mission> Lmissions;
+                if (start == 0) {
+                    Lmissions = missionHandler.getMissions(cityId, date, from, to, minP, maxP, start, PAGE_SIZE);
+                } else {
+                    Lmissions = missionHandler.getMissions(cityId, date, from, to, minP, maxP, (PAGE_SIZE * start) - PAGE_SIZE, start * PAGE_SIZE);
+
                 }
+
+                int missionRowsCount = missionHandler.getCountMissions(cityId, date, from, to, minP, maxP);
 
                 request.setAttribute("paginationMax", missionRowsCount == 0 ? 0 : (missionRowsCount / PAGE_SIZE) + 1);
-                int start = request.getParameter("start") == null ? 0 : Integer.parseInt(request.getParameter("start"));
-                System.out.println(start);
-                if (start == 0) {
-                    query.setFirstResult(start);
-                    query.setMaxResults(PAGE_SIZE);
-                } else {
-                    query.setFirstResult((PAGE_SIZE * start) - PAGE_SIZE);
-                    query.setMaxResults(start * PAGE_SIZE);
-                }
-                Lmissions = query.list();
+
                 request.setAttribute("Lmissions", Lmissions);
                 request.setAttribute("test", Lmissions.size());
                 request.setAttribute("Date", request.getParameter("date"));
-                session1.getTransaction().commit();
 
-            } catch (Exception e) {
-                session1.getTransaction().rollback();
-                e.printStackTrace();
+                request.getRequestDispatcher("views/adDisplayPage.jsp").forward(request, response);
             }
-            request.getRequestDispatcher("views/adDisplayPage.jsp").forward(request, response);
+        } else {
+            response.sendRedirect("/coursefacile/");
         }
+
     }
 
     /**

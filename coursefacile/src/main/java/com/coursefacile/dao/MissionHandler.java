@@ -128,7 +128,7 @@ public class MissionHandler implements IMissionHandler {
         return score;
     }
 
-    public List<Mission> getMissions(String cityId, String date, String from, String to, String minP, String maxP) {
+    public List<Mission> getMissions(String cityId, String date, String from, String to, String minP, String maxP, int start, int end) {
         List<Mission> missions = new ArrayList<Mission>();
         if (cityId.length() != 0 && date.length() != 0) {
             Session session = SessionFactoryHelper.getSessionFactory().openSession();
@@ -156,6 +156,11 @@ public class MissionHandler implements IMissionHandler {
                 }
                 System.out.println("SELECT * from mission WHERE " + cityId + fromTo);
                 Query query = session.createSQLQuery("SELECT * from mission WHERE " + cityId + fromTo + price).addEntity(Mission.class);
+                if (start != -1 && end != -1) {
+                    query.setFirstResult(start);
+                    query.setMaxResults(end);
+                }
+
                 missions = (List<Mission>) query.list();
                 session.getTransaction().commit();
             } catch (Exception e) {
@@ -166,5 +171,45 @@ public class MissionHandler implements IMissionHandler {
             }
         }
         return missions;
+    }
+
+    public int getCountMissions(String cityId, String date, String from, String to, String minP, String maxP) {
+        int countMission = 0;
+        if (cityId.length() != 0 && date.length() != 0) {
+            Session session = SessionFactoryHelper.getSessionFactory().openSession();
+            try {
+                SimpleDateFormat toDb = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat fromHtml = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                session.beginTransaction();
+                Date fromParsedDate = new Date();
+                Date toParsedDate;
+                cityId = "city=" + cityId;
+                String fromTo = " AND missionDate ";
+                String price = "";
+                if (from.length() != 0)
+                    fromParsedDate = fromHtml.parse(date + " " + from);
+                else
+                    fromParsedDate = fromHtml.parse(date + " 00:00");
+                if (to.length() != 0)
+                    toParsedDate = fromHtml.parse(date + " " + to);
+                else
+                    toParsedDate = fromHtml.parse(date + " 23:59");
+                fromTo += " BETWEEN '" + toDb.format(fromParsedDate) + "' AND '" + toDb.format(toParsedDate) + "'";
+
+                if (minP.length() != 0 && maxP.length() != 0) {
+                    price = " AND Price BETWEEN " + minP + " AND " + maxP;
+                }
+                System.out.println("SELECT count(*) from mission WHERE " + cityId + fromTo + price);
+                Query query = session.createSQLQuery("SELECT count(*) from mission WHERE " + cityId + fromTo + price);
+                countMission = ((BigInteger) query.uniqueResult()).intValue();
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                e.printStackTrace();
+            } finally {
+                session.close();
+            }
+        }
+        return countMission;
     }
 }
