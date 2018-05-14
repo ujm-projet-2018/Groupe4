@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class RecoverPassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf8");
         Map<String, String[]> params = request.getParameterMap();
         ServletContext servletContext = this.getServletContext();
         IUserHandler userHandler = new UserHandler();

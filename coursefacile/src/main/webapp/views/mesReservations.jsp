@@ -27,7 +27,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
@@ -124,7 +123,7 @@
 					</div>
 				</div>
                 <c:if test="${empty Lmissions}">
-                    <p class="lead">Vous n'avez acune réservation en cours.</p>
+                    <p class="lead">Vous n'avez aucune réservation en cours.</p>
                 </c:if>
                 <c:if test="${not empty paginationMax and paginationMax ne 0 and not empty Lmissions and paginationMax ne 1}">
 					<div class="mx-auto">

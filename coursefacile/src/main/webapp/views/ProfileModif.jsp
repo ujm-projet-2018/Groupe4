@@ -3,10 +3,8 @@
   --
   --
 --%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -31,6 +29,7 @@
     <%
         User user = UserHandler.getLoggedInUser(request);
         String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
+        request.setCharacterEncoding("UTF-8");
     %>
     <!-- End header header -->
 
@@ -77,7 +76,8 @@
                         <div class="tab-pane" id="settings" role="tabpanel">
                             <div class="card-body">
                                 <form action="" id="profile-form"
-                                      method="post" class="form-horizontal form-material">
+                                      method="post" class="form-horizontal form-material" accept-charset="UTF-8"
+                                      enctype="multipart/form-data">
 
                                     <c:choose>
                                         <c:when test="${not empty user.lname }">

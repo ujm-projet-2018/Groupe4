@@ -15,6 +15,7 @@ public class LoginRegister extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // type = login or register
+        request.setCharacterEncoding("utf8");
         Map<String, String[]> params = request.getParameterMap();
         String prefixPath = this.getServletContext().getInitParameter("prefixPath");
         if (params.containsKey("type")) {

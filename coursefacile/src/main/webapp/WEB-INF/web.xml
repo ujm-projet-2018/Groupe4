@@ -9,6 +9,12 @@
         <param-name>adminEmail</param-name>
         <param-value>abdelmoghit.madih@gmail.com</param-value>
     </context-param>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>

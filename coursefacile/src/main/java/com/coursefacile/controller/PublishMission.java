@@ -21,7 +21,7 @@ public class PublishMission extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+        request.setCharacterEncoding("utf8");
         Map<String, String[]> params = request.getParameterMap();
         if (params.containsKey("missionName") && params.containsKey("city_id") && params.containsKey("date") && params.containsKey("time") && params.containsKey("supermarche") && params.containsKey("description") && params.containsKey("remuneration")) {
             String missionName = request.getParameter("missionName").trim();

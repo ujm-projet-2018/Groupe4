@@ -83,6 +83,7 @@ public class ProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String prefixPath = this.getServletContext().getInitParameter("prefixPath");
+        request.setCharacterEncoding("utf8");
         Map<String, String[]> params = request.getParameterMap();
         if (params.containsKey("confirmationPwd") && request.getRequestURI().equals(prefixPath + "/confirm-pwd") && UserHandler.isLoggedIn(request)) {
             request.setCharacterEncoding("utf8");
@@ -98,10 +99,14 @@ public class ProfileController extends HttpServlet {
                         user2.setTelephone(request.getParameter("telephone"));
                     if (params.containsKey("birthDate") && request.getParameter("birthDate").length() != 0)
                         user2.setBirthDate(request.getParameter("birthDate"));
+                    System.out.println(request.getParameter("address"));
+                    System.out.println(new String(request.getParameter("address").getBytes("UTF-8")));
                     if (params.containsKey("address") && request.getParameter("address").length() != 0)
-                        user2.setAddress(request.getParameter("address"));
+                        user2.setAddress(new String(request.getParameter("address").getBytes("UTF-8")));
+                    System.out.println("hééééééééyheyhey");
+                    System.out.println(request.getParameter("description"));
                     if (params.containsKey("description") && request.getParameter("description").length() != 0)
-                        user2.setDescription(request.getParameter("description"));
+                        user2.setDescription(new String(request.getParameter("description").getBytes("UTF-8")));
                     if (params.containsKey("password") && (request.getParameter("password") != "") && (request.getParameter("password")).length() >= 8)
                         user2.setPassword(Util.hashString(request.getParameter("password")));
                     else if (request.getParameter("password").length() > 0 && request.getParameter("password").length() < 8)
