@@ -2,9 +2,8 @@
 <footer>
 <div class="footer" id="footer">
 	<div class="container-fluid">
-		<div class="col-md-4 wow fadeInUp" data-wow-offset="0"
-			 data-wow-delay="0.2s">
-			<h2>Course Faciles</h2>
+        <div class="col-md-4 wow fadeInUp">
+			<h2>Courses Faciles</h2>
 			<p>In a elit in lorem congue varius. Sed nec arcu. Etiam sit
 				amet augue. Fusce fermen tum neque a rutrum varius odio pede
 				ullamcorp-er tellus ut dignissim nisi risus non tortor. Aliquam
@@ -83,13 +82,13 @@
 <script src="<%=prefixPath%>/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="<%=prefixPath%>/js/bootstrap.min.js"></script>
 <%= Util.includeCssOrJs(request, "*", "/js/wow.min.js")%>
-<%= Util.includeCssOrJs(request, "*", "/js/fancybox/jquery.fancybox.pack.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.easing.1.3.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.bxslider.min.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.prettyPhoto.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.isotope.min.js")%>
-<%= Util.includeCssOrJs(request, "*", "/js/jquery.autocomplete.js")%>
-<%= Util.includeCssOrJs(request, "*", "/js/bootstrap-datepicker.js")%>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<%= Util.includeCssOrJs(request, "/|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/js/jquery.autocomplete.js")%>
+<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/update-mission/*|/missions*|/dashboard/profile", "/js/bootstrap-datepicker.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.validate.min.js")%>
 
@@ -97,27 +96,31 @@
 		src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
 </script>
 <%-- Dashboard scripts --%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*|/dashboard/*", "/js/lib/bootstrap/js/popper.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*|/dashboard/*", "/js/jquery.slimscroll.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*|/dashboard/*", "/js/sidebarmenu.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*|/dashboard/*", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/js/lib/bootstrap/js/popper.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/js/jquery.slimscroll.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/js/sidebarmenu.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/js/lib/sticky-kit-master/dist/sticky-kit.min.js")%>
 <%= Util.includeCssOrJs(request, "/dashboard", "/js/lib/morris-chart/raphael-min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/moment.latest.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/semantic.ui.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/prism.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/pignose.calendar.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/calendar-2/pignose.init.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/owl-carousel/owl.carousel.min.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/lib/owl-carousel/owl.carousel-init.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*", "/js/scripts.js")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/profile|/profile/*|/dashboard/*", "/js/custom.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/lib/calendar-2/moment.latest.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/lib/calendar-2/semantic.ui.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/lib/calendar-2/prism.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/lib/calendar-2/pignose.calendar.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/lib/calendar-2/pignose.init.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/lib/owl-carousel/owl.carousel.min.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/lib/owl-carousel/owl.carousel-init.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/js/scripts.js")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/js/custom.min.js")%>
 <%-- DateTimePicker --%>
 <%= Util.includeCssOrJs(request, "/mission", "/js/datepicker.js")%>
 <%-- Always include this file last --%>
 <script src="<%=prefixPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script src="<%=prefixPath%>/js/bootstrap-datetimepicker.fr.js"></script>
 <script src="<%=prefixPath%>/js/bootbox.min.js"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0r_j4uSAKM-lQxERp_80MfGd9QwRISfM&libraries=places&language=fr&region=FR">
+</script>
 <script type="text/javascript" src="<%=prefixPath%>/js/script.js"></script>
+
 
 
 

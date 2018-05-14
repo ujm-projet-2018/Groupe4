@@ -44,10 +44,6 @@ $(function () {
             valueKey: 'title',
             source: [
                 function (q, add) {
-                    console.log(q);
-                    var $cityIdInput = $("#city_id");
-                    if ($cityIdInput.length)
-                        $cityIdInput.val("");
                     $.ajax({
                         type: 'GET',
                         url: '/coursefacile/filterCities',
@@ -155,6 +151,39 @@ $(function () {
             unhighlight: unhighlight
         });
 
+    }
+    var $contactForm = $('#contact-form');
+    if ($contactForm.length) {
+        $contactForm.validate({
+            rules: {
+                name: {
+                    required: true,
+                },
+                tel: {
+                    required: true,
+                },
+                message: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                name: "Veuillez saisir votre nom",
+                tel: "Veuillez saisir votre numéro de telephone",
+                message: "Veuillez saisir votre message",
+                email: {
+                    required: "Veuillez saisir votre adresse email",
+                    email: "Veuillez sasir une adresse email correcte"
+                }
+            },
+            errorElement: "em",
+            errorPlacement: errorPlacement,
+            highlight: highlight,
+            unhighlight: unhighlight
+        });
     }
     //set sidebar height same as container
     $('#sidebar-gauche').css('height', $('#body-dashboard').height());
@@ -265,44 +294,41 @@ $(function () {
             highlight: highlight,
             unhighlight: unhighlight
         });
-        $profile_form.find('#confirm').click(function (e) {
+        // $.ajax({
+        //     method: 'POST',
+        //     url: '/coursefacile/confirm-pwd',
+        //     data: {confirmationPwd: result},
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         console.log("kaka");
+        //         if (data.length && data[0]) {
+        //             $('#check-submit').val(data[1]);
+        //             $profile_form.submit();
+        //         }
+        //     }
+        // });
+        $('#confirm').click(function (e) {
             e.preventDefault();
-            if ($profile_form.valid())
-                bootbox.prompt({
-                    title: 'Veuillez entrer votre mot de passe actuel',
-                    placeholder: 'mot de passe',
-                    inputType: 'password',
-                    size: 'small',
-                    buttons: {
-                        confirm: {
-                            label: 'Confirmer',
-                            className: 'btn-success'
-                        },
-                        cancel: {
-                            label: 'Annuler',
-                            className: 'btn-danger'
-                        }
-                    },
-                    callback: function (result) {
-                        if (result === null) {
-                        } else {
-                            $.ajax({
-                                method: 'POST',
-                                url: '/coursefacile/confirm-pwd',
-                                data: {confirmationPwd: result},
-                                dataType: 'json',
-                                success: function (data) {
-                                    console.log("kaka");
-                                    if (data.length && data[0]) {
-                                        $('#check-submit').val(data[1]);
-                                        $profile_form.submit();
-                                    }
-                                }
-                            });
+            var $pwdConfirm = $('#pwd-confirm');
+            if ($profile_form.valid()) {
+                $.ajax({
+                    method: 'POST',
+                    url: '/coursefacile/confirm-pwd',
+                    data: {confirmationPwd: $pwdConfirm.val()},
+                    dataType: 'json',
+                    success: function (data) {
+                        // console.log("kaka");
+                        if (data.length && data[0]) {
+                            $('#check-submit').val(data[1]);
+                            $profile_form.submit();
+                        } else if (!data[0]) {
+                            $pwdConfirm.parent().find('.pwd-error').remove();
+                            $pwdConfirm.parent().append('<div class="alert alert-danger pwd-error" role="alert">Mot de passe incorrecte</div>');
                         }
                     }
                 });
-            else {
+
+            } else {
                 $(window).scrollTop($("em.error:first").offset().top - 200);
             }
         })
@@ -324,7 +350,7 @@ $(function () {
         chatClient.onmessage = function (evt) {
 
             var msg = JSON.parse(evt.data);
-            console.log(msg);
+            // console.log(msg);
             var $recepteurMarkup;
             $recepteurMarkup = $('<li>');
             var $recMsgData = $('<div>', {class: 'message-data'});
@@ -385,7 +411,7 @@ $(function () {
             };
 
             var msg = JSON.stringify(messageObject);
-            console.log(msg);
+            // console.log(msg);
             //send message
             chatClient.send(msg);
             $message.val('');
@@ -473,7 +499,7 @@ $(function () {
 
     }
     var $formTime = $('.form_time');
-    if ($formTime.length)
+    if ($formTime.length) {
         $formTime.datetimepicker({
             language: 'fr',
             weekStart: 1,
@@ -485,5 +511,498 @@ $(function () {
             maxView: 1,
             forceParse: 0
         });
+        var $formTimeInput = $formTime.find('input');
+        $formTimeInput.val($formTimeInput.data('time'));
 
-});
+        var $de = $('#de');
+        var $a = $('#a');
+        if ($a.length && $de.length) {
+            $a.val($a.data('time'));
+            $de.val($de.data('time'));
+        }
+
+    }
+    /**
+     * map itinerary
+     */
+    var $getItinerary = $('#get-itinerary');
+    var directionsDisplay;
+    var directionsService;
+    var travelMode = 'WALKING';
+    var currentPosition;
+
+    function initMap(mapId, mapZoom) {
+        map = new google.maps.Map(document.getElementById(mapId), {
+            center: currentPosition,
+            zoom: mapZoom
+        });
+        directionsDisplay = new google.maps.DirectionsRenderer;
+        directionsService = new google.maps.DirectionsService;
+        directionsDisplay.setMap(map);
+
+    }
+
+    function createItinerary(keyWord, currentPosition) {
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: currentPosition,
+            // radius: 10000,
+            type: ['store'],
+            keyword: keyWord,
+            rankBy: google.maps.places.RankBy.DISTANCE
+        }, nearbySearchCallback);
+    }
+
+    var shopPlace;
+
+    function drawItinirary(position, travel, place, wayPoint) {
+        shopPlace = place;
+        var directionServiceRoute = {
+            origin: position,
+            destination: place.geometry.location,
+            travelMode: travel,
+            avoidFerries: true,
+            avoidHighways: true,
+            avoidTolls: true,
+            optimizeWaypoints: true
+
+        }
+        if (wayPoint.length != 0) {
+            directionServiceRoute.waypoints = [
+                {
+                    location: wayPoint,
+                    stopover: true
+                }];
+        }
+        if (travel == 'TRANSIT') {
+            directionServiceRoute = {
+                origin: position,
+                destination: place.geometry.location,
+                travelMode: travel,
+                transitOptions: {
+                    modes: ['BUS', 'RAIL', 'SUBWAY', 'TRAIN', 'TRAM'],
+                    routingPreference: 'LESS_WALKING'
+                },
+                optimizeWaypoints: true
+            }
+            /**
+             * waypoint in transit
+             */
+            if (wayPoint.length != 0) {
+                directionServiceRoute.waypoints = [
+                    {
+                        location: [wayPoint, wayPoint],
+                        stopover: true
+                    }];
+            }
+        }
+        // console.log(wayPoint);
+
+        // console.log(directionServiceRoute);
+        directionsService.route(directionServiceRoute, function (response, status) {
+            if (status === 'OK') {
+                // console.log(response);
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+
+
+    function nearbySearchCallback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            // for (var i = 0; i < results.length; i++) {
+            console.log(results);
+            createMarker(results[0]);
+            drawItinirary(currentPosition, travelMode, results[0], '');
+
+        }
+    }
+
+    function createMarker(place) {
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+        });
+        infowindow.setContent(place.name);
+        infowindow.open(map, marker);
+
+    }
+
+    var markers = [];
+    var missionPlace;
+
+    function createMarkerWithValue(missions, travel) {
+        missions = missions.missions;
+        // console.log(missions)
+
+        var place = missions[0].place;
+        var infowindow;
+        if (missions.length == 1) {
+
+            infowindow = new google.maps.InfoWindow({
+                content: '<h4>' + missions[0].missionName + '</h4><p>' + missions[0].missionPrice + '</p><p>' + missions[0].missionDescription + '</p>' + '<button class="draw-itin btn" data-mission=\'' + JSON.stringify(missions[0]) + '\'>Voir itiniéraire</button><a href="/coursefacile/mission/' + missions[0].missionId + '" class="btn btn-success">voir mission</a> '
+            });
+        } else {
+            // console.log('here')
+            var content = "";
+            for (var i = 0; i < missions.length; i++) {
+                content += '    <div class="panel panel-default">\n' +
+                    '        <div class="panel-heading" role="tab" id="headingOne">\n' +
+                    '            <h4 class="panel-title">\n' +
+                    '                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + missions[i].missionId + '" aria-expanded="true" aria-controls="collapseOne">\n' +
+                    '                    ' + missions[i].missionName +
+                    '                </a>\n' +
+                    '            </h4>\n' +
+                    '        </div>\n' +
+                    '        <div id="collapse' + missions[i].missionId + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">\n' +
+                    '            <div class="panel-body">\n' + '<p>' + missions[i].missionPrice + '</p>' +
+                    '              <p>' + missions[i].missionDescription + '</p>' + '<p><button class="draw-itin btn" data-mission=\'' + JSON.stringify(missions[i]) + '\'>Voir</button> </p><a href="/coursefacile/mission/' + missions[i].missionId + '" class="btn btn-success">voir mission</a>' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>\n'
+            }
+            // console.log(content);
+            infowindow = new google.maps.InfoWindow({
+                content: '<div class="panel-group" style="width: 300px" id="accordion" role="tablist" aria-multiselectable="true">' + content + '</div>'
+            });
+        }
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location,
+        });
+        marker.addListener('click', function () {
+            infowindow.open(map, marker);
+            $('.draw-itin').on('click', function (e) {
+                e.preventDefault();
+                // console.log($(this).data('mission'));
+                var mission = $(this).data('mission');
+                missionPlace = mission.place;
+                console.log(missionPlace);
+                draw = true;
+                getClosestDestination(mission.missionKeyWord, missionPlace.geometry.location, draw, null, travel);
+            })
+        });
+        markers.push(marker);
+
+    }
+
+    var draw = false
+
+    function getClosestDestination(keyWord, position, draw, missionInfos, travel) {
+        console.log(missionPlace);
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+            location: position,
+            // radius: 10000,
+            // type: ['store'],
+            keyword: keyWord,
+            rankBy: google.maps.places.RankBy.DISTANCE
+        }, function (result, status) {
+            console.log("====status====");
+            console.log(status);
+            if ("ZERO_RESULTS" != status) {
+                console.log("====getClosestDestination====");
+                console.log(result);
+                nearbySearchPositionCallback(result, status, position, draw, missionInfos, travel);
+            }
+        });
+    }
+
+    function nearbySearchPositionCallback(results, status, chosedPosition, draw, missionInfos, travel) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            // for (var i = 0; i < results.length; i++) {
+            var service = new google.maps.DistanceMatrixService();
+            var origins = [];
+            var destinations = [];
+            origins.push(currentPosition);
+            origins.push(chosedPosition);
+            console.log("=====result nearby position=====");
+            console.log(results);
+            console.log("=====chosedPosition=====");
+            console.log(chosedPosition);
+            for (var i = 0; i < results.length; i++) {
+                destinations.push(results[i].geometry.location);
+            }
+            console.log("===== destinations =====");
+            console.log(destinations);
+            // console.log(results);
+            // console.log(missionPlace);
+            service.getDistanceMatrix({
+                origins: origins,
+                destinations: destinations,
+                travelMode: travelMode,
+                avoidHighways: true,
+                avoidTolls: true
+            }, function (response, status) {
+                getDistanceMatrixcallback(response, status, draw, missionInfos, travel);
+            });
+
+        }
+    }
+
+    function compare(a, b) {
+        if (a.distance < b.distance)
+            return -1;
+        if (a.distance > b.distance)
+            return 1;
+        return 0;
+    }
+
+    var nearestAdress;
+    var missionsItineraries = [];
+
+    function getDistanceMatrixcallback(response, status, draw, missionInfos, travel) {
+        // console.log(response);
+        console.log(response);
+        var currentPosToShopDist = response.rows[0];
+        var missionPosToShopDist = response.rows[1];
+        console.log("=== currentPosToShopDist ===");
+        console.log(currentPosToShopDist);
+        console.log("=== missionPosToShopDist ===");
+        console.log(missionPosToShopDist);
+        var distances = [];
+        for (var i = 0; i < currentPosToShopDist.elements.length; i++) {
+            distances.push({
+                adressIndex: i,
+                distance: currentPosToShopDist.elements[i].distance.value + missionPosToShopDist.elements[i].distance.value
+            });
+        }
+        distances.sort(compare);
+        console.log("=== distances ===");
+        console.log(distances);
+        // for (var i = 0; i < distances.length; i++) {
+        // console.log(distances[i]);
+        // }
+        // console.log(missionPlace);
+        nearestAdress = response.destinationAddresses[distances[0].adressIndex];
+        if (draw)
+            drawItinirary(currentPosition, travel, missionPlace, nearestAdress);
+        else {
+            // console.log('here')
+            missionsItineraries.push({
+                distance: distances[0].distance,
+                missionInfos: missionInfos,
+                waypoint: nearestAdress
+            });
+        }
+
+
+    }
+
+
+    function getCurrentPosition() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+        return currentPosition;
+    }
+
+    function setPosition(position) {
+        currentPosition = {lat: position.coords.latitude, lng: position.coords.longitude};
+    }
+
+    if ($getItinerary.length) {
+
+        function buildItineraryToShop() {
+            currentPosition = getCurrentPosition();
+            setTimeout(function () {
+                // console.log(currentPosition);
+
+                console.log("== buildItineraryToShop ==");
+                console.log(currentPosition);
+                initMap('map', 15);
+                var keyWord = $getItinerary.data('key-word');
+                createItinerary(keyWord, currentPosition);
+            }, 600);
+
+        }
+
+        $getItinerary.on('click', function () {
+            buildItineraryToShop();
+        });
+        $('.travel-mode').on('click', function () {
+            $('#map').html('');
+            travelMode = $(this).data('travel-mode');
+            buildItineraryToShop();
+        });
+    }
+
+    /**
+     * mission listing map
+     */
+    function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    }
+
+    var missionArray = [];
+
+    var $mapMissions = $('.col-mission-map');
+    if ($mapMissions.length) {
+
+
+        $('#show-map').on('click', function (e) {
+            e.preventDefault();
+            var travel = $('#travel-method').val();
+            var city_id = getUrlParameter('city_id');
+            var date = getUrlParameter('date');
+            var de = getUrlParameter('de');
+            var a = getUrlParameter('a');
+            var data = {
+                'city_id': city_id,
+                'date': date,
+                'from': de == undefined ? "" : de,
+                'to': a == undefined ? "" : a
+            };
+            $mapMissions.html('');
+            missionArray = [];
+            var $missionMap = $('<div id="map-missions" >');
+            $mapMissions.append($missionMap);
+            $.ajax({
+                method: 'get',
+                data: data,
+                url: prefixPath + '/get-missions',
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    if (data.length) {
+                        var test = getCurrentPosition();
+                        setTimeout(function () {
+                            initMap('map-missions', 13);
+                            // console.log(test);
+                            // console.log(currentPosition);
+                            for (var i = 0; i < data.length; i++) {
+                                var mission = data[i];
+                                processData(mission);
+                            }
+                            setTimeout(function () {
+                                console.log(missionArray);
+                                for (var i = 0; i < missionArray.length; i++) {
+                                    var missions = missionArray[i];
+                                    console.log(missions.missions.length);
+                                    console.log("=====================");
+
+                                    if (missions.missions.length == 1) {
+                                        getClosetstMissionData(missions.missions[0]);
+                                    } else {
+                                        for (var j = 0; j < missions.missions.length; j++) {
+                                            getClosetstMissionData(missions.missions[j]);
+                                        }
+                                    }
+
+                                    setTimeout(function () {
+                                        missionsItineraries.sort(function (a, b) {
+                                            return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
+                                        });
+                                        for (var j = 0; j < missionsItineraries.length; j++) {
+                                            console.log(missionsItineraries[j]);
+                                        }
+                                        var wayPoint = (missionsItineraries[0] == undefined) ? "" : missionsItineraries[0].waypoint;
+                                        console.log(missionsItineraries);
+                                        drawItinirary(currentPosition, travel, missionsItineraries[0].missionInfos.place, wayPoint);
+
+                                    }, 3000);
+                                    createMarkerWithValue(missions, travel);
+                                }
+
+                            }, 400)
+
+                        }, 400);
+
+                    }
+                }
+            });
+        });
+
+
+        function getClosetstMissionData(mission) {
+            console.log(mission);
+            if (mission.place != undefined)
+                getClosestDestination(mission.missionKeyWord, mission.place.geometry.location, false, mission, '');
+        }
+
+        function pushMission(mission) {
+            var found = false;
+            // console.log(missionArray);
+            for (var i = 0; i < missionArray.length; i++) {
+                if (missionArray[i].id == mission.ownerId) {
+                    missionArray[i].missions.push(mission);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                missionArray.push({
+                    id: mission.ownerId,
+                    missions: [mission]
+                });
+        }
+
+        function processData(mission) {
+            $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + mission.ownerAdress, function (data) {
+                mission.place = data.results[0];
+                pushMission(mission);
+            })
+        }
+    }
+    var $sliderRangePrice = $(".slider-range-price");
+    if ($sliderRangePrice.length) {
+        var min = 5, max = 50;
+        var $minP = $('#minP');
+        var $maxP = $('#maxP');
+        if ($minP.length && $maxP.length) {
+            min = $minP.val();
+            max = $maxP.val();
+        }
+        $sliderRangePrice.slider({
+            range: true,
+            min: 0,
+            max: 200,
+            values: [min.length ? min : 5, max.length ? max : 55],
+            slide: function (event, ui) {
+                $("#amount").val("Prix: de " + ui.values[0] + " € - à " + ui.values[1] + " €");
+            },
+            change: function (event, ui) {
+                $('#minP').val(ui.values[0]);
+                $('#maxP').val(ui.values[1]);
+                console.log($(this).val());
+
+            }
+        });
+
+
+        if (min.length && max.length)
+            $("#amount").val("Prix: de " + min +
+                " € - à " + max + " €");
+        else
+            $("#amount").val("Interval de prix");
+
+    }
+    var $reset = $('#reset-search-form');
+    if ($reset.length) {
+        $reset.on('click', function () {
+            $("#amount").val("Interval de prix");
+            $('#minP').val('');
+            $('#maxP').val('');
+            $('#de').val('');
+            $('#a').val('');
+        });
+
+    }
+})
+;

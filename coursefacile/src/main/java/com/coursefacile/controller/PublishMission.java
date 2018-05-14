@@ -45,38 +45,45 @@ public class PublishMission extends HttpServlet {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                float price = 0;
-                try {
-                    price = Float.parseFloat(remuneration);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-                myMission.setCity(city);
-                myMission.setMissionDate(date1);
-                myMission.setPublishDate(new Date());
-                myMission.setPrice(price);
-                myMission.setDestination(supermarche);
-                myMission.setDescription(description);
-
-                if (!UserHandler.isLoggedIn(request)) {
-                    Util.addGlobalAlert(Util.WARNING,
-                            "Vous devez vous connecter ou vous inscrire avant de publier votre annonce !");
-                    request.getSession().setAttribute("myMission", myMission);
-                    request.getSession().setAttribute("fromUrl", request.getRequestURI());
-                    response.sendRedirect("/coursefacile/login");
-                } else {
-                    User currentUser = UserHandler.getLoggedInUser(request);
-                    System.out.println(currentUser.getId());
-                    myMission.setOwner(currentUser);
-                    IMissionHandler missionHandler = new MissionHandler();
-                    myMission.setPublished(true);
-                    if (missionHandler.add(myMission)) {
-                        Util.addGlobalAlert(Util.SUCCESS, "Votre Annonce vient d'être publié");
-                        response.sendRedirect("/coursefacile");
-                    } else {
-                        Util.addGlobalAlert(Util.DANGER,
-                                "Une erreur est survenu lors de l'enregistrement de la mission ! Veuillez réessayer s'il vous plait :)");
+                if (date1.compareTo(new Date()) >= 0) {
+                    float price = 0;
+                    try {
+                        price = Float.parseFloat(remuneration);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
                     }
+
+                    myMission.setCity(city);
+                    myMission.setMissionDate(date1);
+                    myMission.setPublishDate(new Date());
+                    myMission.setPrice(price);
+                    myMission.setDestination(supermarche);
+                    myMission.setDescription(description);
+                    myMission.setName(missionName);
+
+                    if (!UserHandler.isLoggedIn(request)) {
+                        Util.addGlobalAlert(Util.WARNING,
+                                "Vous devez vous connecter ou vous inscrire avant de publier votre annonce !");
+                        request.getSession().setAttribute("myMission", myMission);
+                        request.getSession().setAttribute("fromUrl", request.getRequestURI());
+                        response.sendRedirect("/coursefacile/login");
+                    } else {
+                        User currentUser = UserHandler.getLoggedInUser(request);
+                        System.out.println(currentUser.getId());
+                        myMission.setOwner(currentUser);
+                        IMissionHandler missionHandler = new MissionHandler();
+                        myMission.setPublished(true);
+                        if (missionHandler.add(myMission)) {
+                            Util.addGlobalAlert(Util.SUCCESS, "Votre Annonce vient d'être publié");
+                            response.sendRedirect("/coursefacile");
+                        } else {
+                            Util.addGlobalAlert(Util.DANGER,
+                                    "Une erreur est survenu lors de l'enregistrement de la mission ! Veuillez réessayer s'il vous plait :)");
+                        }
+                    }
+                } else {
+                    Util.addGlobalAlert(Util.WARNING, "Veuillez choisir une date valide!");
+                    this.getServletContext().getRequestDispatcher("/views/publishMission.jsp").forward(request, response);
                 }
             } else {
                 Util.addGlobalAlert(Util.DANGER, "Vous n'avez pas bien rempli le formulaire ! veuillez réessayer");

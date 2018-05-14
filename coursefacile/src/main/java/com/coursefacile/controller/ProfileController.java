@@ -1,7 +1,10 @@
 package com.coursefacile.controller;
 
+import com.coursefacile.dao.IMissionHandler;
 import com.coursefacile.dao.IUserHandler;
+import com.coursefacile.dao.MissionHandler;
 import com.coursefacile.dao.UserHandler;
+import com.coursefacile.model.Mission;
 import com.coursefacile.utilities.Util;
 
 import javax.servlet.ServletException;
@@ -12,8 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.coursefacile.model.User;
+import javafx.util.converter.LocalDateStringConverter;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Map;
 
 @WebServlet("/profile")
@@ -29,7 +38,7 @@ public class ProfileController extends HttpServlet {
         userHandler = new UserHandler();
         String pathInfo = request.getPathInfo() != null ? request.getPathInfo() : "";
         String[] pathParts = pathInfo.split("/");
-        System.out.println(request.getRequestURI());
+//        System.out.println(request.getRequestURI());
         if (pathParts.length == 2) {
             String param = pathParts[1];
             int id;
@@ -41,7 +50,23 @@ public class ProfileController extends HttpServlet {
                 return;
             }
             User user2 = userHandler.get(id);
+            System.out.println(user2);
+            IMissionHandler missionHandler = new MissionHandler();
+            int score = missionHandler.getScore(user2);
+            request.setAttribute("score", score);
             request.setAttribute("user2", user2);
+            if (user2.getBirthDate() != null && user2.getBirthDate().length() != 0) {
+                try {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date birthDate = formatter.parse(user2.getBirthDate());
+                    LocalDate localBirthDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate localCurrentDate = LocalDate.now();
+                    int age = Period.between(localBirthDate, localCurrentDate).getYears();
+                    request.setAttribute("age", age);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             this.getServletContext().getRequestDispatcher("/views/PublicProfile.jsp").forward(request, response);
 
         } else if (request.getRequestURI().equals(prefixPath + "/dashboard/profile")) {
@@ -66,8 +91,7 @@ public class ProfileController extends HttpServlet {
             User currentUser = UserHandler.getLoggedInUser(request);
             String status = Boolean.toString(userHandler.validatePwd(currentUser.getEmail(), request.getParameter("confirmationPwd")));
             response.getWriter().println("[" + status + ",\"" + Util.hashString(currentUser.getPassword()) + "\"]");
-        } else if (request.getRequestURI().equals(prefixPath + "/profile")) {
-
+        } else if (request.getRequestURI().equals(prefixPath + "/dashboard/profile")) {
             if (UserHandler.isLoggedIn(request)) {
                 if (params.containsKey("checkSubmit")) {
                     user2 = UserHandler.getLoggedInUser(request);
@@ -107,7 +131,8 @@ public class ProfileController extends HttpServlet {
 
             }
 
-        }
+        } else
+            System.out.println("XXX");
     }
 
 

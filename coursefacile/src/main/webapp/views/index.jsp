@@ -94,7 +94,7 @@
 <div class="container mg-top-50">
     <div class="text-center">
         <div class="wow bounceInDown" data-wow-offset="0" data-wow-delay="0.3s">
-            <h3>Faites des courses comme vous voulez plus librement!</h3>
+            <h3>Faites des courses comme vous voulez plus librement !</h3>
         </div>
     </div>
 </div>

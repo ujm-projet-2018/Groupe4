@@ -7,13 +7,16 @@ import java.util.Set;
 @Entity
 @Table(name = "mission")
 public class Mission {
+    public static final int SCORE_MIN = 10;
     @Id
     @GeneratedValue
     int id;
     private String name;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Date publishDate;
     private Date missionDate;
+    private Date reservationDate;
     @ManyToOne
     @JoinColumn(name = "city")
     private City city;
@@ -124,5 +127,13 @@ public class Mission {
 
     public void setConversation(Set<Message> conversation) {
         this.conversation = conversation;
+    }
+
+    public Date getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
     }
 }

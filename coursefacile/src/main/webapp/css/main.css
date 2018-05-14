@@ -2,11 +2,11 @@
 #publier-mission {
     margin-top: 20px;
     background-color: DodgerBlue;
-    border: none; 
-    color: white; 
-    padding: 12px 16px; 
-    font-size: 16px; 
-    cursor: pointer; 
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
     border-radius: 18px;
 }
 
@@ -174,6 +174,7 @@ nav.navbar-static-top {
 #sidebar-gauche {
     position: absolute;
     margin-top: 55px;
+    left: 2px;
 }
 
 #titre-dashboard {
@@ -297,9 +298,16 @@ nav.navbar-static-top {
   }
 
   #infos ul li {
-    color: #5DD167;
     font-weight: 500;
     font-size: 1.2em;
+  }
+
+  #verifie {
+    color: #5DD167;
+  }
+
+  #nonverifie {
+  	color: red;
   }
 
  #infos hr {
@@ -353,7 +361,7 @@ hr.separator {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 338px;
+    height: 310px;
 }
 
 .public-profile-header .lead {
@@ -644,7 +652,7 @@ img.img-user-listing {
 }
 
 .banner-header {
-    height: 338px;
+    height: 310px;
 }
 
 .banner-header h2.title {
@@ -657,6 +665,13 @@ img.img-user-listing {
     background-image: url("/coursefacile/images/ecommerce.jpg");
 }
 
+.mg-top-10 {
+    margin-top: 10px !important;
+}
+
+.mg-top-20 {
+    margin-top: 20px !important;
+}
 .mg-top-50 {
     margin-top: 50px !important;
 }
@@ -665,4 +680,91 @@ img.img-user-listing {
     .info-publish-home {
         padding-top: 50px;
     }
+}
+
+.related-mission {
+    height: 70px;
+    border-radius: 50%;
+}
+
+.pad-20 {
+    padding-top: 20px !important;
+}
+
+.no-mg {
+    margin: 0 !important;
+}
+
+.detail-mission-bg {
+    background-image: url("/coursefacile/images/grocery-shopping-e1457564196533.jpg");
+}
+
+#mesmissions {
+	margin-left: 80px;
+}
+
+#prix {
+	background: #d84949;
+	color: #ffffff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	padding: 10px 15px;
+	font-weight: 14px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+}
+
+#bouton_mes_missions {
+	padding: 8px 20px;
+    background: #ED502E;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+}
+
+#fullwidth2 {
+	margin-left: 250px;
+	min-height: 536px;
+}
+
+#details_reservation {
+	background-image: url("/coursefacile/images/courses.png");
+}
+
+.progress-bar-profil-punlic .progressbar li:after :not .progress-bar-profil-punlic .progressbar li.activated {
+    width: 83%;
+    height: 2px;
+    content: '';
+    position: absolute;
+    background-color: #67757c;
+    top: 15px;
+    left: -43%;
+    z-index: unset;
+}
+
+.list-right-info p.lead {
+    font-size: 14px;
+}
+.btn-default.travel-mode {
+    background-color: #f8f8f8;
+    font-size: 14px;
+}
+
+#map, #map-missions {
+    width: 100%;
+}
+
+#map-missions {
+    min-height: 500px;
+}
+
+#amount {
+    padding: 0;
+}
+
+.mg-top-5 {
+    margin-top: 5px !important;
 }

@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.coursefacile.dao.IMissionHandler;
+import com.coursefacile.dao.MissionHandler;
 import com.coursefacile.dao.UserHandler;
+import com.coursefacile.model.Mission;
 
 /**
  * @author walid
@@ -19,12 +22,20 @@ import com.coursefacile.dao.UserHandler;
 
 public class Dashboard extends HttpServlet {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (UserHandler.isLoggedIn(request)) {
+            IMissionHandler missionHandler = new MissionHandler();
+            int score = missionHandler.getScore(UserHandler.getLoggedInUser(request));
+            request.setAttribute("score", score);
             this.getServletContext().getRequestDispatcher("/views/dashboard.jsp").forward(request, response);
         } else {
             request.getSession().setAttribute("fromUrl", request.getRequestURI());
