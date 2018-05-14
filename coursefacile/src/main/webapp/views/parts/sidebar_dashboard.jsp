@@ -21,7 +21,7 @@
 				<li><a class=" "
 					href="<%=prefixPath%>/dashboard/mesreservations"
 					aria-expanded="false"><i class="fa fa-cart-arrow-down"></i><span
-						class="hide-menu">Mes réservations </span></a></li>
+                        class="hide-menu">Mes rÃ©servations </span></a></li>
 				<li class="nav-label">Mon compte</li>
 				<li><a class=" " href="<%=prefixPath%>/dashboard/messages"
 					aria-expanded="false"><i class="fa fa-envelope"></i><span
@@ -45,7 +45,7 @@
 							disponnible </span></a></li>
 				<li><a class=" " href="#" aria-expanded="false"><i
 						class="fa fa-credit-card"></i><span class="hide-menu">Paiements
-							effectués</span></a></li>
+							effectuï¿½s</span></a></li>
 				-->
 			</ul>
 		</nav>

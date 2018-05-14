@@ -146,14 +146,14 @@
                                 <h3>Publiée par</h3>
                                 <ul>
                                     <li><c:set var="imgUrl"
-                                               value="/coursefacile/images/people.png"></c:set> <c:if
+                                               value="/images/people.png"></c:set> <c:if
                                             test="${not empty mission.owner.image}">
                                         <c:set var="imgUrl" value="${mission.owner.image}"></c:set>
                                     </c:if>
                                         <div class="our-border clearfix">
                                             <div class="our-img">
                                                 <a href="<%=prefixPath%>/profile/${mission.owner.id}">
-                                                    <img alt="" height="90" width="90" src="${imgUrl}">
+                                                    <img alt="" height="90" width="90" src="<%=prefixPath%>${imgUrl}">
                                                 </a>
                                             </div>
                                             <div class="our-info">

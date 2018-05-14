@@ -71,7 +71,7 @@
 											<c:set var="contact" scope="page" value="${msg.sender}"></c:set>
 										</c:if>
 										<c:set var="image" scope="page"
-											value="/coursefacile/images/people.png" />
+                                               value="/images/people.png"/>
 										<c:if test="${not empty contact.image}">
 											<c:set var="image" scope="page" value="${contact.image}" />
 										</c:if>
@@ -82,7 +82,8 @@
 													<div class="col-sm-3">
 														<div class="imagewrapper">
 															<div class="text-center">
-																<img alt="" class="img-user-listing" src="${image}">
+                                                                <img alt="" class="img-user-listing"
+                                                                     src="<%=prefixPath%>${image}">
 															</div>
 														</div>
 													</div>

@@ -93,13 +93,13 @@
 									<h3>Notre agent</h3>
 									<ul>
 										<li><c:set var="imgUrl"
-												value="/coursefacile/images/people.png"></c:set> <c:if
+                                                   value="/images/people.png"></c:set> <c:if
 												test="${not empty mission.owner.image}">
 												<c:set var="imgUrl" value="${mission.owner.image}"></c:set>
 											</c:if>
 											<div class="our-border clearfix">
 												<div class="our-img">
-													<img alt="" height="90" width="90" src="${imgUrl}">
+                                                    <img alt="" height="90" width="90" src="<%=prefixPath%>${imgUrl}">
 												</div>
 												<div class="our-info">
 													<h5>

@@ -649,6 +649,7 @@ img.img-user-listing {
 
 .avatar img {
     cursor: pointer;
+    min-height: 92px;
 }
 
 .banner-header {
@@ -767,4 +768,8 @@ img.img-user-listing {
 
 .mg-top-5 {
     margin-top: 5px !important;
+}
+
+.fix-header.fix-sidebar .global-alert {
+    text-align: center;
 }

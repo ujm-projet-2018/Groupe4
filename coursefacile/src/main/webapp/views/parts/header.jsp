@@ -30,7 +30,7 @@
                             <%
                                 if (UserHandler.isLoggedIn(request)) {
                                     User user = UserHandler.getLoggedInUser(request);
-                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
                             %>
                             <li class="user">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">

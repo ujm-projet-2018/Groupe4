@@ -27,11 +27,11 @@
         <div class="row">
 
             <div class="col-md-12 text-center">
-                <c:set var="imgUrl" value="/coursefacile/images/people.png"></c:set>
+                <c:set var="imgUrl" value="/images/people.png"></c:set>
                 <c:if test="${not empty user2.image}">
                     <c:set var="imgUrl" value="${user2.image}"></c:set>
                 </c:if>
-                <img src="${imgUrl}" name="aboutme" width="140" height="140" class="img-circle"/>
+                <img src="<%=prefixPath%>${imgUrl}" name="aboutme" width="140" height="140" class="img-circle"/>
                 <div class="lead color-white">${user2.lname} ${user2.fname}
                 </div>
 

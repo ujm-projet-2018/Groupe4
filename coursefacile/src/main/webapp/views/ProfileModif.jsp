@@ -30,7 +30,7 @@
     <%@include file="parts/notification_message.jsp" %>
     <%
         User user = UserHandler.getLoggedInUser(request);
-        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
     %>
     <!-- End header header -->
 
@@ -48,15 +48,20 @@
                         <div class="card-body">
                             <div class="card-two">
                                 <header>
-                                    <div class="avatar">
+                                    <form id="form-edit-profile-photo"
+                                          action="<%= prefixPath%>/dashboard/profile/upload-photo" method="post"
+                                          enctype="multipart/form-data">
+                                        <div class="avatar">
 										<span><label class="ace-file-input ace-file-multiple"
-                                                     style="width: 100%;"> <input type="file"
-                                                                                  name="avatar"> <span
+                                                     style="width: 100%;">
+                                            <input type="file" id="avatar-profile"
+                                                   name="avatar"> <span
                                                 class="ace-file-container">
-													<img src="<%=imgUrl%>" alt="Profile picture "/>
+													<img src="<%=imgUrl%>" id="profile-photo" alt="Profile picture "/>
 											</span>
 										</label> </span>
-                                    </div>
+                                        </div>
+                                    </form>
                                 </header>
 
                                 <h3>${user.lname} ${user.fname}</h3>

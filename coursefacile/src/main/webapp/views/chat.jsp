@@ -34,12 +34,13 @@
             <div class="chat ">
                 <div class="chat-header clearfix">
                     <c:set var="receiverImage" scope="page"
-                           value="/coursefacile/images/people.png"/>
+                           value="/images/people.png"/>
                     <c:if test="${not empty receiver.image}">
                         <c:set var="receiverImage" scope="page" value="${receiver.image}"/>
                     </c:if>
-                    <a href="/profile/${receiver.id}"><img class="contact-img"
-                                                           src="${receiverImage}" alt="avatar"/></a>
+                    <a href="<%=prefixPath%>/profile/${receiver.id}"><img class="contact-img"
+                                                                          src="<%=prefixPath%>${receiverImage}"
+                                                                          alt="avatar"/></a>
 
                     <div class="chat-about">
                         <div class="chat-with">
