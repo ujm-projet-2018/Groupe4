@@ -138,8 +138,7 @@
                                                     <input type="text" placeholder="JJ/MM/AAAA"
                                                            name="birthDate" id="date"
                                                            class="form-control form-control-line"
-                                                           value="<fmt:formatDate pattern="dd/MM/yyyy"
-                                                                       value="${user.birthDate}"/>">
+                                                           value="${user.birthDate}">
                                                 </div>
                                             </div>
 
@@ -153,8 +152,7 @@
                                                         <input type="text" placeholder="JJ/MM/AAAA"
                                                                name="birthDate" id="date"
                                                                class="form-control form-control-line"
-                                                               value="<fmt:formatDate pattern="dd/MM/yyyy"
-                                                                       value="${user.birthDate}"/>">
+                                                               value="${user.birthDate}">
                                                     </div>
                                                 </div>
 

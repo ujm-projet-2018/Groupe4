@@ -122,6 +122,14 @@
         </div>
         <div class="col-md-6">
             <form class="form-horizontal">
+                <c:if test="${not empty age}">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Age</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">${age} ans</p>
+                        </div>
+                    </div>
+                </c:if>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">

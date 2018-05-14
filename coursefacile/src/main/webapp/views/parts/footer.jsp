@@ -88,7 +88,7 @@
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.isotope.min.js")%>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <%= Util.includeCssOrJs(request, "/|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/js/jquery.autocomplete.js")%>
-<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/js/bootstrap-datepicker.js")%>
+<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/update-mission/*|/missions*|/dashboard/profile", "/js/bootstrap-datepicker.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/functions.js")%>
 <%= Util.includeCssOrJs(request, "*", "/js/jquery.validate.min.js")%>
 

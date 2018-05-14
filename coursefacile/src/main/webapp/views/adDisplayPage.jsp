@@ -122,7 +122,7 @@
     <div class="container">
         <div class="row mg-top-20 well">
             <div class="col-sm-12">
-                <p>Afficher la map avec tout les mission et avec la mission aillaiant le meilleur itineraire</p>
+                <p>Afficher la map avec tout les mission et avec la mission dont le coût en distance est minimale</p>
                 <form class="form-inline">
                     <div class="form-group">
                         <label for="travel-method">Methode</label>

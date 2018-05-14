@@ -143,7 +143,7 @@
 
                             <!-- sidebar-box our-box -->
                             <div class="sidebar-box our-box">
-                                <h3>Notre agent</h3>
+                                <h3>Publiée par</h3>
                                 <ul>
                                     <li><c:set var="imgUrl"
                                                value="/coursefacile/images/people.png"></c:set> <c:if
@@ -152,7 +152,9 @@
                                     </c:if>
                                         <div class="our-border clearfix">
                                             <div class="our-img">
-                                                <img alt="" height="90" width="90" src="${imgUrl}">
+                                                <a href="<%=prefixPath%>/profile/${mission.owner.id}">
+                                                    <img alt="" height="90" width="90" src="${imgUrl}">
+                                                </a>
                                             </div>
                                             <div class="our-info">
                                                 <h5>
@@ -166,6 +168,14 @@
                                                     href="mailto:${mission.owner.email}">${mission.owner.email}</a>
                                             </div>
                                         </div>
+                                        <c:if test="${not empty user and mission.owner.id ne user.id}">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <a href="<%= prefixPath%>/dashboard/send-messages/${mission.owner.id}"
+                                                       class="btn btn-primary">Contacter l'éditeur</a>
+                                                </div>
+                                            </div>
+                                        </c:if>
                                     </li>
                                 </ul>
                             </div>

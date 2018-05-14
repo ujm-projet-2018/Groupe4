@@ -692,16 +692,22 @@ $(function () {
     var draw = false
 
     function getClosestDestination(keyWord, position, draw, missionInfos, travel) {
-        // console.log(missionPlace);
+        console.log(missionPlace);
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
             location: position,
             // radius: 10000,
-            type: ['store'],
+            // type: ['store'],
             keyword: keyWord,
             rankBy: google.maps.places.RankBy.DISTANCE
         }, function (result, status) {
-            nearbySearchPositionCallback(result, status, position, draw, missionInfos, travel);
+            console.log("====status====");
+            console.log(status);
+            if ("ZERO_RESULTS" != status) {
+                console.log("====getClosestDestination====");
+                console.log(result);
+                nearbySearchPositionCallback(result, status, position, draw, missionInfos, travel);
+            }
         });
     }
 
@@ -885,7 +891,7 @@ $(function () {
                                 processData(mission);
                             }
                             setTimeout(function () {
-                                // console.log(missionArray);
+                                console.log(missionArray);
                                 for (var i = 0; i < missionArray.length; i++) {
                                     var missions = missionArray[i];
                                     console.log(missions.missions.length);
@@ -910,7 +916,7 @@ $(function () {
                                         console.log(missionsItineraries);
                                         drawItinirary(currentPosition, travel, missionsItineraries[0].missionInfos.place, wayPoint);
 
-                                    }, 2400);
+                                    }, 3000);
                                     createMarkerWithValue(missions, travel);
                                 }
 
@@ -925,7 +931,7 @@ $(function () {
 
 
         function getClosetstMissionData(mission) {
-            // console.log(mission);
+            console.log(mission);
             if (mission.place != undefined)
                 getClosestDestination(mission.missionKeyWord, mission.place.geometry.location, false, mission, '');
         }

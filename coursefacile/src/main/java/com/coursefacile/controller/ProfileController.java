@@ -15,8 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.coursefacile.model.User;
+import javafx.util.converter.LocalDateStringConverter;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Map;
 
 @WebServlet("/profile")
@@ -49,6 +55,18 @@ public class ProfileController extends HttpServlet {
             int score = missionHandler.getScore(user2);
             request.setAttribute("score", score);
             request.setAttribute("user2", user2);
+            if (user2.getBirthDate() != null && user2.getBirthDate().length() != 0) {
+                try {
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    Date birthDate = formatter.parse(user2.getBirthDate());
+                    LocalDate localBirthDate = birthDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate localCurrentDate = LocalDate.now();
+                    int age = Period.between(localBirthDate, localCurrentDate).getYears();
+                    request.setAttribute("age", age);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             this.getServletContext().getRequestDispatcher("/views/PublicProfile.jsp").forward(request, response);
 
         } else if (request.getRequestURI().equals(prefixPath + "/dashboard/profile")) {

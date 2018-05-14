@@ -7,7 +7,7 @@
 <link href="<%= prefixPath %>/css/prettyPhoto.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/style.css" rel="stylesheet">
 <link href="<%= prefixPath %>/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/css/datepicker.css")%>
+<%= Util.includeCssOrJs(request, "/|/profile|/Publish-Mission|/dashboard/update-mission/*|/missions*|/dashboard/profile", "/css/datepicker.css")%>
 <%-- Login page styles --%>
 <%= Util.includeCssOrJs(request, "/|/Publish-Mission|/dashboard/update-mission/*|/missions*", "/css/jquery.autocomplete.css")%>
 <%= Util.includeCssOrJs(request, "/login", "/css/form-elements.css")%>
@@ -18,8 +18,8 @@
 <%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/css/lib/owl.carousel.min.css")%>
 <%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/css/lib/owl.theme.default.min.css")%>
 <%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/css/helper.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/css/style_dashboard.css")%>
-<%= Util.includeCssOrJs(request, "/dashboard|/profile/*|/dashboard/*|/dashboard/send-messages/*", "/css/animate_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/css/style_dashboard.css")%>
+<%= Util.includeCssOrJs(request, "/dashboard|/dashboard/*|/dashboard/send-messages/*", "/css/animate_dashboard.css")%>
 <%-- Mission Listing styles --%>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <%--<link rel="stylesheet" type="text/css" media="screen"--%>
