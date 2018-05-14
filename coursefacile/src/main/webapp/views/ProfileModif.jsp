@@ -15,7 +15,7 @@
     <%@ include file="parts/styles.jsp" %>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-sidebar">
 <%@include file="parts/header.jsp" %>
 <!-- Preloader - style you can find in spinners.css -->
 <div class="preloader">

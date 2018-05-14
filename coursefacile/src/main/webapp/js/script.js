@@ -1025,5 +1025,13 @@ $(function () {
             }
         });
     }
+    var $showSideBar = $('#show-side-bar');
+    if ($showSideBar.length) {
+        $showSideBar.on('click', function (e) {
+            e.preventDefault();
+            $(this).parent().toggleClass('open');
+            $('#show-side-bar-box').toggleClass('open');
+        });
+    }
 })
 ;

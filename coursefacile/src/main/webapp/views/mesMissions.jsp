@@ -36,7 +36,7 @@
 <%@ include file="parts/styles.jsp"%>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-sidebar">
 	<%@include file="parts/header.jsp"%>
 	<!-- Main wrapper  -->
 	<div id="main-wrapper">
@@ -132,7 +132,10 @@
 						</ul>
 					</div>
 				</div>
-				<c:if test="${not empty paginationMax and paginationMax ne 0}">
+                <c:if test="${empty Lmissions}">
+                    <p class="lead">Vous n'avez acune réservation en cours.</p>
+                </c:if>
+                <c:if test="${not empty paginationMax and paginationMax ne 0 and not empty Lmissions and paginationMax ne 1}">
 					<div class="mx-auto">
 						<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">

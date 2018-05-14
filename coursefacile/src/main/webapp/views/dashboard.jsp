@@ -16,14 +16,14 @@
     <%@ include file="parts/styles.jsp" %>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-sidebar">
 <%@include file="parts/header.jsp" %>
 <!-- Main wrapper  -->
 <div id="main-wrapper">
     <%@include file="parts/notification_message.jsp" %>
     <%
         User user = UserHandler.getLoggedInUser(request);
-        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
     %>
     <!-- End header header -->
 
