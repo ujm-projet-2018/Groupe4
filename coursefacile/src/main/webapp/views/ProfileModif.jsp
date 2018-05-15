@@ -3,7 +3,6 @@
   --
   --
 --%>
-<%@page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 
@@ -29,7 +28,6 @@
     <%
         User user = UserHandler.getLoggedInUser(request);
         String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
-        request.setCharacterEncoding("UTF-8");
     %>
     <!-- End header header -->
 

@@ -138,10 +138,10 @@
 							</div>
 						</div>
 					</c:if>
-					<c:if test="${not empty contacts}">
+					<c:if test="${empty messages}">
 						<div class="row">
 							<div class="grid_list_product st2">
-								<p>Aucun message trouvé</p>
+								<p class="lead">Aucun message trouvé</p>
 							</div>
 						</div>
 
