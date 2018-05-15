@@ -151,8 +151,7 @@ public class ProfileController extends HttpServlet {
                             check = file.delete();
                             System.out.println("check:=" + check);
                         }
-                        UUID uuid = UUID.randomUUID();
-                        String fileName = currentUser.getFname() + uuid.toString() + ".png";
+                        String fileName = currentUser.getFname() + currentUser.getId() + ".png";
                         InputStream imageProfileInputStream = imageProfile.getInputStream();
                         byte[] buffer = new byte[imageProfileInputStream.available()];
                         imageProfileInputStream.read(buffer);

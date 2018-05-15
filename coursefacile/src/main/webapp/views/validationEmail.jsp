@@ -27,11 +27,19 @@ To change this template use File | Settings | File Templates.
     <% } else {
         String urlValidationMail = (String) request.getAttribute("urlValidationMail");
     %>
-    <div class="jumbotron">
+    <div class="jumbotron validation-page">
+        <c:if test="${not empty user and user.emailChecked eq true}">
+            <p class="lead text-success">Le lien est déjà utilisé.</p>
+            <p class="lead text-success">Votre mail est validé.</p>
+        </c:if>
+        <c:if test="${not empty user and user.emailChecked ne true}">
         <p class="lead text-danger">Votre mail n'est pas validé.</p>
-        <p class="text-danger">Le lien de validation a expiré!</p>
-        <p><a class="btn btn-primary btn-lg" href="<%= urlValidationMail %>" role="button">Recevoir un nouvel mail de
-            validation</a></p>
+            <p class="text-danger">Le lien de validation a expiré!</p>
+            <p><a class="btn btn-primary btn-lg" href="<%= urlValidationMail %>" role="button">Recevoir un nouvel mail
+                de
+                validation</a></p>
+        </c:if>
+
     </div>
     <% } %>
 </div>

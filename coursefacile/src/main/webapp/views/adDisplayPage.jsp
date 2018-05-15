@@ -157,17 +157,17 @@
                                     <div class="row">
                                         <div class="col-md-2">
                                             <div class="imagewrapper">
-                                                <c:set var="image" value="/coursefacile/images/people.png"></c:set>
+                                                <c:set var="image" value="/images/people.png"></c:set>
                                                 <c:if test="${not empty post.owner.image}">
                                                     <c:set var="image" value="${ post.owner.image}"></c:set>
                                                 </c:if>
-                                                <a href="/coursefacile/profile/${post.owner.id}"><img alt=""
-                                                                                                      accesskey=""
-                                                                                                      class="img-circle"
-                                                                                                      width="140px"
-                                                                                                      height="140px"
-                                                                                                      style="border-radius: 50%; vertical-align: middle; margin-top: 14px"
-                                                                                                      src="${image}"></a>
+                                                <a href="<%=prefixPath%>/profile/${post.owner.id}"><img alt=""
+                                                                                                        accesskey=""
+                                                                                                        class="img-circle"
+                                                                                                        width="140px"
+                                                                                                        height="140px"
+                                                                                                        style="border-radius: 50%; vertical-align: middle; margin-top: 14px"
+                                                                                                        src="<%=prefixPath%>${image}"></a>
                                                 <span class="price">${post.price} €</span>
                                             </div>
                                         </div>

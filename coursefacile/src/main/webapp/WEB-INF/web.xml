@@ -169,6 +169,14 @@
         <servlet-name>Contact</servlet-name>
         <url-pattern>/contact</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteMission</servlet-name>
+        <servlet-class>com.coursefacile.controller.DeleteMission</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteMission</servlet-name>
+        <url-pattern>/dashboard/delete-mission/*</url-pattern>
+    </servlet-mapping>
     <error-page>
         <error-code>404</error-code>
         <location>/views/erreur404.jsp</location>

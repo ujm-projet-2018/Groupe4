@@ -121,11 +121,15 @@
                                 </c:if>
                                 <c:if test="${user.id eq mission.owner.id}">
                                     <div class="share">
-                                        <a class="btn btn-primary"
+                                        <a class="btn btn-primary no-mg-top"
                                            href="<%=prefixPath%>/dashboard/update-mission/${mission.id}">Modifier cette
+                                            mission</a>
+                                        <a class="btn btn-danger"
+                                           href="<%=prefixPath%>/dashboard/delete-mission/${mission.id}">Supprimer
                                             mission</a>
                                     </div>
                                 </c:if>
+
                             </div>
                         </div>
                         <!-- End Property -->
