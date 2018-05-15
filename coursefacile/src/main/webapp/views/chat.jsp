@@ -3,8 +3,6 @@
   --
   --
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-
 <!DOCTYPE html>
 <html>
 
@@ -14,7 +12,7 @@
     <%@ include file="parts/styles.jsp" %>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-sidebar">
 <%@include file="parts/header.jsp" %>
 <!-- Main wrapper  -->
 <div id="main-wrapper">
@@ -34,12 +32,13 @@
             <div class="chat ">
                 <div class="chat-header clearfix">
                     <c:set var="receiverImage" scope="page"
-                           value="/coursefacile/images/people.png"/>
+                           value="/images/people.png"/>
                     <c:if test="${not empty receiver.image}">
                         <c:set var="receiverImage" scope="page" value="${receiver.image}"/>
                     </c:if>
-                    <a href="/profile/${receiver.id}"><img class="contact-img"
-                                                           src="${receiverImage}" alt="avatar"/></a>
+                    <a href="<%=prefixPath%>/profile/${receiver.id}"><img class="contact-img"
+                                                                          src="<%=prefixPath%>${receiverImage}"
+                                                                          alt="avatar"/></a>
 
                     <div class="chat-about">
                         <div class="chat-with">

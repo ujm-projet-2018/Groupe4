@@ -61,6 +61,7 @@ public class ModifierMission extends HttpServlet {
      */
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf8");
         String prefixPath = this.getServletContext().getInitParameter("prefixPath");
         Map<String, String[]> params = request.getParameterMap();
         String pathInfo = request.getPathInfo() != null ? request.getPathInfo() : "";

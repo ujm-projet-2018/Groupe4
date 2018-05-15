@@ -24,10 +24,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
@@ -65,14 +63,15 @@
                                         <div class="row mg-top-20">
                                             <div class="col-md-offset-1 col-md-2">
 												<div class="imagewrapper">
-													<c:set var="image" value="/coursefacile/images/people.png"></c:set>
+                                                    <c:set var="image" value="/images/people.png"></c:set>
 													<c:if test="${not empty post.owner.image}">
 														<c:set var="image" value="${ post.owner.image}"></c:set>
 													</c:if>
-													<a href="/coursefacile/profile/${post.owner.id}"><img
-														alt="" class="img-circle" width="140px" height="140px"
-														style="border-radius: 50%; vertical-align: middle; margin-top: 14px"
-														src="${image}"></a> <span class="price" id="prix">${post.price}
+                                                    <a href="<%=prefixPath%>/profile/${post.owner.id}"><img
+                                                            alt="" class="img-circle" width="140px" height="140px"
+                                                            style="border-radius: 50%; vertical-align: middle; margin-top: 14px"
+                                                            src="<%=prefixPath%>${image}"></a> <span class="price"
+                                                                                                     id="prix">${post.price}
 														€</span>
 												</div>
 											</div>
@@ -122,7 +121,10 @@
 						</ul>
 					</div>
 				</div>
-				<c:if test="${not empty paginationMax and paginationMax ne 0}">
+                <c:if test="${empty Lmissions}">
+                    <p class="lead">Vous n'avez aucune réservation en cours.</p>
+                </c:if>
+                <c:if test="${not empty paginationMax and paginationMax ne 0 and not empty Lmissions and paginationMax ne 1}">
 					<div class="mx-auto">
 						<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">

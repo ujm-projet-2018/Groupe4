@@ -3,7 +3,6 @@
   --
   --
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +13,7 @@
 <%@ include file="parts/styles.jsp"%>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-sidebar">
 	<%@include file="parts/header.jsp"%>
 
 	<div class="main-content">
@@ -71,7 +70,7 @@
 											<c:set var="contact" scope="page" value="${msg.sender}"></c:set>
 										</c:if>
 										<c:set var="image" scope="page"
-											value="/coursefacile/images/people.png" />
+                                               value="/images/people.png"/>
 										<c:if test="${not empty contact.image}">
 											<c:set var="image" scope="page" value="${contact.image}" />
 										</c:if>
@@ -82,7 +81,8 @@
 													<div class="col-sm-3">
 														<div class="imagewrapper">
 															<div class="text-center">
-																<img alt="" class="img-user-listing" src="${image}">
+                                                                <img alt="" class="img-user-listing"
+                                                                     src="<%=prefixPath%>${image}">
 															</div>
 														</div>
 													</div>
@@ -138,10 +138,10 @@
 							</div>
 						</div>
 					</c:if>
-					<c:if test="${not empty contacts}">
+					<c:if test="${empty messages}">
 						<div class="row">
 							<div class="grid_list_product st2">
-								<p>Aucun message trouvé</p>
+								<p class="lead">Aucun message trouvé</p>
 							</div>
 						</div>
 

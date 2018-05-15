@@ -23,14 +23,14 @@
                     <div class="menu">
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation"><a href="<%= prefixPath %>/Publish-Mission"
-                                                       class="btn btn-default btn-publish-mission"><i
-                                    class="fa fa-cart-plus"></i>  Publier une mission</a></li>
+                                                       class="btn btn-default btn-publish-mission">Publier une
+                                mission</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/" class="active">Accueil</a></li>
                             <li role="presentation"><a href="<%= prefixPath %>/contact">Contact</a></li>
                             <%
                                 if (UserHandler.isLoggedIn(request)) {
                                     User user = UserHandler.getLoggedInUser(request);
-                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+                                    String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
                             %>
                             <li class="user">
                                 <a data-toggle="dropdown" href="#" class="dropdown-toggle" aria-expanded="false">

@@ -4,29 +4,28 @@ import com.coursefacile.dao.IMissionHandler;
 import com.coursefacile.dao.IUserHandler;
 import com.coursefacile.dao.MissionHandler;
 import com.coursefacile.dao.UserHandler;
-import com.coursefacile.model.Mission;
 import com.coursefacile.utilities.Util;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 
 import com.coursefacile.model.User;
-import javafx.util.converter.LocalDateStringConverter;
 
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
-@WebServlet("/profile")
-
+@MultipartConfig
 public class ProfileController extends HttpServlet {
     IUserHandler userHandler = new UserHandler();
     User user2;
@@ -84,6 +83,7 @@ public class ProfileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String prefixPath = this.getServletContext().getInitParameter("prefixPath");
+        request.setCharacterEncoding("utf8");
         Map<String, String[]> params = request.getParameterMap();
         if (params.containsKey("confirmationPwd") && request.getRequestURI().equals(prefixPath + "/confirm-pwd") && UserHandler.isLoggedIn(request)) {
             request.setCharacterEncoding("utf8");
@@ -95,31 +95,36 @@ public class ProfileController extends HttpServlet {
             if (UserHandler.isLoggedIn(request)) {
                 if (params.containsKey("checkSubmit")) {
                     user2 = UserHandler.getLoggedInUser(request);
-                    if (params.containsKey("telephone"))
+                    if (params.containsKey("telephone") && request.getParameter("telephone").length() != 0)
                         user2.setTelephone(request.getParameter("telephone"));
-                    if (params.containsKey("birthDate"))
+                    if (params.containsKey("birthDate") && request.getParameter("birthDate").length() != 0)
                         user2.setBirthDate(request.getParameter("birthDate"));
-                    if (params.containsKey("address"))
-                        user2.setAddress(request.getParameter("address"));
-                    if (params.containsKey("description"))
-                        user2.setDescription(request.getParameter("description"));
+                    System.out.println(request.getParameter("address"));
+                    System.out.println(new String(request.getParameter("address").getBytes("UTF-8")));
+                    if (params.containsKey("address") && request.getParameter("address").length() != 0)
+                        user2.setAddress(new String(request.getParameter("address").getBytes("UTF-8")));
+                    System.out.println("hééééééééyheyhey");
+                    System.out.println(request.getParameter("description"));
+                    if (params.containsKey("description") && request.getParameter("description").length() != 0)
+                        user2.setDescription(new String(request.getParameter("description").getBytes("UTF-8")));
+                    if (params.containsKey("password") && (request.getParameter("password") != "") && (request.getParameter("password")).length() >= 8)
+                        user2.setPassword(Util.hashString(request.getParameter("password")));
+                    else if (request.getParameter("password").length() > 0 && request.getParameter("password").length() < 8)
+                        Util.addGlobalAlert(Util.WARNING, "Le mot de passe n'est pas modifié il doit contenir au minimum 8 caracteres");
 
                     if (params.containsKey("fname") && params.containsKey("lname") && params.containsKey("email")) {
                         // check if an input is empty or password < 8 char and input contains smthing
                         if ((request.getParameter("fname") != "") && (request.getParameter("lname") != "")
-                                && (request.getParameter("email") != "") && (request.getParameter("password") != "")
-                                && (request.getParameter("password")).length() >= 8) {
+                                && (request.getParameter("email") != "")
+                                ) {
                             user2.setFname(request.getParameter("fname"));
                             user2.setLname(request.getParameter("lname"));
                             user2.setEmail(request.getParameter("email"));
-                            if (params.containsKey("password"))
-                                user2.setPassword(Util.hashString(request.getParameter("password")));
                             userHandler.update(user2);
                             Util.addGlobalAlert(Util.SUCCESS, "profile modifie avec succes");
-                        } else {
+                        } else
                             Util.addGlobalAlert(Util.WARNING,
-                                    "s'il vous plait ne pas laisser les champs vide, le password doit contenir > 8 caracteres");
-                        }
+                                    "le nom prenom et email sont obligatoires");
                         this.getServletContext().getRequestDispatcher("/views/ProfileModif.jsp").forward(request, response);
                     }
                 } else {
@@ -131,8 +136,49 @@ public class ProfileController extends HttpServlet {
 
             }
 
-        } else
-            System.out.println("XXX");
+        } else if (request.getRequestURI().equals(prefixPath + "/dashboard/profile/upload-photo")) {
+            if (UserHandler.isLoggedIn(request)) {
+                User currentUser = UserHandler.getLoggedInUser(request);
+                Part imageProfile = request.getPart("avatar");
+                if (imageProfile != null) {
+
+                    try {
+                        boolean check = true;
+                        if (currentUser.getImage() != null && !currentUser.getImage().isEmpty()) {
+                            System.out.println(getServletConfig().getServletContext().getRealPath("") + currentUser.getImage());
+                            File file = new File(getServletConfig().getServletContext().getRealPath("") + currentUser.getImage());
+                            System.out.println("fileExists:=" + file.exists());
+                            check = file.delete();
+                            System.out.println("check:=" + check);
+                        }
+                        String fileName = currentUser.getFname() + currentUser.getId() + ".png";
+                        InputStream imageProfileInputStream = imageProfile.getInputStream();
+                        byte[] buffer = new byte[imageProfileInputStream.available()];
+                        imageProfileInputStream.read(buffer);
+                        File targetFile = new File(getServletConfig().getServletContext().getRealPath("uploads") + "/" + fileName);
+                        OutputStream outStream = new FileOutputStream(targetFile);
+                        outStream.write(buffer);
+                        UserHandler userHandler = new UserHandler();
+                        currentUser.setImage("/uploads/" + fileName);
+                        if (userHandler.update(currentUser))
+                            Util.addGlobalAlert(Util.SUCCESS, "Image de profile modifiée avec succès");
+                        else
+                            Util.addGlobalAlert(Util.DANGER, "Une erreure est survenue! Vuillez réessayer");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        response.getWriter().println("false");
+                    }
+                } else {
+                    Util.addGlobalAlert(Util.WARNING, "Veuillez fournire une image ");
+                }
+                response.sendRedirect(prefixPath + "/dashboard/profile");
+            } else
+                response.sendRedirect(prefixPath + "/login");
+
+        } else {
+            request.getSession().setAttribute("fromUrl", request.getRequestURI());
+            response.sendRedirect(prefixPath + "/login");
+        }
     }
 
 

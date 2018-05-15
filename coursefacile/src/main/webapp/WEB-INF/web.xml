@@ -9,6 +9,12 @@
         <param-name>adminEmail</param-name>
         <param-value>abdelmoghit.madih@gmail.com</param-value>
     </context-param>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
@@ -55,6 +61,7 @@
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile/*</url-pattern>
         <url-pattern>/dashboard/profile</url-pattern>
+        <url-pattern>/dashboard/profile/upload-photo</url-pattern>
         <url-pattern>/confirm-pwd</url-pattern>
     </servlet-mapping>
     <servlet>
@@ -161,6 +168,14 @@
     <servlet-mapping>
         <servlet-name>Contact</servlet-name>
         <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteMission</servlet-name>
+        <servlet-class>com.coursefacile.controller.DeleteMission</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteMission</servlet-name>
+        <url-pattern>/dashboard/delete-mission/*</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

@@ -1,6 +1,8 @@
 package com.coursefacile.utilities;
 
 import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -64,12 +66,22 @@ public class Util {
      */
     public static boolean sendEmail(String toEmail, String subject, String body) {
         try {
-            String smtpHostServer = "localhost";
-            Properties props = System.getProperties();
+            final String username = "no.replay.courses.faciles@gmail.com";
+            final String password = "CourseFacile2018";
 
-            props.put("mail.smtp.host", smtpHostServer);
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
 
-            javax.mail.Session session = javax.mail.Session.getInstance(props, null);
+//            javax.mail.Session session = javax.mail.Session.getInstance(props, null);
+            Session session = Session.getInstance(props,
+                    new javax.mail.Authenticator() {
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(username, password);
+                        }
+                    });
             MimeMessage msg = new MimeMessage(session);
             //set message headers
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");

@@ -5,8 +5,6 @@
   Time: 14:47
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -123,11 +121,15 @@
                                 </c:if>
                                 <c:if test="${user.id eq mission.owner.id}">
                                     <div class="share">
-                                        <a class="btn btn-primary"
+                                        <a class="btn btn-primary no-mg-top"
                                            href="<%=prefixPath%>/dashboard/update-mission/${mission.id}">Modifier cette
+                                            mission</a>
+                                        <a class="btn btn-danger"
+                                           href="<%=prefixPath%>/dashboard/delete-mission/${mission.id}">Supprimer
                                             mission</a>
                                     </div>
                                 </c:if>
+
                             </div>
                         </div>
                         <!-- End Property -->
@@ -146,14 +148,14 @@
                                 <h3>Publiée par</h3>
                                 <ul>
                                     <li><c:set var="imgUrl"
-                                               value="/coursefacile/images/people.png"></c:set> <c:if
+                                               value="/images/people.png"></c:set> <c:if
                                             test="${not empty mission.owner.image}">
                                         <c:set var="imgUrl" value="${mission.owner.image}"></c:set>
                                     </c:if>
                                         <div class="our-border clearfix">
                                             <div class="our-img">
                                                 <a href="<%=prefixPath%>/profile/${mission.owner.id}">
-                                                    <img alt="" height="90" width="90" src="${imgUrl}">
+                                                    <img alt="" height="90" width="90" src="<%=prefixPath%>${imgUrl}">
                                                 </a>
                                             </div>
                                             <div class="our-info">

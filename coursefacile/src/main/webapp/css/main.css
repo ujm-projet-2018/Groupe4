@@ -1,3 +1,6 @@
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+}
 /* header */
 #publier-mission {
     margin-top: 20px;
@@ -649,6 +652,7 @@ img.img-user-listing {
 
 .avatar img {
     cursor: pointer;
+    min-height: 92px;
 }
 
 .banner-header {
@@ -767,4 +771,156 @@ img.img-user-listing {
 
 .mg-top-5 {
     margin-top: 5px !important;
+}
+
+.fix-sidebar .global-alert {
+    text-align: center;
+}
+
+.dropdown-menu li {
+    padding: 0;
+}
+
+.fix-sidebar div.header {
+    height: 80px;
+    position: unset;
+}
+
+@media (max-width: 767px) {
+    .mini-sidebar .nav-label {
+        display: none;
+    }
+
+    .mini-sidebar .sidebar-nav #sidebarnav li {
+        position: relative;
+    }
+
+    .mini-sidebar .sidebar-nav {
+        background: transparent;
+    }
+
+    .mini-sidebar .scroll-sidebar {
+        padding-bottom: 0;
+        position: absolute;
+        overflow-x: hidden !important;
+    }
+
+    .mini-sidebar .scroll-sidebar {
+        padding-bottom: 0;
+        position: absolute;
+        overflow-x: hidden !important;
+    }
+
+    #sidebar-gauche {
+        width: 210px;
+    }
+}
+
+@media (max-width: 991px) {
+    #sidebar-gauche {
+        margin-top: 90px;
+    }
+}
+
+.ace-settings-container {
+    position: fixed;
+    left: 0;
+    top: 105px;
+    z-index: 9999;
+}
+
+.btn.btn-app.ace-settings-btn.btn-xs {
+    width: 42px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.btn.btn-app.ace-settings-btn {
+    float: right;
+    display: block;
+    text-align: center;
+    border-radius: 6px 0 0 6px;
+    opacity: .55;
+    vertical-align: top;
+    margin: 0;
+}
+
+.btn.btn-app.btn-xs {
+    width: 64px;
+    font-size: 15px;
+    border-radius: 8px;
+    padding-bottom: 7px;
+    padding-top: 8px;
+    line-height: 1.45;
+}
+
+.btn.btn-app.btn-xs > .ace-icon {
+    display: block;
+    font-size: 24px;
+    line-height: 24px;
+    margin: 0;
+}
+
+.btn.btn-app > .ace-icon {
+    display: block;
+    font-size: 42px;
+    margin: 0 0 4px;
+    line-height: 36px;
+    min-width: 0;
+    padding: 0;
+}
+
+.btn.btn-app > .ace-icon {
+    opacity: .88;
+}
+
+.ace-settings-box {
+    display: block;
+    float: left;
+    max-width: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    -moz-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+    background-color: #FFF;
+    border: 0 solid #FFB34B;
+    -webkit-transition: max-width .25s linear 0s, max-height 0s linear .25s, padding 0s linear .25s, border-width 0s linear .25s;
+    -o-transition: max-width .25s linear 0s, max-height 0s linear .25s, padding 0s linear .25s, border-width 0s linear .25s;
+    transition: max-width .25s linear 0s, max-height 0s linear .25s, padding 0s linear .25s, border-width 0s linear .25s;
+}
+
+.width-50 {
+    width: 50% !important;
+}
+
+.pull-left {
+    float: left;
+}
+
+.ace-settings-box .ace-settings-item {
+    margin: 6px 0;
+    color: #444;
+    max-height: 24px;
+    position: relative;
+    z-index: -1;
+    white-space: nowrap;
+}
+
+.ace-settings-box.open {
+    max-width: 320px;
+    max-height: 1000px;
+    padding: 0 14px;
+    border-width: 2px;
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.btn.btn-app.ace-settings-btn.open, .btn.btn-app.ace-settings-btn:hover {
+    opacity: 1;
 }

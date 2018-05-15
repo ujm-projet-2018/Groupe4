@@ -1004,5 +1004,34 @@ $(function () {
         });
 
     }
+    var $avatarProfile = $('#avatar-profile');
+    if ($avatarProfile.length) {
+        $avatarProfile.on('change', function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#profile-photo').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+
+                $('#form-edit-profile-photo').submit();
+            }
+            else {
+                $('#img').attr('src', prefixPath + '/images/people.png');
+            }
+        });
+    }
+    var $showSideBar = $('#show-side-bar');
+    if ($showSideBar.length) {
+        $showSideBar.on('click', function (e) {
+            e.preventDefault();
+            $(this).parent().toggleClass('open');
+            $('#show-side-bar-box').toggleClass('open');
+        });
+    }
 })
 ;

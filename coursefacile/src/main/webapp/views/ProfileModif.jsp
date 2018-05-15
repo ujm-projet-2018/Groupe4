@@ -3,10 +3,7 @@
   --
   --
 --%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -15,7 +12,7 @@
     <%@ include file="parts/styles.jsp" %>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-sidebar">
 <%@include file="parts/header.jsp" %>
 <!-- Preloader - style you can find in spinners.css -->
 <div class="preloader">
@@ -30,7 +27,7 @@
     <%@include file="parts/notification_message.jsp" %>
     <%
         User user = UserHandler.getLoggedInUser(request);
-        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
     %>
     <!-- End header header -->
 
@@ -48,15 +45,20 @@
                         <div class="card-body">
                             <div class="card-two">
                                 <header>
-                                    <div class="avatar">
+                                    <form id="form-edit-profile-photo"
+                                          action="<%= prefixPath%>/dashboard/profile/upload-photo" method="post"
+                                          enctype="multipart/form-data">
+                                        <div class="avatar">
 										<span><label class="ace-file-input ace-file-multiple"
-                                                     style="width: 100%;"> <input type="file"
-                                                                                  name="avatar"> <span
+                                                     style="width: 100%;">
+                                            <input type="file" id="avatar-profile"
+                                                   name="avatar"> <span
                                                 class="ace-file-container">
-													<img src="<%=imgUrl%>" alt="Profile picture "/>
+													<img src="<%=imgUrl%>" id="profile-photo" alt="Profile picture "/>
 											</span>
 										</label> </span>
-                                    </div>
+                                        </div>
+                                    </form>
                                 </header>
 
                                 <h3>${user.lname} ${user.fname}</h3>
@@ -72,7 +74,8 @@
                         <div class="tab-pane" id="settings" role="tabpanel">
                             <div class="card-body">
                                 <form action="" id="profile-form"
-                                      method="post" class="form-horizontal form-material">
+                                      method="post" class="form-horizontal form-material" accept-charset="UTF-8"
+                                      enctype="multipart/form-data">
 
                                     <c:choose>
                                         <c:when test="${not empty user.lname }">

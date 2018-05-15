@@ -4,10 +4,7 @@
   --
 --%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -16,14 +13,14 @@
     <%@ include file="parts/styles.jsp" %>
 </head>
 
-<body class="fix-header fix-sidebar">
+<body class="fix-sidebar">
 <%@include file="parts/header.jsp" %>
 <!-- Main wrapper  -->
 <div id="main-wrapper">
     <%@include file="parts/notification_message.jsp" %>
     <%
         User user = UserHandler.getLoggedInUser(request);
-        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : user.getImage();
+        String imgUrl = user.getImage() == null ? prefixPath + "/images/people.png" : prefixPath + user.getImage();
     %>
     <!-- End header header -->
 
