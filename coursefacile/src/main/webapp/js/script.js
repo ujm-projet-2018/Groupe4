@@ -529,9 +529,10 @@ $(function () {
     var directionsDisplay;
     var directionsService;
     var travelMode = 'WALKING';
-    var currentPosition;
 
-    function initMap(mapId, mapZoom) {
+    //var currentPosition;
+
+    function initMap(mapId, mapZoom, currentPosition) {
         map = new google.maps.Map(document.getElementById(mapId), {
             center: currentPosition,
             zoom: mapZoom
@@ -550,7 +551,9 @@ $(function () {
             type: ['store'],
             keyword: keyWord,
             rankBy: google.maps.places.RankBy.DISTANCE
-        }, nearbySearchCallback);
+        }, function (result, status) {
+            nearbySearchCallback(result, status, currentPosition);
+        });
     }
 
     var shopPlace;
@@ -610,7 +613,7 @@ $(function () {
     }
 
 
-    function nearbySearchCallback(results, status) {
+    function nearbySearchCallback(results, status, currentPosition) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             // for (var i = 0; i < results.length; i++) {
             console.log(results);
@@ -691,56 +694,71 @@ $(function () {
 
     var draw = false
 
-    function getClosestDestination(keyWord, position, draw, missionInfos, travel) {
-        console.log(missionPlace);
-        var service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-            location: position,
-            // radius: 10000,
-            // type: ['store'],
-            keyword: keyWord,
-            rankBy: google.maps.places.RankBy.DISTANCE
-        }, function (result, status) {
-            console.log("====status====");
-            console.log(status);
-            if ("ZERO_RESULTS" != status) {
-                console.log("====getClosestDestination====");
-                console.log(result);
-                nearbySearchPositionCallback(result, status, position, draw, missionInfos, travel);
-            }
+    function getClosestDestination(keyWord, position) {
+        var getClosestDestinationPromises = new Promise(function (resolve, reject) {
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: position,
+                // radius: 10000,
+                // type: ['store'],
+                keyword: keyWord,
+                rankBy: google.maps.places.RankBy.DISTANCE
+            }, function (result, status) {
+                console.log("====status====");
+                console.log(status);
+                if ("ZERO_RESULTS" != status) {
+                    console.log("====getClosestDestination====");
+                    console.log(result);
+                    // var nearbySearchPositionCallbackPromise = nearbySearchPositionCallback(result, status, position,currentPos, draw, missionInfos, travel);
+                    // nearbySearchPositionCallbackPromise.then(function(response){
+                    var response = {result: result, status: status};
+                    resolve(response);
+                    // });
+                } else {
+                    reject(false);
+                }
+            });
         });
+        return getClosestDestinationPromises;
     }
 
-    function nearbySearchPositionCallback(results, status, chosedPosition, draw, missionInfos, travel) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            // for (var i = 0; i < results.length; i++) {
-            var service = new google.maps.DistanceMatrixService();
-            var origins = [];
-            var destinations = [];
-            origins.push(currentPosition);
-            origins.push(chosedPosition);
-            console.log("=====result nearby position=====");
-            console.log(results);
-            console.log("=====chosedPosition=====");
-            console.log(chosedPosition);
-            for (var i = 0; i < results.length; i++) {
-                destinations.push(results[i].geometry.location);
-            }
-            console.log("===== destinations =====");
-            console.log(destinations);
-            // console.log(results);
-            // console.log(missionPlace);
-            service.getDistanceMatrix({
-                origins: origins,
-                destinations: destinations,
-                travelMode: travelMode,
-                avoidHighways: true,
-                avoidTolls: true
-            }, function (response, status) {
-                getDistanceMatrixcallback(response, status, draw, missionInfos, travel);
-            });
+    function nearbySearchPositionCallback(results, status, chosedPosition, currentPos, draw, missionInfos, travel) {
+        var nearbySearchPositionCallbackPromise = new Promise(function (resolve, reject) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                // for (var i = 0; i < results.length; i++) {
+                var service = new google.maps.DistanceMatrixService();
+                var origins = [];
+                var destinations = [];
+                origins.push(currentPos);
+                origins.push(chosedPosition);
+                console.log("=====result nearby position=====");
+                console.log(results);
+                console.log("=====chosedPosition=====");
+                console.log(chosedPosition);
+                for (var i = 0; i < results.length; i++) {
+                    destinations.push(results[i].geometry.location);
+                }
+                console.log("===== destinations =====");
+                console.log(destinations);
+                // console.log(results);
+                // console.log(missionPlace);
+                service.getDistanceMatrix({
+                    origins: origins,
+                    destinations: destinations,
+                    travelMode: travelMode,
+                    avoidHighways: true,
+                    avoidTolls: true
+                }, function (response, status) {
+                    console.log("====response====");
+                    console.log(response);
+                    var checkResponse = getDistanceMatrixcallback(response, status, draw, missionInfos, travel);
+                    resolve(checkResponse);
+                });
 
-        }
+            }
+        });
+        return nearbySearchPositionCallbackPromise;
+
     }
 
     function compare(a, b) {
@@ -756,6 +774,7 @@ $(function () {
 
     function getDistanceMatrixcallback(response, status, draw, missionInfos, travel) {
         // console.log(response);
+        var checkResponse = false;
         console.log(response);
         var currentPosToShopDist = response.rows[0];
         var missionPosToShopDist = response.rows[1];
@@ -779,7 +798,7 @@ $(function () {
         // console.log(missionPlace);
         nearestAdress = response.destinationAddresses[distances[0].adressIndex];
         if (draw)
-            drawItinirary(currentPosition, travel, missionPlace, nearestAdress);
+            checkResponse = drawItinirary(currentPosition, travel, missionPlace, nearestAdress);
         else {
             // console.log('here')
             missionsItineraries.push({
@@ -787,38 +806,47 @@ $(function () {
                 missionInfos: missionInfos,
                 waypoint: nearestAdress
             });
+            checkResponse = true;
         }
+        return checkResponse;
 
 
     }
 
 
-    function getCurrentPosition() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setPosition);
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-        return currentPosition;
-    }
+    var getCurrentPosition = function () {
+        var getCurrentPositionPromise = new Promise(function (resolve, reject) {
+            var currentPos = null;
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    currentPos = setPosition(position);
+                    resolve(currentPos);
+                });
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+                reject(Error("Geolocation is not supported by this browser."));
+            }
+        });
+        return getCurrentPositionPromise;
+    };
 
     function setPosition(position) {
-        currentPosition = {lat: position.coords.latitude, lng: position.coords.longitude};
+        return {lat: position.coords.latitude, lng: position.coords.longitude};
     }
 
     if ($getItinerary.length) {
 
         function buildItineraryToShop() {
-            currentPosition = getCurrentPosition();
-            setTimeout(function () {
+            var getCurrentPositionPromise = getCurrentPosition();
                 // console.log(currentPosition);
+            getCurrentPositionPromise.then(function (currentPos) {
 
                 console.log("== buildItineraryToShop ==");
-                console.log(currentPosition);
-                initMap('map', 15);
+                console.log(currentPos);
+                initMap('map', 15, currentPos);
                 var keyWord = $getItinerary.data('key-word');
-                createItinerary(keyWord, currentPosition);
-            }, 600);
+                createItinerary(keyWord, currentPos);
+            })
 
         }
 
@@ -851,7 +879,6 @@ $(function () {
     }
 
     var missionArray = [];
-
     var $mapMissions = $('.col-mission-map');
     if ($mapMissions.length) {
 
@@ -881,31 +908,30 @@ $(function () {
                 cache: false,
                 success: function (data) {
                     if (data.length) {
-                        var test = getCurrentPosition();
-                        setTimeout(function () {
-                            initMap('map-missions', 13);
+                        getCurrentPosition().then(function (currentPos) {
+                            initMap('map-missions', 13, currentPos);
                             // console.log(test);
                             // console.log(currentPosition);
+                            var processDataPromises = [];
                             for (var i = 0; i < data.length; i++) {
                                 var mission = data[i];
-                                processData(mission);
+                                processDataPromises.push(processData(mission));
                             }
-                            setTimeout(function () {
-                                console.log(missionArray);
+                            Promise.all(processDataPromises).then(function (values) {
+                                // console.log(values);
+                                // console.log(missionArray);
                                 for (var i = 0; i < missionArray.length; i++) {
                                     var missions = missionArray[i];
                                     console.log(missions.missions.length);
                                     console.log("=====================");
-
-                                    if (missions.missions.length == 1) {
-                                        getClosetstMissionData(missions.missions[0]);
-                                    } else {
-                                        for (var j = 0; j < missions.missions.length; j++) {
-                                            getClosetstMissionData(missions.missions[j]);
-                                        }
+                                    var getClosetstMissionDataPromises = [];
+                                    for (var j = 0; j < missions.missions.length; j++) {
+                                        console.log("===========**missions.missions***==========");
+                                        console.log(missions.missions[j]);
+                                        getClosetstMissionDataPromises.push(getClosetstMissionData(missions.missions[j], currentPos));
                                     }
-
-                                    setTimeout(function () {
+                                    Promise.all(getClosetstMissionDataPromises).then(function (values) {
+                                        console.log(values);
                                         missionsItineraries.sort(function (a, b) {
                                             return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0);
                                         });
@@ -914,15 +940,14 @@ $(function () {
                                         }
                                         var wayPoint = (missionsItineraries[0] == undefined) ? "" : missionsItineraries[0].waypoint;
                                         console.log(missionsItineraries);
-                                        drawItinirary(currentPosition, travel, missionsItineraries[0].missionInfos.place, wayPoint);
+                                        drawItinirary(currentPos, travel, missionsItineraries[0].missionInfos.place, wayPoint);
+                                        createMarkerWithValue(missions, travel);
+                                    });
 
-                                    }, 3000);
-                                    createMarkerWithValue(missions, travel);
                                 }
+                            });
+                        });
 
-                            }, 400)
-
-                        }, 400);
 
                     }
                 }
@@ -930,10 +955,18 @@ $(function () {
         });
 
 
-        function getClosetstMissionData(mission) {
-            console.log(mission);
-            if (mission.place != undefined)
-                getClosestDestination(mission.missionKeyWord, mission.place.geometry.location, false, mission, '');
+        function getClosetstMissionData(mission, currentPos) {
+            console.log(mission.place.geometry.location);
+            var getClosetstMissionDataPromise = new Promise(function (resolve, reject) {
+                var getClosestDestinationPromise = getClosestDestination(mission.missionKeyWord, mission.place.geometry.location, currentPos);
+                getClosestDestinationPromise.then(function (response) {
+                    var nearbySearchPositionCallbackPromise = nearbySearchPositionCallback(response.result, response.status, mission.place.geometry.location, currentPos, false, mission, '')
+                    nearbySearchPositionCallbackPromise.then(function (response) {
+                        resolve(response);
+                    });
+                });
+            });
+            return getClosetstMissionDataPromise;
         }
 
         function pushMission(mission) {
@@ -954,10 +987,16 @@ $(function () {
         }
 
         function processData(mission) {
-            $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + mission.ownerAdress, function (data) {
-                mission.place = data.results[0];
-                pushMission(mission);
-            })
+            var processDataPromise = new Promise(function (resolve, reject) {
+                $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + mission.ownerAdress, function (data) {
+                    mission.place = data.results[0];
+                    console.log(mission.place);
+                    pushMission(mission);
+                    resolve(mission);
+                });
+            });
+
+            return processDataPromise;
         }
     }
     var $sliderRangePrice = $(".slider-range-price");
